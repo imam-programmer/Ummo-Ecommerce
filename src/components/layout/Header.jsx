@@ -4,8 +4,6 @@ import { Link } from "react-router";
 import navData from "../../api/navbardata.json";
 
 const Header = () => {
-  console.log(navData);
-
   return (
     <header className="pt-7.25 pb-7">
       <nav>
