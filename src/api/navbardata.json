@@ -1,0 +1,30 @@
+[{
+    "id":1,
+    "title":"HOME",
+    "path":"/"
+},
+{
+    "id":2,
+    "title":"SHOP",
+    "path":"/shop"
+},
+{
+    "id":3,
+    "title":"COLLECTION",
+    "path":"/collection"
+},
+{
+    "id":4,
+    "title":"JOURNAL",
+    "path":"/journal"
+},
+{
+    "id":5,
+    "title":"LOOKBOOK",
+    "path":"/lookbook"
+},
+{
+    "id":6,
+    "title":"PAGES",
+    "path":"/pages"
+}]

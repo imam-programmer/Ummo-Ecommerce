@@ -1,1 +1,9 @@
 @import "tailwindcss";
+@utility container{
+    max-width: 1410px;
+    margin:0 auto
+}
+@theme {
+  --font-jost: "Jost", sans-serif;
+  --color-primary:#222222;
+}
