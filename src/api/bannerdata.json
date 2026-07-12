@@ -7,4 +7,13 @@
     "id":2,
     "image":"./public/images/SLIDER.png",
     "url":"/"
+},{
+    "id":1,
+    "image":"./public/images/SLIDER.png",
+    "url":"/"
+},
+{
+    "id":2,
+    "image":"./public/images/SLIDER.png",
+    "url":"/"
 }]
