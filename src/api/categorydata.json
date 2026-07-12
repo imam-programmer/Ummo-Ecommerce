@@ -1,0 +1,21 @@
+[{
+    "id":1,
+    "image":"./images/category1.png",
+    "name":"WOMEN COLLECTION"
+},
+{
+    "id":2,
+    "image":"./images/category2.png",
+    "name":"MEN COLLECTION"
+}
+,
+{
+    "id":3,
+    "image":"./images/category3.png",
+    "name":"KIDS COLLECTION"
+},
+{
+    "id":4,
+    "image":"./images/category4.png",
+    "name":"E-GIFT CARDS"
+}]
