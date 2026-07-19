@@ -16,7 +16,7 @@ const Category = () => {
                   <h2 className='uppercase font-medium text-[26px] text-primary'><span className='font-bold'>{item.name}</span> collection</h2>
                   <Link className='uppercase text-primary text-sm leading-6 after:content-[] after:w-12.5 after:h-0.5 after:bg-primary after:absolute after:bottom-0 relative after:left-0'>
                   {
-                    item.id==4? "DISCOVER MORE":"shop now"
+                    item.id==4? "DISCOVER MORE":" "
                   }
                   </Link>
                 </div>

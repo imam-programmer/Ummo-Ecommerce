@@ -6,6 +6,8 @@
 @theme {
   --font-jost: "Jost", sans-serif;
   --color-primary:#222222;
+  --color-gray:#767676;
+
 }
 .swiper-pagination-bullet{
   background-color: #ddc2b9 !important;
