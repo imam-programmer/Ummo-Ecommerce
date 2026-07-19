@@ -1,16 +1,21 @@
 [{
     "id":1,
-    "name":"ALL"
+    "name":"all"
 },
 {
     "id":2,
-    "name":"NEWARRIVALS"
+    "name":"men's clothing"
 },
 {
     "id":3,
-    "name":"BEST SELLER"
+    "name":"women's clothing"
 },
 {
     "id":4,
-    "name":"TOP RATTING"
+    "name":"jewelery"
+}
+,
+{
+    "id":5,
+    "name":"electronics"
 }]

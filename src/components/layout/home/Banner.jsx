@@ -6,7 +6,6 @@ import Image from "../common/Image";
 import 'swiper/css';
 import 'swiper/css/pagination';
 const Banner = () => {
-  console.log(bannerData);
   return (
     <section className="flex">
       <Swiper

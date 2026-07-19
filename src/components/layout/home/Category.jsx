@@ -9,7 +9,7 @@ const Category = () => {
         <div className='grid grid-cols-4 gap-7.5'>
           {
             categorydata.map((item) => (
-              <div className={`w-full relative ${item.id == 1 ? "col-span-2 row-span-2" : item.id == 2 && "col-span-2"}  `}>
+              <div key={item.id} className={`w-full relative ${item.id == 1 ? "col-span-2 row-span-2" : item.id == 2 && "col-span-2"}  `}>
                 <Image src={item.image} alt={item.name} />
                 <div className=' absolute bottom-10 left-10'>
                   <h3 className='uppercase text-sm leading-6 text-primary '>hot list</h3>
