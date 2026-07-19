@@ -1,18 +1,18 @@
 [{
     "id":1,
     "image":"./images/category1.png",
-    "name":"WOMEN COLLECTION"
+    "name":"WOMEN"
 },
 {
     "id":2,
     "image":"./images/category2.png",
-    "name":"MEN COLLECTION"
+    "name":"MEN"
 }
 ,
 {
     "id":3,
     "image":"./images/category3.png",
-    "name":"KIDS COLLECTION"
+    "name":"KIDS"
 },
 {
     "id":4,
