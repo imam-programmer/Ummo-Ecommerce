@@ -4,7 +4,7 @@ import Image from '../../common/Image'
 const FooterTop1 = () => {
     return (
         <div>
-            <div className='container'>
+         
                 <div className='flex flex-col items-start gap-11.25'>
 
                     <Image src="./images/logo.png" alt="footerlogo" />
@@ -44,7 +44,7 @@ const FooterTop1 = () => {
                     </div>
 
                 </div>
-            </div>
+          
         </div>
     )
 }
