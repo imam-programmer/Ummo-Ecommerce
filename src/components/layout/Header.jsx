@@ -10,7 +10,7 @@ const Header = () => {
         <div className="container">
           <div className="flex items-center">
             <Link to="/">
-              <Image src="./public/images/logo.png" alt="logo" />
+              <Image src="./images/logo.png" alt="logo" />
             </Link>
             <ul className="ml-14 flex gap-10.75">
               {navData?.map((item) => (
