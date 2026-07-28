@@ -1,0 +1,76 @@
+[{
+    "id":1,
+    "image":"./images/sponcerimage1.png",
+    "url":"/"
+},
+{
+    "id":2,
+    "image":"./images/sponcerimage2.png",
+    "url":"/"
+},{
+    "id":3,
+    "image":"./images/sponcerimage3.png",
+    "url":"/"
+},
+{
+    "id":4,
+    "image":"./images/sponcerimage4.png",
+    "url":"/"
+},
+{
+    "id":5,
+    "image":"./images/sponcerimage5.jpg",
+    "url":"/"
+},
+{
+    "id":6,
+    "image":"./images/sponcerimage6.png",
+    "url":"/"
+},{
+    "id":7,
+    "image":"./images/sponcerimage7.png",
+    "url":"/"
+},
+{
+    "id":8,
+    "image":"./images/sponcerimage8.png",
+    "url":"/"
+},
+{
+    "id":9,
+    "image":"./images/sponcerimage9.png",
+    "url":"/"
+},
+{
+    "id":10,
+    "image":"./images/sponcerimage10.jpg",
+    "url":"/"
+},{
+    "id":11,
+    "image":"./images/sponcerimage11.png",
+    "url":"/"
+},
+{
+    "id":12,
+    "image":"./images/sponcerimage12.png",
+    "url":"/"
+},
+{
+    "id":13,
+    "image":"./images/sponcerimage13.jpg",
+    "url":"/"
+},
+{
+    "id":14,
+    "image":"./images/sponcerimage14.png",
+    "url":"/"
+},{
+    "id":15,
+    "image":"./images/sponcerimage15.png",
+    "url":"/"
+},
+{
+    "id":16,
+    "image":"./images/sponcerimage16.png",
+    "url":"/"
+}]
