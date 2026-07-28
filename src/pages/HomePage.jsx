@@ -4,6 +4,7 @@ import Category from '../components/layout/home/Category'
 import TrendyProducts from '../components/layout/home/TrendyProducts'
 import SpringCollection from '../components/layout/home/SpringCollection'
 import Starting from '../components/layout/home/Starting'
+import LimitedEdition from '../components/layout/home/LimitedEdition'
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
    <TrendyProducts/>
    <SpringCollection/>
    <Starting/>
+   <LimitedEdition/>
    </>
   )
 }

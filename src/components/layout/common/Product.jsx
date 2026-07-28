@@ -4,7 +4,7 @@ import Image from './Image'
 const Product = ({ item }) => {
     return (
         <div className='max-w-82.5 group relative '>
-            <Image className="h-80 w-[200px] block mx-auto object-contain" src={item.image} />
+            <Image className="h-80 w-50 block mx-auto object-contain" src={item.image} />
             <div className='mt-3.2'>
                 <div className='flex justify-between'>
                     <h4 className='text-sm text-gray font-normal uppercase'>{item.category}</h4>
