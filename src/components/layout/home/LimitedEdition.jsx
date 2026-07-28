@@ -18,9 +18,6 @@ const LimitedEdition = () => {
 
 
     }, [])
-
-    console.log(products);
-
     return (
         <section className='mt-22.75'>
             <div className="container ">

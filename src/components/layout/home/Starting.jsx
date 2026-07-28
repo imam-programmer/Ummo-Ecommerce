@@ -10,7 +10,7 @@ const Starting = () => {
                 <div className='flex justify-between '>
                     <div className='w-172.5 h-99.5  bg-[#D6001C] flex justify-between pl-12.5 pr-2.5 items-end'>
 
-                        <div>
+                        <div className='mb-12.75'>
 
                             <h3 className='text-lg font-medium  text-white'>STARTİNG AT $39</h3>
                             <h2 className='text-[26px] font-medium text-white mb-3.75 mt-2'>Women’s T-Shirts</h2>

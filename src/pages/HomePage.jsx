@@ -5,6 +5,7 @@ import TrendyProducts from '../components/layout/home/TrendyProducts'
 import SpringCollection from '../components/layout/home/SpringCollection'
 import Starting from '../components/layout/home/Starting'
 import LimitedEdition from '../components/layout/home/LimitedEdition'
+import Sponcer from '../components/layout/home/Sponcer'
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
    <SpringCollection/>
    <Starting/>
    <LimitedEdition/>
+   <Sponcer/>
    </>
   )
 }
