@@ -6,6 +6,7 @@ import SpringCollection from '../components/layout/home/SpringCollection'
 import Starting from '../components/layout/home/Starting'
 import LimitedEdition from '../components/layout/home/LimitedEdition'
 import Sponcer from '../components/layout/home/Sponcer'
+import Services from '../components/layout/home/Services'
 
 const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ const HomePage = () => {
    <Starting/>
    <LimitedEdition/>
    <Sponcer/>
+   <Services/>
    </>
   )
 }
