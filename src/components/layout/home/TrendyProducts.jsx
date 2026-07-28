@@ -55,15 +55,21 @@ const TrendyProducts = () => {
                                 <Product item={item} key={item.id} />
                             )
                             ) : products.map((item) => (
-                                <Product item={item} key={item.id} />
-                            ))
+                                <>
+                                    <Product item={item} key={item.id} />
+                                </>
+                            )
+                            )
                     }
                 </div>
-                <div className='text-center'>
-                    <button onClick={handleProductShow} className='font-medium text-sm relative leading-6 text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-primary after:w-0 after:duration-300 after:content-[""] mt-10.25 hover:after:w-[70%] cursor-pointer'>{showAllProducts?"SEE LESS PRODUCT":"SEE ALL PRODUCT"}
-                        
+                {filterProducts.length == 0 &&
+
+                    <div className='text-center'>
+                        <button onClick={handleProductShow} className='font-medium text-sm relative leading-6 text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-primary after:w-0 after:duration-300 after:content-[""] mt-10.25 hover:after:w-[70%] cursor-pointer'>{showAllProducts ? "SEE LESS PRODUCT" : "SEE ALL PRODUCT"}
+
                         </button>
-                </div>
+                    </div>
+                }
             </div>
         </section>
     )
