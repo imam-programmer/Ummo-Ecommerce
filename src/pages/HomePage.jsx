@@ -12,7 +12,7 @@ import Footer from '../components/Footer'
 const HomePage = () => {
   return (
    <>
-   <Banner/>
+   {/* <Banner/>
    <Category/>
    <TrendyProducts/>
    <SpringCollection/>
@@ -20,7 +20,7 @@ const HomePage = () => {
    <LimitedEdition/>
    <Sponcer/>
    <Services/>
-   <Footer/>
+   <Footer/> */}
    </>
   )
 }
