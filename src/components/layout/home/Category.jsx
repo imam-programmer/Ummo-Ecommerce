@@ -4,7 +4,7 @@ import Image from '../common/Image'
 import { Link } from 'react-router'
 const Category = () => {
   return (
-    <div className='md:mt-25.25 mt-3.75'>
+    <div className='md:mt-25.25 mt-3.75 px-3 md:px-0'>
       <div className="container">
         <div className='flex flex-col md:grid md:grid-cols-4 gap-3.75 md:gap-7.5'>
           {
