@@ -13,7 +13,7 @@ const HomePage = () => {
   return (
    <>
    <Banner/>
-   {/* <Category/> */}
+   <Category/>
    {/* <TrendyProducts/> */}
    {/* <SpringCollection/> */}
    {/* <Starting/> */}
