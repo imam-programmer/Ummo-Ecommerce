@@ -1,38 +1,60 @@
 @import "tailwindcss";
-@utility container{
-    max-width: 1410px;
-    margin:0 auto
+@utility container {
+  max-width: 1410px;
+  margin: 0 auto;
 }
 @theme {
   --font-jost: "Jost", sans-serif;
-  --color-primary:#222222;
-  --color-gray:#767676;
-
+  --color-primary: #222222;
+  --color-gray: #767676;
 }
 
-.swiper-pagination-bullet{
+.swiper-pagination-bullet {
   background-color: #ddc2b9 !important;
   opacity: 1 !important;
   margin-right: 28px !important;
 }
-.swiper-pagination-bullet-active{
+.swiper-pagination-bullet-active {
   background-color: #222222 !important;
   position: relative;
-
 }
-.swiper-pagination-bullet-active::after{
+.swiper-pagination-bullet-active::after {
   content: "";
-width: 29px;
-height: 29px;
-border: 3px solid #222222;
-position: absolute;
-top: 50%;
-border-radius: 50%;
-left: 50%;
-transform: translate(-50%,-50%);
+  width: 29px;
+  height: 29px;
+  border: 3px solid #222222;
+  position: absolute;
+  top: 50%;
+  border-radius: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .swiper-pagination {
-    text-align: start !important;
-    margin-left: 289px !important;
-    bottom: 58px !important;
+  text-align: start !important;
+  margin-left: 289px !important;
+  bottom: 58px !important;
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .swiper-pagination {
+    margin-left: 40px !important;
+    bottom: 20px !important;
+  }
+  .swiper-pagination-bullet {
+    margin-right: 14px !important;
+  }
+  .swiper-pagination-bullet {
+    width: var(
+      --swiper-pagination-bullet-width,
+      var(--swiper-pagination-bullet-size, 5px)
+    ) !important;
+    height: var(
+      --swiper-pagination-bullet-height,
+      var(--swiper-pagination-bullet-size, 5px)
+    ) !important;
+  }
+  .swiper-pagination-bullet-active::after {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #222222;
+  }
 }

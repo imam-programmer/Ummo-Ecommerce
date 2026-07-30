@@ -8,9 +8,9 @@ import { IoCloseSharp } from "react-icons/io5";
 const Header = () => {
   const [menuActive, setmenuActive] = useState(false)
   return (
-    <header className="lg:pt-7.25 lg:pb-7 py-4">
+    <header className="md:pt-7.25 md:pb-7 py-4">
       <nav>
-        <div className="container hidden lg:block">
+        <div className="container hidden md:block">
           <div className="flex items-center">
             <Link to="/">
               <Image src="./images/logo.png" alt="logo" />
@@ -131,7 +131,7 @@ const Header = () => {
         </div>
 
         {/* =========mobile ===responsive header========== */}
-        <div className="flex justify-between items-center mx-4 lg:hidden">
+        <div className="flex  justify-between items-center mx-4 md:hidden">
           <button onClick={()=>setmenuActive(true)}>
             <svg width="25" height="18" viewBox="0 0 25 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="25" height="2" fill="#222222" />
