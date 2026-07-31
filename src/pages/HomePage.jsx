@@ -16,7 +16,7 @@ const HomePage = () => {
    <Category/>
    <TrendyProducts/>
    <SpringCollection/>
-   {/* <Starting/> */}
+   <Starting/>
    {/* <LimitedEdition/> */}
    {/* <Sponcer/> */}
    {/* <Services/> */}
