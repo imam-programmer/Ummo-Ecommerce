@@ -1,0 +1,23 @@
+[{
+    "id":1,
+    "name":"New Arrivals",
+    "path":"/new"
+},
+{
+    "id":2,
+    "name":"Accessories",
+    "path":"/accessories"
+},{
+    "id":3,
+    "name":"Men",
+    "path":"/men"
+},
+{
+    "id":4,
+    "name":"Women",
+    "path":"/women"
+},{
+    "id":5,
+    "name":"Shop All",
+    "path":"/shop"
+}]

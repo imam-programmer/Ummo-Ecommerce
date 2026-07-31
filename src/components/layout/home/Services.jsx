@@ -34,8 +34,8 @@ const Services = () => {
         description: "We return money within 30 days"
     },]
     return (
-        <section className='mt-25.5 mb-25'>
-            <div className="container flex justify-between px-26">
+        <section className='md:mt-25.5 mt-12.25 md:mb-25 mb-12'>
+            <div className="container flex flex-wrap justify-center gap-x-64 gap-y-18.5 md:gap-y-0">
                 {array.map((item) => (
                     <div key={item.id} className="flex flex-col items-center">
                         <h2 >{item.svg}</h2>

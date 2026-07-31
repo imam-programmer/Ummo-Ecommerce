@@ -8,7 +8,7 @@ import FooterTop5 from './FooterTop5'
 
 const FooterTop = () => {
     return (
-        <div className='container flex justify-between pb-22 border-b-2 border-[#CFCDCD]'>
+        <div className='container flex  justify-between pb-22 border-b-2 border-[#CFCDCD]'>
             <FooterTop1/>
             <FooterTop2/>
             <FooterTop3/>

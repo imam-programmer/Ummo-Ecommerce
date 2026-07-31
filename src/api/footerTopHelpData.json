@@ -1,0 +1,27 @@
+[{
+    "id":1,
+    "name":"Customer Service",
+    "path":"/service"
+},
+{
+    "id":2,
+    "name":"My Account",
+    "path":"/Account"
+},{
+    "id":3,
+    "name":"Find a Store",
+    "path":"/store"
+},
+{
+    "id":4,
+    "name":"Legal & Privacy",
+    "path":"/privacy"
+},{
+    "id":5,
+    "name":"Contact",
+    "path":"/contact"
+},{
+    "id":6,
+    "name":"Gift Card",
+    "path":"/gift"
+}]
