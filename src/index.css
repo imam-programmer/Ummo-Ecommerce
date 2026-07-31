@@ -92,14 +92,14 @@
 }
 #my-class .swiper-pagination-clickable{
   position: absolute !important;
-  bottom: 15px !important;
+  bottom: 2px !important;
  
     text-align: center !important;
   margin-left: 0 !important;
 
 }
 #my-class{
-  padding-bottom: 60px !important;
+  padding-bottom: 30px !important;
 }
 }
 @media (min-width:800px) {

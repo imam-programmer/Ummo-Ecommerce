@@ -18,7 +18,7 @@ const HomePage = () => {
    <SpringCollection/>
    <Starting/>
    <LimitedEdition/>
-   {/* <Sponcer/> */}
+   <Sponcer/>
    {/* <Services/> */}
    {/* <Footer/> */}
    </>
