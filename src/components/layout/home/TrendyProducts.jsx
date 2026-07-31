@@ -33,12 +33,12 @@ const TrendyProducts = () => {
         <section className='md:mt-23.5 md:mb-25 mt-9.25'>
             <div className="container  px-3 md:px-0">
                 <Title name="our trendy" namebold="products" />
-                <ul className='flex justify-center flex-wrap md:gap-13.5  gap-x-11.5 gap-y-2 mb-10 mt-7.5'>
+                <ul className='flex justify-center flex-wrap md:gap-13.5  gap-x-8 gap-y-2 mb-10 mt-7.5'>
 
                     {treadydata.map((item) => (
                         <li key={item.id} >
                             <button onClick={() => handleTabs(item.name)}
-                                className={`text-base after:bg-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:duration-300 after:content-[""] hover:after:w-[70%] font-medium text-gray cursor-pointer uppercase ${item.name == activeCategory ? 'text-primary' : 'text-gray'}`}>{item.name}</button>
+                                className={`text-[14px] md:text-base after:bg-primary relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:duration-300 after:content-[""] hover:after:w-[70%] font-medium text-gray cursor-pointer uppercase ${item.name == activeCategory ? 'text-primary' : 'text-gray'}`}>{item.name}</button>
                         </li>
                     ))}
 
