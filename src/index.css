@@ -90,4 +90,20 @@
     font-size: 14px;
   
 }
+#my-class .swiper-pagination-clickable{
+  position: absolute !important;
+  bottom: 15px !important;
+ 
+    text-align: center !important;
+  margin-left: 0 !important;
+
+}
+#my-class{
+  padding-bottom: 60px !important;
+}
+}
+@media (min-width:800px) {
+  #my-class .swiper-pagination-clickable{
+ display: none !important;
+}
 }

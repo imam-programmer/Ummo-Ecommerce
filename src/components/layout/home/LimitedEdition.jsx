@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Title from '../common/Title'
 import axios from 'axios'
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import 'swiper/css/pagination';
+
 import Product from '../common/Product';
 const LimitedEdition = () => {
     const [products, setProducts] = useState([])
@@ -19,14 +21,19 @@ const LimitedEdition = () => {
 
     }, [])
     return (
-        <section className='md:mt-22.75 mt-9.25 px-2 md:px-0'>
+        <section className='md:mt-22.75 mt-9.25 px-2 md:px-0 '>
             <div className="container ">
                 <Title name="LIMITED" namebold="EDITION" />
                 <div className='relative'>
-
-                 <Swiper navigation={true}
+ 
+                 <Swiper id="my-class"
+             
+                  modules={[Pagination,Navigation]}
+                   navigation={true}
+                     pagination={{clickable:true}}
                  breakpoints={{
                         300: {
+                            
           slidesPerView: 2,
           spaceBetween: 30,
           allowTouchMove: false,
@@ -42,7 +49,7 @@ const LimitedEdition = () => {
           allowTouchMove: false,
         },
                  }}
-                  modules={[Navigation]}    navigation={{
+       navigation={{
           nextEl: '.custom-next',
           prevEl: '.custom-prev',
         }} className="mySwiper">
