@@ -30,8 +30,8 @@ const TrendyProducts = () => {
     }
 
     return (
-        <section className='mt-23.5 mb-25'>
-            <div className="container">
+        <section className='md:mt-23.5 md:mb-25 mt-9.25'>
+            <div className="container  px-3 md:px-0">
                 <Title name="our trendy" namebold="products" />
                 <ul className='flex justify-center flex-wrap md:gap-13.5  gap-x-11.5 gap-y-2 mb-10 mt-7.5'>
 
@@ -43,7 +43,7 @@ const TrendyProducts = () => {
                     ))}
 
                 </ul>
-                {/* <div className='grid grid-cols-4 gap-3'>
+                <div className='grid grid-cols-2 md:grid-cols-4 gap-3 gap-x-3.5 md:gap-x-0'>
 
                     {filterProducts.length > 0 ?
                         filterProducts.map((item) => (
@@ -65,11 +65,11 @@ const TrendyProducts = () => {
                 {filterProducts.length == 0 &&
 
                     <div className='text-center'>
-                        <button onClick={handleProductShow} className='font-medium text-sm relative leading-6 text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-primary after:w-0 after:duration-300 after:content-[""] mt-10.25 hover:after:w-[70%] cursor-pointer'>{showAllProducts ? "SEE LESS PRODUCT" : "SEE ALL PRODUCT"}
+                        <button onClick={handleProductShow} className='font-medium text-sm relative leading-6 text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-primary after:w-0 after:duration-300 after:content-[""] mt-5.5 md:mt-10.25 hover:after:w-[70%] cursor-pointer'>{showAllProducts ? "SEE LESS PRODUCT" : "SEE ALL PRODUCT"}
 
                         </button>
                     </div>
-                } */}
+                }
             </div>
         </section>
     )

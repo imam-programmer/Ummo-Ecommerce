@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from './Image'
 
 const Product = ({ item }) => {
+    const [showMore, setShowMore] = useState(false)
     return (
         <div className='max-w-82.5 group relative '>
-            <Image className="h-80 w-50 block mx-auto object-contain" src={item.image} />
+            <Image className="md:h-80 md:w-50 h-40 w-30 block mx-auto object-contain" src={item.image} />
             <div className='mt-3.2'>
                 <div className='flex justify-between'>
-                    <h4 className='text-sm text-gray font-normal uppercase'>{item.category}</h4>
+                    <h4 className='text-[12px] md:text-sm text-gray font-normal uppercase'>{item.category}</h4>
                     <button>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_31_61)">
@@ -21,14 +22,14 @@ const Product = ({ item }) => {
                         </svg>
                     </button>
                 </div>
-                <h3 className='text-base text-primary font-normal uppercase mt-2.25'>{item.title}</h3>
-                <h5 className='text-base text-primary font-normal uppercase'>${item.price}</h5>
+                <h3  onClick={()=>setShowMore(!showMore)} className={showMore?"desc":"desc clamp"}>{item.title}</h3>
+                <h5 className='md:text-base text-[14px] text-primary font-normal uppercase'>${item.price}</h5>
             </div>
 
 
             <div>
 
-                <button className='absolute group-hover:visible cursor-pointer bottom-25 left-[50%] translate-[-50%] invisible w-77.5 shadow-xl shadow-[#3333335b] font-medium text-sm bg-white  text-black h-12.5 text-center '>ADD TO CART</button>
+                <button className='absolute group-hover:visible cursor-pointer bottom-18 md:bottom-25 left-[50%] translate-[-50%] invisible w-[90%] md:w-77.5 shadow-xl shadow-[#3333335b] font-medium text-sm bg-white  text-black h-7 md:h-12.5 text-center '>ADD TO CART</button>
             </div>
         </div>
     )

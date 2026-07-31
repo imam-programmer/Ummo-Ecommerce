@@ -34,6 +34,27 @@
   margin-left: 289px !important;
   bottom: 58px !important;
 }
+
+.clamp{
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 1rem;
+  color: #222222;
+  font-weight: 400;
+  margin-top: 9px;
+  text-transform: uppercase;
+
+}
+.desc{
+  line-height: 1.6;
+    font-size: 1rem;
+  color: #222222;
+  font-weight: 400;
+  margin-top: 9px;
+  text-transform: uppercase;
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .swiper-pagination {
     margin-left: 40px !important;
@@ -57,4 +78,16 @@
     height: 20px;
     border: 1px solid #222222;
   }
+  .clamp{
+  margin-top: 5px;
+  font-size: 14px;
+
+
+}
+.desc{
+    margin-top: 5px;
+  line-height: 1.6;
+    font-size: 14px;
+  
+}
 }
