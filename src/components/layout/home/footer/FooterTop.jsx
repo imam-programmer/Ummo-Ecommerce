@@ -17,7 +17,7 @@ const FooterTop = () => {
             <FooterTop5/>
             
         </div>
-             <div className='container md:hidden flex flex-col px-3.75  justify-between pb-12.5 border-b-2 border-[#CFCDCD]'>
+             <div className='container md:hidden flex flex-col px-3.75  justify-between pb-2 border-b-2 border-[#CFCDCD]'>
             <FooterTop1/>
             <div className="flex gap-26 mt-[49.74px]">
 
