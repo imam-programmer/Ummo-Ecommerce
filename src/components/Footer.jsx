@@ -5,9 +5,9 @@ import FooterBottom from './layout/home/footer/FooterBottom'
 
 const Footer = () => {
   return (
-    <footer className='bg-[#E4E4E4] pt-25 '>
+    <footer className='bg-[#E4E4E4] md:pt-25 pt-12.25'>
         <FooterTop/>
-        {/* <FooterBottom/> */}
+        <FooterBottom/>
     </footer>
   )
 }
