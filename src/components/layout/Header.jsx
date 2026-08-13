@@ -17,12 +17,15 @@ const Header = () => {
             </Link>
             <ul className="ml-14 flex gap-10.75">
               {navData?.map((item) => (
+                <Link to={item.path}>
+
                 <li
                   className='text-primary cursor-pointer after:bg-primary relative text-sm leading-6 font-medium after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:duration-300 after:content-[""] hover:after:w-[70%]'
                   key={item.id}
                 >
                   {item?.title}
                 </li>
+                </Link>
               ))}
             </ul>
 
