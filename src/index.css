@@ -107,3 +107,8 @@
  display: none !important;
 }
 }
+.hup{
+  display: grid;
+  grid-template-columns: 5;
+  row-gap: 200px;
+}
