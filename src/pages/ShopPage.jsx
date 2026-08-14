@@ -7,7 +7,7 @@ const ShopPage = () => {
   return (
     <>
       <ShopBanner />
-      <div className='container flex justify-between mt-9'>
+      <div className='container flex justify-between mt-9 gap-15'>
         <ShopFilter/>
         <ShopAllProducts/>
       </div>

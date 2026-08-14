@@ -9,7 +9,7 @@ const ShopBanner = () => {
                 <h2 className='font-bold text-[60px] text-primary uppercase'>shoes</h2>
                 <ul className='flex justify-center gap-7.5'>
                     <li className='font-medium text-base text-primary'>#STAYHOME</li>
-                    <li className='font-medium text-base text-primary'> NEW IN</li>
+                    <li className='font-medium text-base text-primary whitespace-nowrap'> NEW IN</li>
                     <li className='font-medium text-base text-primary'> JACKETS</li>
                     <li className='font-medium text-base text-primary'>HOODIES</li>
                     <li className='font-medium text-base text-primary'>MEN</li>
