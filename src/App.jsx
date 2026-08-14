@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router/dom";
 import Rootlayout from './components/layout/Rootlayout';
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
+import Breadcrumb from './components/layout/common/Breadcrumb';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -11,7 +12,8 @@ const App = () => {
     Component: Rootlayout,
     children: [
       { index: true, Component: HomePage },
-      {path:"shop",Component:ShopPage}
+      {path:"shop",Component:ShopPage},
+   
     ],
   },
 ]);
