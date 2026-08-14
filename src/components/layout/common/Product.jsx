@@ -5,7 +5,7 @@ const Product = ({ item }) => {
     const [showMore, setShowMore] = useState(false)
     return (
         <div className='max-w-82.5 group relative '>
-            <Image className="md:h-80 md:w-50 h-40 w-30 block mx-auto object-contain" src={item.image} />
+            <Image className="md:h-80 md:w-50 h-40 w-30 block mx-auto object-contain" src={item.thumbnail} />
             <div className='mt-3.2'>
                 <div className='flex justify-between'>
                     <h4 className='text-[12px] md:text-sm text-gray font-normal uppercase'>{item.category}</h4>

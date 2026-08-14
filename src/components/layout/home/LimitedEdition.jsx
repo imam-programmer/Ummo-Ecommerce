@@ -11,8 +11,8 @@ import Product from '../common/Product';
 const LimitedEdition = () => {
     const [products, setProducts] = useState([])
     useEffect(() => {
-        axios.get('https://fakestoreapi.com/products?limit=10').then((res => {
-            setProducts(res.data)
+        axios.get('https://dummyjson.com/products?limit=10').then((res => {
+            setProducts(res.data.products)
 
         })).catch((err) => {
             console.log(err)
@@ -20,6 +20,7 @@ const LimitedEdition = () => {
 
 
     }, [])
+    console.log(products)
     return (
         <section className='md:mt-22.75 mt-9.25 px-2 md:px-0 '>
             <div className="container ">

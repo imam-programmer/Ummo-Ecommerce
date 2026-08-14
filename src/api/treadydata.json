@@ -4,18 +4,18 @@
 },
 {
     "id":2,
-    "name":"men's clothing"
+    "name":"beauty"
 },
 {
     "id":3,
-    "name":"women's clothing"
+    "name":"fragrances"
 },
 {
     "id":4,
-    "name":"jewelery"
+    "name":"furniture"
 }
 ,
 {
     "id":5,
-    "name":"electronics"
+    "name":"groceries"
 }]

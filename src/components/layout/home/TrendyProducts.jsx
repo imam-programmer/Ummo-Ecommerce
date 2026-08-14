@@ -9,8 +9,8 @@ const TrendyProducts = () => {
     const [filterProducts, setFilterProduct] = useState([])
     const [showAllProducts, setshowAllProducts] = useState(false)
     useEffect(() => {
-        axios.get('https://fakestoreapi.com/products').then((res => {
-            setProducts(res.data)
+        axios.get('https://dummyjson.com/products').then((res => {
+            setProducts(res.data.products)
 
         })).catch((err) => {
             console.log(err)
@@ -18,6 +18,7 @@ const TrendyProducts = () => {
 
 
     }, [])
+    console.log(products)
     function handleTabs(category) {
         setActiveCategory(category)
 
@@ -52,7 +53,10 @@ const TrendyProducts = () => {
                         : !showAllProducts ?
                             products.slice(0, 8).map((item) => (
 
+
                                 <Product item={item} key={item.id} />
+
+
                             )
                             ) : products.map((item) => (
                                 <>

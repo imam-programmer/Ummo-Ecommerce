@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Breadcrumb from '../layout/common/Breadcrumb'
 import axios from 'axios'
-
+import Product from "../layout/common/Product"
 const ShopAllProducts = () => {
     const [products, setProducts] = useState([])
     useEffect(() => {
@@ -14,6 +14,7 @@ const ShopAllProducts = () => {
 
 
     }, [])
+    console.log(products)
    
   return (
     <div className='w-full '>
@@ -39,6 +40,11 @@ const ShopAllProducts = () => {
       </div>
       </div>
 
+{
+  products.map((item)=>(
+    <Product item={item} key={item.id}/>
+  ))
+}
 
     </div>
   )
