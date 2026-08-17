@@ -28,12 +28,13 @@ setloading(false)
     const firstIdx=lastIdx-ProductPerPage
 
 const SliceData=products.slice(firstIdx,lastIdx)
-console.log(SliceData)
+
 
 
   function handleview(hup) {
     setview(hup)
   }
+
   if(loading){
     return (
       <div className='grid grid-cols-3  gap-5 content-start'>
@@ -110,10 +111,9 @@ console.log(SliceData)
           ))
         }
       </div>
-<div className='mt-5 text-center'>
-<button onClick={()=>setCurrPage(CurrPage-1)}>pre</button>
-<button onClick={()=>setCurrPage(CurrPage+1)}>next</button>
-<Pagination item={products}/>
+<div className='mt-10 text-center'>
+
+<Pagination item={products} ProductPerPage={ProductPerPage} CurrPage={setCurrPage}/>
 </div>
     </div>
   )
