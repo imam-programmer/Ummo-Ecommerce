@@ -2,10 +2,16 @@ import React, { useEffect, useState } from 'react'
 import Breadcrumb from '../layout/common/Breadcrumb'
 import axios from 'axios'
 import Product from "../layout/common/Product"
+import Pagination from './Pagination'
+
 const ShopAllProducts = () => {
   const [products, setProducts] = useState([])
   const [view, setview] = useState(3)
   const [loading, setloading] = useState(true)
+    const [CurrPage, setCurrPage] = useState(1);
+    const [ProductPerPage, setProductPerPage] = useState(9)
+ 
+    
   useEffect(() => {
     axios.get('https://dummyjson.com/products?limit=200').then((res => {
       setProducts(res.data.products)
@@ -18,15 +24,22 @@ setloading(false)
 
   }, [])
 
+     const lastIdx=CurrPage * ProductPerPage;
+    const firstIdx=lastIdx-ProductPerPage
+
+const SliceData=products.slice(firstIdx,lastIdx)
+console.log(SliceData)
+
+
   function handleview(hup) {
     setview(hup)
   }
   if(loading){
     return (
       <div className='grid grid-cols-3  gap-5 content-start'>
-      {Array.from({length:6},()=>(
+      {Array.from({length:6},(hup,idx)=>(
 
-<div
+<div key={idx}
   role="status"
   className="w-80 h-75 p-4 border-5 border-[#3333332a] rounded-2xl shadow-xs animate-pulse md:p-6"
 >
@@ -92,13 +105,16 @@ setloading(false)
       <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
 
         {
-          products.map((item) => (
+          SliceData.map((item) => (
             <Product item={item} key={item.id} />
           ))
         }
       </div>
-
-
+<div className='mt-5 text-center'>
+<button onClick={()=>setCurrPage(CurrPage-1)}>pre</button>
+<button onClick={()=>setCurrPage(CurrPage+1)}>next</button>
+<Pagination item={products}/>
+</div>
     </div>
   )
 }
