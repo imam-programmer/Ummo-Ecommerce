@@ -112,3 +112,43 @@
   grid-template-columns: 5;
   row-gap: 200px;
 }
+.shoplist{
+  position: relative;
+  transition: 0.5s;
+  padding: 5px 5px;
+}
+.shoplist::after{
+  content: "";
+position: absolute;
+height: 3.5px;
+width:0;
+bottom: 0;
+left: 0;
+  background-color: rgb(0, 255, 13);
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.shoplist::before{
+  content: "";
+position: absolute;
+height: 3px;
+width: 0;
+top: 0;
+right: 0;
+  background-color: rgb(9, 255, 0);
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.shoplist:hover::after{
+width: 100%;
+}
+.shoplist:hover::before{
+width: 100%;
+}
+.shoplist:hover{
+  background-color: black;
+  border-radius: 20px;
+  color: white;
+  overflow: hidden;
+}
+
