@@ -1,0 +1,43 @@
+[{
+    "id":1,
+    "name":"#STAYHOME",
+    "url":"/"
+},
+{
+    "id":2,
+    "name":"NEW IN",
+    "url":"/"
+},{
+    "id":3,
+    "name":"JACKETS",
+    "url":"/"
+},
+{
+    "id":4,
+    "name":"HOODIES",
+    "url":"/"
+},
+{
+    "id":5,
+    "name":"MEN",
+    "url":"/"
+},
+{
+    "id":6,
+    "name":"WOMEN",
+    "url":"/"
+},{
+    "id":7,
+    "name":"TROUSERS",
+    "url":"/"
+},
+{
+    "id":8,
+    "name":"ACCESSORIES",
+    "url":"/"
+},
+{
+    "id":9,
+    "name":"SHOES",
+    "url":"/"
+}]
