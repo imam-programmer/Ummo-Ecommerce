@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { FaChevronUp } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { allCat, filterProduct } from "../../slices/productSlice";
 
 
 const COLORS = [
@@ -58,6 +59,8 @@ export default function ShopFilter() {
     price: true,
   });
 let Products=useSelector((state)=>state.Products.products)
+const AllCate=useSelector((state)=>state.Products.AllCat)
+// console.log(AllCat)
 let Categore=Products.map(item=>item.category)
 
 
@@ -66,7 +69,7 @@ const CATEGORIES = [...new Set(Categore)] ;
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [brandSearch, setBrandSearch] = useState("");
   const [checkedBrands, setCheckedBrands] = useState([]);
-  const [AllCate, setAllCate] = useState(true)
+  // const [AllCate, setAllCate] = useState(true)
   const [minPrice, setMinPrice] = useState(29);
   const [maxPrice, setMaxPrice] = useState(937);
   const [ActiveCategory, setActiveCategory] = useState("All")
@@ -91,10 +94,13 @@ const CATEGORIES = [...new Set(Categore)] ;
     b.name.toLowerCase().includes(brandSearch.toLowerCase())
   );
 
+  let dispatch=useDispatch()
 
 function handleActiveCategory(item){
 setActiveCategory(item)
-setAllCate(false)
+let filterProducts=Products.filter((Pitem)=>Pitem.category==item)
+dispatch(filterProduct(filterProducts))
+dispatch(allCat(false))
 }
 
   const handleMinChange = (e) => {
@@ -106,7 +112,7 @@ setAllCate(false)
     const value = Math.max(Number(e.target.value), minPrice + 1);
     setMaxPrice(value);
   };
-console.log(ActiveCategory);
+// console.log(ActiveCategory);
 
   return (
     <div className="font-jost w-full max-w-75 px-1 text-primary -mt-2">
@@ -119,8 +125,9 @@ console.log(ActiveCategory);
         />
         {openSections.categories && (
           <ul className="mt-3 space-y-3">
-            <li className={`${AllCate?"text-black":"text-gray"}`} onClick={()=>{
-              setAllCate(true)
+            <li className={`${AllCate?"text-black":"text-gray"} cursor-pointer`} onClick={()=>{
+             
+              dispatch(allCat(true))
               setActiveCategory("")
             }}>All</li>
             {CATEGORIES.map((cat) => (                   

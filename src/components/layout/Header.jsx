@@ -147,10 +147,10 @@ const Header = () => {
           <ul className={`z-50 absolute duration-750 w-full ${menuActive?"left-0":"-left-full"}  pt-10 h-screen bg-black top-0`}>
             <IoCloseSharp onClick={()=>setmenuActive(false)} size={25} className="absolute right-4 top-2 text-white"/>
             {navData?.map((item) => (
-              <Link to={item.path} onClick={()=>setmenuActive(false)}>
+              <Link key={item.id} to={item.path} onClick={()=>setmenuActive(false)}>
               <li
                 className='text-white leading-8 cursor-pointer text-sm text-center font-medium '
-                key={item.id}
+                
               >
                 {item?.title}
               </li>

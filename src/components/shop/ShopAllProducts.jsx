@@ -3,7 +3,7 @@ import Breadcrumb from '../layout/common/Breadcrumb'
 import axios from 'axios'
 import Product from "../layout/common/Product"
 import Pagination from './Pagination'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../../slices/productSlice'
 
 const ShopAllProducts = () => {
@@ -12,25 +12,45 @@ const ShopAllProducts = () => {
   const [loading, setloading] = useState(true)
     const [CurrPage, setCurrPage] = useState(1);
     const [ProductPerPage, setProductPerPage] = useState(9)
+     const [first, setfirst] = useState([])
+    const FilterProduct= useSelector((state)=>state.Products.filter)
+    const AllCate=useSelector((state)=>state.Products.AllCat)
+console.log(AllCate)
  const dispatch = useDispatch()
-    
+    let arr=[]
+    for(let i=1;i<=Math.ceil(FilterProduct.length/ProductPerPage);i++){
+        arr.push(i)
+    }
+        let array=[]
+    for(let i=1;i<=Math.ceil(FilterProduct.length/ProductPerPage);i++){
+        array.push(i)
+    }
   useEffect(() => {
     axios.get('https://dummyjson.com/products?limit=200').then((res => {
       setProducts(res.data.products)
       dispatch(addProduct(res.data.products))
 setloading(false)
+setfirst(arr)
+
     })).catch((err) => {
       setloading(false)
       console.log(err)
     })
 
 
-  }, [])
+  }, [FilterProduct])
 
      const lastIdx=CurrPage * ProductPerPage;
     const firstIdx=lastIdx-ProductPerPage
 
 const SliceData=products.slice(firstIdx,lastIdx)
+const hupData=products.slice(firstIdx,lastIdx)
+const FilterSliceData=FilterProduct.slice(firstIdx,lastIdx)
+console.log(hupData)
+   
+
+
+
 
 
 
@@ -109,14 +129,23 @@ const SliceData=products.slice(firstIdx,lastIdx)
       <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
 
         {
-          SliceData.map((item) => (
+        
+        FilterProduct.length>0?
+          FilterSliceData.map((item) => (
+            <Product item={item} key={item.id} />
+          )):
+           SliceData.map((item) => (
             <Product item={item} key={item.id} />
           ))
         }
       </div>
 <div className='mt-10 text-center'>
-
+{
+  FilterProduct.length>0?
+  first.map((item,idx)=><button key={idx} onClick={()=>setCurrPage(item)} className='text-[18px] focus:bg-green-700 focus:text-white cursor-pointer  ml-2  w-7 border border-green-400 rounded-sm hover:bg-green-700'>{item}</button>)
+  :
 <Pagination item={products} ProductPerPage={ProductPerPage} CurrPage={setCurrPage}/>
+}
 </div>
     </div>
   )
