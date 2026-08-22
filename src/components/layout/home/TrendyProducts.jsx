@@ -18,7 +18,7 @@ const TrendyProducts = () => {
 
 
     }, [])
-    console.log(products)
+
     function handleTabs(category) {
         setActiveCategory(category)
 

@@ -3,6 +3,8 @@ import Breadcrumb from '../layout/common/Breadcrumb'
 import axios from 'axios'
 import Product from "../layout/common/Product"
 import Pagination from './Pagination'
+import { useDispatch } from 'react-redux'
+import { addProduct } from '../../slices/productSlice'
 
 const ShopAllProducts = () => {
   const [products, setProducts] = useState([])
@@ -10,11 +12,12 @@ const ShopAllProducts = () => {
   const [loading, setloading] = useState(true)
     const [CurrPage, setCurrPage] = useState(1);
     const [ProductPerPage, setProductPerPage] = useState(9)
- 
+ const dispatch = useDispatch()
     
   useEffect(() => {
     axios.get('https://dummyjson.com/products?limit=200').then((res => {
       setProducts(res.data.products)
+      dispatch(addProduct(res.data.products))
 setloading(false)
     })).catch((err) => {
       setloading(false)
