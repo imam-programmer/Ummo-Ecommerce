@@ -12,10 +12,10 @@ const ShopAllProducts = () => {
   const [loading, setloading] = useState(true)
     const [CurrPage, setCurrPage] = useState(1);
     const [ProductPerPage, setProductPerPage] = useState(9)
-     const [first, setfirst] = useState([])
+     const [FilterShowPagination, setFilterShowPagination] = useState([])
     const FilterProduct= useSelector((state)=>state.Products.filter)
     const AllCate=useSelector((state)=>state.Products.AllCat)
-console.log(AllCate)
+// console.log(AllCate)
  const dispatch = useDispatch()
     let arr=[]
     for(let i=1;i<=Math.ceil(FilterProduct.length/ProductPerPage);i++){
@@ -30,7 +30,7 @@ console.log(AllCate)
       setProducts(res.data.products)
       dispatch(addProduct(res.data.products))
 setloading(false)
-setfirst(arr)
+setFilterShowPagination(arr)
 
     })).catch((err) => {
       setloading(false)
@@ -40,19 +40,18 @@ setfirst(arr)
 
   }, [FilterProduct])
 
+  const [cpage, setcpage] = useState(1)
+  const [Pperpage, setPperpage] = useState(9)
      const lastIdx=CurrPage * ProductPerPage;
     const firstIdx=lastIdx-ProductPerPage
-
 const SliceData=products.slice(firstIdx,lastIdx)
-const hupData=products.slice(firstIdx,lastIdx)
-const FilterSliceData=FilterProduct.slice(firstIdx,lastIdx)
-console.log(hupData)
+const lidx=cpage * Pperpage
+const Fidx=lidx - Pperpage
+console.log(lidx)
+const FilterSliceData=FilterProduct.slice(Fidx,lidx)
+
    
-
-
-
-
-
+console.log(FilterShowPagination)
 
   function handleview(hup) {
     setview(hup)
@@ -128,8 +127,10 @@ console.log(hupData)
       </div>
       <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
 
-        {
-        
+        {AllCate?
+          SliceData.map((item) => (
+            <Product item={item} key={item.id} />
+          )):
         FilterProduct.length>0?
           FilterSliceData.map((item) => (
             <Product item={item} key={item.id} />
@@ -142,10 +143,12 @@ console.log(hupData)
 <div className='mt-10 text-center'>
 {
   FilterProduct.length>0?
-  first.map((item,idx)=><button key={idx} onClick={()=>setCurrPage(item)} className='text-[18px] focus:bg-green-700 focus:text-white cursor-pointer  ml-2  w-7 border border-green-400 rounded-sm hover:bg-green-700'>{item}</button>)
-  :
+  FilterShowPagination.map((item)=>(
+    <button  className='text-[18px]   focus:bg-green-700 focus:text-white cursor-pointer  ml-2  w-7 border border-green-400 rounded-sm hover:bg-green-700' onClick={()=>}>{item}</button>
+  )):
 <Pagination item={products} ProductPerPage={ProductPerPage} CurrPage={setCurrPage}/>
 }
+
 </div>
     </div>
   )
