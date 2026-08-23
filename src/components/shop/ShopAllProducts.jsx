@@ -6,7 +6,7 @@ import Pagination from './Pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../../slices/productSlice'
 
-const ShopAllProducts = () => {
+const ShopAllProducts = ({cpage,setcpage}) => {
   const [products, setProducts] = useState([])
   const [view, setview] = useState(3)
   const [loading, setloading] = useState(true)
@@ -15,7 +15,7 @@ const ShopAllProducts = () => {
      const [FilterShowPagination, setFilterShowPagination] = useState([])
     const FilterProduct= useSelector((state)=>state.Products.filter)
     const AllCate=useSelector((state)=>state.Products.AllCat)
-// console.log(AllCate)
+
  const dispatch = useDispatch()
     let arr=[]
     for(let i=1;i<=Math.ceil(FilterProduct.length/ProductPerPage);i++){
@@ -40,18 +40,18 @@ setFilterShowPagination(arr)
 
   }, [FilterProduct])
 
-  const [cpage, setcpage] = useState(1)
+ 
   const [Pperpage, setPperpage] = useState(9)
      const lastIdx=CurrPage * ProductPerPage;
     const firstIdx=lastIdx-ProductPerPage
 const SliceData=products.slice(firstIdx,lastIdx)
 const lidx=cpage * Pperpage
 const Fidx=lidx - Pperpage
-console.log(lidx)
+// console.log(lidx)
 const FilterSliceData=FilterProduct.slice(Fidx,lidx)
-
+console.log(cpage)
    
-console.log(FilterShowPagination)
+// console.log(FilterShowPagination)
 
   function handleview(hup) {
     setview(hup)
@@ -96,7 +96,6 @@ console.log(FilterShowPagination)
 </div>
       ))}
 
-
       </div>
 
     )
@@ -140,9 +139,11 @@ console.log(FilterShowPagination)
 <div className='mt-10 text-center'>
 {
   FilterProduct.length>0?
-  FilterShowPagination.map((item)=>(
-    <button  className='text-[18px]   focus:bg-green-700 focus:text-white cursor-pointer  ml-2  w-7 border border-green-400 rounded-sm hover:bg-green-700' onClick={()=>setcpage(item)}>{item}</button>
-  )):
+  FilterShowPagination.map((item,idx)=>(
+    <button key={idx} className='text-[18px]   focus:bg-green-700 focus:text-white cursor-pointer  ml-2  w-7 border border-green-400 rounded-sm hover:bg-green-700' onClick={()=>{setcpage(item)}}>{item}</button>
+  )):AllCate ?
+<Pagination item={products} ProductPerPage={ProductPerPage} CurrPage={setCurrPage}/>
+:
 <Pagination item={products} ProductPerPage={ProductPerPage} CurrPage={setCurrPage}/>
 }
 

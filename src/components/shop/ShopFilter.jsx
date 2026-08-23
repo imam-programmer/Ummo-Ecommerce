@@ -6,16 +6,16 @@ import { allCat, filterProduct } from "../../slices/productSlice";
 
 
 const COLORS = [
-  { name: "Navy", hex: "#1B2A5E" },
-  { name: "Yellow", hex: "#E4B94C" },
-  { name: "Black", hex: "#232323" },
-  { name: "Light Blue", hex: "#A9CDEB" },
-  { name: "Brown", hex: "#8C5A2B" },
-  { name: "Gold", hex: "#D89B3D" },
-  { name: "Peach", hex: "#F0B79E" },
-  { name: "Gray", hex: "#B9B9B9" },
-  { name: "Red", hex: "#D9736B" },
-  { name: "Mint", hex: "#AEDCC0" },
+  // { name: "Navy", hex: "#1B2A5E" },
+  // { name: "Yellow", hex: "#E4B94C" },
+  // { name: "Black", hex: "#232323" },
+  // { name: "Light Blue", hex: "#A9CDEB" },
+  // { name: "Brown", hex: "#8C5A2B" },
+  // { name: "Gold", hex: "#D89B3D" },
+  // { name: "Peach", hex: "#F0B79E" },
+  // { name: "Gray", hex: "#B9B9B9" },
+  // { name: "Red", hex: "#D9736B" },
+  // { name: "Mint", hex: "#AEDCC0" },
 ];
 
 const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
@@ -50,7 +50,9 @@ function SectionHeader({ title, open, onToggle }) {
   );
 }
 
-export default function ShopFilter() {
+export default function ShopFilter({cpage,setcpage}) {
+  
+  
   const [openSections, setOpenSections] = useState({
     categories: true,
     color: true,
@@ -60,9 +62,8 @@ export default function ShopFilter() {
   });
 let Products=useSelector((state)=>state.Products.products)
 const AllCate=useSelector((state)=>state.Products.AllCat)
-// console.log(AllCat)
-let Categore=Products.map(item=>item.category)
 
+let Categore=Products.map(item=>item.category)
 
 const CATEGORIES = [...new Set(Categore)] ;
   const [selectedColor, setSelectedColor] = useState("Gray");
@@ -101,6 +102,7 @@ setActiveCategory(item)
 let filterProducts=Products.filter((Pitem)=>Pitem.category==item)
 dispatch(filterProduct(filterProducts))
 dispatch(allCat(false))
+setcpage(1)
 }
 
   const handleMinChange = (e) => {
@@ -143,30 +145,7 @@ dispatch(allCat(false))
       </div>
 
       {/* Color */}
-      <div className="border-b border-gray-200 py-6">
-        <SectionHeader
-          title="Color"
-          open={openSections.color}
-          onToggle={() => toggleSection("color")}
-        />
-        {openSections.color && (
-          <div className="mt-4 flex flex-wrap gap-6.25">
-            {COLORS.map((color) => (
-              <button
-                key={color.name}
-                aria-label={color.name}
-                onClick={() => setSelectedColor(color.name)}
-                className={`h-5.25 w-5.25 cursor-pointer rounded-full transition-all ${
-                  selectedColor === color.name
-                    ? "ring-3 ring-primary ring-offset-5"
-                    : ""
-                }`}
-                style={{ backgroundColor: color.hex }}
-              />
-            ))}
-          </div>
-        )}
-      </div>
+ 
 
       {/* Sizes */}
       <div className="border-b border-gray-200 py-6">
