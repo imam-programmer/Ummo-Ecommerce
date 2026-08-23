@@ -131,11 +131,8 @@ console.log(FilterShowPagination)
           SliceData.map((item) => (
             <Product item={item} key={item.id} />
           )):
-        FilterProduct.length>0?
+        FilterProduct.length>0 &&
           FilterSliceData.map((item) => (
-            <Product item={item} key={item.id} />
-          )):
-           SliceData.map((item) => (
             <Product item={item} key={item.id} />
           ))
         }
@@ -144,7 +141,7 @@ console.log(FilterShowPagination)
 {
   FilterProduct.length>0?
   FilterShowPagination.map((item)=>(
-    <button  className='text-[18px]   focus:bg-green-700 focus:text-white cursor-pointer  ml-2  w-7 border border-green-400 rounded-sm hover:bg-green-700' onClick={()=>}>{item}</button>
+    <button  className='text-[18px]   focus:bg-green-700 focus:text-white cursor-pointer  ml-2  w-7 border border-green-400 rounded-sm hover:bg-green-700' onClick={()=>setcpage(item)}>{item}</button>
   )):
 <Pagination item={products} ProductPerPage={ProductPerPage} CurrPage={setCurrPage}/>
 }
