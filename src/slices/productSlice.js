@@ -2,9 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   products:[],
- filter:[],
- AllCat:true
- 
+ filter:[]
 }
 
 export const counterSlice = createSlice({

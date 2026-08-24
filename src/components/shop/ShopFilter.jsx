@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaChevronUp } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { allCat, filterProduct } from "../../slices/productSlice";
 
 
@@ -42,17 +42,16 @@ function SectionHeader({ title, open, onToggle }) {
       <FaChevronUp
         size={18}
         strokeWidth={2}
-        className={`text-primary transition-transform duration-200 ${
-          open ? "" : "rotate-180"
-        }`}
+        className={`text-primary transition-transform duration-200 ${open ? "" : "rotate-180"
+          }`}
       />
     </button>
   );
 }
 
-export default function ShopFilter({cpage,setcpage}) {
-  
-  
+export default function ShopFilter({ currentPage, setCurrentPage, Allshow, setAllshow }) {
+
+
   const [openSections, setOpenSections] = useState({
     categories: true,
     color: true,
@@ -60,21 +59,20 @@ export default function ShopFilter({cpage,setcpage}) {
     brands: true,
     price: true,
   });
-let Products=useSelector((state)=>state.Products.products)
-const AllCate=useSelector((state)=>state.Products.AllCat)
+  let Products = useSelector((state) => state.Products.products)
+  const AllCate = useSelector((state) => state.Products.AllCat)
 
-let Categore=Products.map(item=>item.category)
+  let Categore = Products.map(item => item.category)
 
-const CATEGORIES = [...new Set(Categore)] ;
+  const CATEGORIES = [...new Set(Categore)];
 
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [brandSearch, setBrandSearch] = useState("");
   const [checkedBrands, setCheckedBrands] = useState([]);
-  // const [AllCate, setAllCate] = useState(true)
   const [minPrice, setMinPrice] = useState(29);
   const [maxPrice, setMaxPrice] = useState(937);
 
-  const [ActiveCategory, setActiveCategory] = useState("All")
+  const [ActiveCategory, setActiveCategory] = useState("")
 
   const PRICE_FLOOR = 29;
   const PRICE_CEIL = 937;
@@ -96,15 +94,14 @@ const CATEGORIES = [...new Set(Categore)] ;
     b.name.toLowerCase().includes(brandSearch.toLowerCase())
   );
 
-  let dispatch=useDispatch()
+  let dispatch = useDispatch()
 
-function handleActiveCategory(item){
-setActiveCategory(item) /*this for active style */ 
-let filterProducts=Products.filter((Pitem)=>Pitem.category==item)  /* this is for filtering data by category */
-dispatch(filterProduct(filterProducts)) /* push filtering data on redux for using this data other components*/
-dispatch(allCat(false)) /* pushing boolean value on redux for currecting pagination on filtering products*/
-setcpage(1)  
-}
+  function handleActiveCategory(item) {
+    setActiveCategory(item) /*this for active style */
+    let filterProducts = Products.filter((Pitem) => Pitem.category == item)  /* this is for filtering data by category */
+    dispatch(filterProduct(filterProducts)) /* push filtering data on redux for using this data other components*/
+    setCurrentPage(1)
+  }
 
   const handleMinChange = (e) => {
     const value = Math.min(Number(e.target.value), maxPrice - 1);
@@ -115,7 +112,6 @@ setcpage(1)
     const value = Math.max(Number(e.target.value), minPrice + 1);
     setMaxPrice(value);
   };
-// console.log(ActiveCategory);
 
   return (
     <div className="font-jost w-full max-w-75 px-1 text-primary -mt-2">
@@ -128,55 +124,33 @@ setcpage(1)
         />
         {openSections.categories && (
           <ul className="mt-3 space-y-3">
-            <li className={`${AllCate?"text-black":"text-gray"} cursor-pointer`} onClick={()=>{
-             
-              dispatch(allCat(true)) /*push data on redux for conditioning on shopallProducs.jsx */
-              
+            <li className={`${Allshow ? "text-black" : "text-gray"} cursor-pointer`} onClick={() => {
+
+              setAllshow(true)
+              setCurrentPage(1)
+
               setActiveCategory("") /*for active category */
             }}>All</li>
-            {CATEGORIES.map((cat) => (                   
+            {CATEGORIES.map((cat) => (
               <li key={cat}>
-                <button className={`text-[15px]  capitalize cursor-pointer ${ActiveCategory==cat&&"text-black!"} transition-colors text-gray `} onClick={()=>handleActiveCategory(cat)}>
+                <button className={`text-[15px]  capitalize cursor-pointer ${ActiveCategory == cat && "text-black!"} transition-colors text-gray `} onClick={() => {
+                  handleActiveCategory(cat)
+                  setAllshow(false)
+                }}>
                   {cat}
                 </button>
               </li>
-       
+
             ))}
           </ul>
         )}
       </div>
 
-  
- 
+
+
 
       {/* Sizes */}
-      <div className="border-b border-gray-200 py-6">
-        <SectionHeader
-          title="Sizes"
-          open={openSections.sizes}
-          onToggle={() => toggleSection("sizes")}
-        />
-        {openSections.sizes && (
-          <div className="mt-4 flex flex-wrap gap-3">
-            {SIZES.map((size) => {
-              const active = selectedSizes.includes(size);
-              return (
-                <button
-                  key={size}
-                  onClick={() => toggleSize(size)}
-                  className={`flex cursor-pointer h-11 w-16 items-center justify-center border text-sm transition-colors ${
-                    active
-                      ? "border-primary bg-primary text-white"
-                      : "border-gray-300 text-primary hover:border-primary"
-                  }`}
-                >
-                  {size}
-                </button>
-              );
-            })}
-          </div>
-        )}
-      </div>
+     
 
       {/* Brands */}
       <div className="border-b border-gray-200 py-6">

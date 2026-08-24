@@ -2,35 +2,25 @@ import React, { useEffect, useState } from 'react'
 import Breadcrumb from '../layout/common/Breadcrumb'
 import axios from 'axios'
 import Product from "../layout/common/Product"
-import Pagination from './Pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../../slices/productSlice'
-
-const ShopAllProducts = ({cpage,setcpage}) => {
+import ResponsivePagination from 'react-responsive-pagination';
+import 'react-responsive-pagination/themes/classic-light-dark.css';
+const ShopAllProducts = ({currentPage,setCurrentPage,Allshow,setAllshow}) => {
   const [products, setProducts] = useState([])
   const [view, setview] = useState(3)
   const [loading, setloading] = useState(true)
-    const [CurrPage, setCurrPage] = useState(1);
-    const [ProductPerPage, setProductPerPage] = useState(9)
-     const [FilterShowPagination, setFilterShowPagination] = useState([])
     const FilterProduct= useSelector((state)=>state.Products.filter)
-    const AllCate=useSelector((state)=>state.Products.AllCat)
-
+    const [totalPages, settotalPages] = useState(0)
+  
+console.log(FilterProduct)
  const dispatch = useDispatch()
-    let arr=[]
-    for(let i=1;i<=Math.ceil(FilterProduct.length/ProductPerPage);i++){
-        arr.push(i)
-    }
-        let array=[]
-    for(let i=1;i<=Math.ceil(FilterProduct.length/ProductPerPage);i++){
-        array.push(i)
-    }
   useEffect(() => {
     axios.get('https://dummyjson.com/products?limit=200').then((res => {
       setProducts(res.data.products)
+      settotalPages(FilterProduct.length>0?Math.ceil(FilterProduct.length/12):Math.ceil(res.data.products.length/12))
       dispatch(addProduct(res.data.products))
 setloading(false)
-setFilterShowPagination(arr)
 
     })).catch((err) => {
       setloading(false)
@@ -40,17 +30,13 @@ setFilterShowPagination(arr)
 
   }, [FilterProduct])
 
-     const lastIdx=CurrPage * ProductPerPage;
-    const firstIdx=lastIdx-ProductPerPage
-const SliceData=products.slice(firstIdx,lastIdx)
-const lidx=cpage * ProductPerPage
-const Fidx=lidx - ProductPerPage
-// console.log(lidx)
-const FilterSliceData=FilterProduct.slice(Fidx,lidx)
-console.log(cpage)
-   
-// console.log(FilterShowPagination)
 
+
+let fasttidx=(currentPage - 1) * 12;
+let lastidx=fasttidx + 12
+
+
+console.log(currentPage)
   function handleview(hup) {
     setview(hup)
   }
@@ -124,26 +110,22 @@ console.log(cpage)
       </div>
       <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
 
-        {AllCate?
-          SliceData.map((item) => (
+        {Allshow ?
+         products.slice(fasttidx , lastidx).map((item) => (
             <Product item={item} key={item.id} />
           )):
         FilterProduct.length>0 &&
-          FilterSliceData.map((item) => (
+
+          FilterProduct.slice(fasttidx,lastidx).map((item) => (
             <Product item={item} key={item.id} />
           ))
+          
         }
       </div>
 <div className='mt-10 text-center'>
-{
-  FilterProduct.length>0?
-  FilterShowPagination.map((item,idx)=>(
-    <button key={idx} className='text-[18px]   focus:bg-green-700 focus:text-white cursor-pointer  ml-2  w-7 border border-green-400 rounded-sm hover:bg-green-700' onClick={()=>{setcpage(item)}}>{item}</button>
-  )):AllCate &&
-<Pagination item={products} ProductPerPage={ProductPerPage} CurrPage={setCurrPage}/>
 
-}
-
+{/* in this way i will set pagination*/ }
+<ResponsivePagination current={currentPage} total={totalPages} onPageChange={setCurrentPage}/>
 </div>
     </div>
   )
