@@ -40,13 +40,11 @@ setFilterShowPagination(arr)
 
   }, [FilterProduct])
 
- 
-  const [Pperpage, setPperpage] = useState(9)
      const lastIdx=CurrPage * ProductPerPage;
     const firstIdx=lastIdx-ProductPerPage
 const SliceData=products.slice(firstIdx,lastIdx)
-const lidx=cpage * Pperpage
-const Fidx=lidx - Pperpage
+const lidx=cpage * ProductPerPage
+const Fidx=lidx - ProductPerPage
 // console.log(lidx)
 const FilterSliceData=FilterProduct.slice(Fidx,lidx)
 console.log(cpage)
@@ -141,10 +139,9 @@ console.log(cpage)
   FilterProduct.length>0?
   FilterShowPagination.map((item,idx)=>(
     <button key={idx} className='text-[18px]   focus:bg-green-700 focus:text-white cursor-pointer  ml-2  w-7 border border-green-400 rounded-sm hover:bg-green-700' onClick={()=>{setcpage(item)}}>{item}</button>
-  )):AllCate ?
+  )):AllCate &&
 <Pagination item={products} ProductPerPage={ProductPerPage} CurrPage={setCurrPage}/>
-:
-<Pagination item={products} ProductPerPage={ProductPerPage} CurrPage={setCurrPage}/>
+
 }
 
 </div>

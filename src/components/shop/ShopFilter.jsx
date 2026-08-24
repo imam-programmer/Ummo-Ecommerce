@@ -66,13 +66,14 @@ const AllCate=useSelector((state)=>state.Products.AllCat)
 let Categore=Products.map(item=>item.category)
 
 const CATEGORIES = [...new Set(Categore)] ;
-  const [selectedColor, setSelectedColor] = useState("Gray");
+
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [brandSearch, setBrandSearch] = useState("");
   const [checkedBrands, setCheckedBrands] = useState([]);
   // const [AllCate, setAllCate] = useState(true)
   const [minPrice, setMinPrice] = useState(29);
   const [maxPrice, setMaxPrice] = useState(937);
+
   const [ActiveCategory, setActiveCategory] = useState("All")
 
   const PRICE_FLOOR = 29;
@@ -98,11 +99,11 @@ const CATEGORIES = [...new Set(Categore)] ;
   let dispatch=useDispatch()
 
 function handleActiveCategory(item){
-setActiveCategory(item)
-let filterProducts=Products.filter((Pitem)=>Pitem.category==item)
-dispatch(filterProduct(filterProducts))
-dispatch(allCat(false))
-setcpage(1)
+setActiveCategory(item) /*this for active style */ 
+let filterProducts=Products.filter((Pitem)=>Pitem.category==item)  /* this is for filtering data by category */
+dispatch(filterProduct(filterProducts)) /* push filtering data on redux for using this data other components*/
+dispatch(allCat(false)) /* pushing boolean value on redux for currecting pagination on filtering products*/
+setcpage(1)  
 }
 
   const handleMinChange = (e) => {
@@ -129,12 +130,13 @@ setcpage(1)
           <ul className="mt-3 space-y-3">
             <li className={`${AllCate?"text-black":"text-gray"} cursor-pointer`} onClick={()=>{
              
-              dispatch(allCat(true))
-              setActiveCategory("")
+              dispatch(allCat(true)) /*push data on redux for conditioning on shopallProducs.jsx */
+              
+              setActiveCategory("") /*for active category */
             }}>All</li>
             {CATEGORIES.map((cat) => (                   
               <li key={cat}>
-                <button className={`text-[15px]  capitalize cursor-pointer ${ActiveCategory==cat&&"!text-black"} transition-colors text-gray `} onClick={()=>handleActiveCategory(cat)}>
+                <button className={`text-[15px]  capitalize cursor-pointer ${ActiveCategory==cat&&"text-black!"} transition-colors text-gray `} onClick={()=>handleActiveCategory(cat)}>
                   {cat}
                 </button>
               </li>
@@ -144,7 +146,7 @@ setcpage(1)
         )}
       </div>
 
-      {/* Color */}
+  
  
 
       {/* Sizes */}
