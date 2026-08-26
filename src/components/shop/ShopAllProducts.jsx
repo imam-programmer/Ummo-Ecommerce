@@ -6,21 +6,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../../slices/productSlice'
 import ResponsivePagination from 'react-responsive-pagination';
 import 'react-responsive-pagination/themes/classic-light-dark.css';
-const ShopAllProducts = ({currentPage,setCurrentPage,Allshow,setAllshow}) => {
+const ShopAllProducts = ({ currentPage, setCurrentPage, Allshow, setAllshow }) => {
   const [products, setProducts] = useState([])
   const [view, setview] = useState(3)
   const [loading, setloading] = useState(true)
-    const FilterProduct= useSelector((state)=>state.Products.filter)
-    const [totalPages, settotalPages] = useState(0)
-  
-console.log(FilterProduct)
- const dispatch = useDispatch()
+  const FilterProduct = useSelector((state) => state.Products.filter)
+  const [totalPages, settotalPages] = useState(0)
+
+  console.log(FilterProduct)
+  const dispatch = useDispatch()
   useEffect(() => {
     axios.get('https://dummyjson.com/products?limit=200').then((res => {
       setProducts(res.data.products)
-      settotalPages(FilterProduct.length>0?Math.ceil(FilterProduct.length/12):Math.ceil(res.data.products.length/12))
+      settotalPages(FilterProduct.length > 0 ? Math.ceil(FilterProduct.length / 12) : Math.ceil(res.data.products.length / 12))
       dispatch(addProduct(res.data.products))
-setloading(false)
+      setloading(false)
 
     })).catch((err) => {
       setloading(false)
@@ -32,59 +32,62 @@ setloading(false)
 
 
 
-let fasttidx=(currentPage - 1) * 12;
-let lastidx=fasttidx + 12
+  let fasttidx = (currentPage - 1) * 12;
+  let lastidx = fasttidx + 12
 
 
-console.log(currentPage)
+  console.log(currentPage)
+
   function handleview(hup) {
     setview(hup)
   }
 
-  if(loading){
+
+  // Product loading animation here===================================================================
+  if (loading) {
     return (
       <div className='grid grid-cols-3  gap-5 content-start'>
-      {Array.from({length:6},(hup,idx)=>(
+        {Array.from({ length: 6 }, (hup, idx) => (
 
-<div key={idx}
-  role="status"
-  className="w-80 h-75 p-4 border-5 border-[#3333332a] rounded-2xl shadow-xs animate-pulse md:p-6"
->
-  <div
-    role="status"
-    className="flex items-center justify-center h-40 w-full bg-neutral-quaternary rounded-base animate-pulse mb-4 sm:mb-6"
-  >
-    <svg
-      className="w-11 h-11 text-fg-disabled"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke="currentColor"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1ZM9 12h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Zm5.697 2.395v-.733l1.269-1.219v2.984l-1.268-1.032Z"
-      />
-    </svg>
-    <span className="sr-only">Loading...</span>
-  </div>
-  <div className="h-2.5 bg-[#33333375] rounded-full w-48 mb-4" />
-  <div className="h-2 bg-[#33333375]  rounded-full mb-2.5" />
-  <div className="h-2 bg-[#33333375]  rounded-full mb-2.5" />
-  <div className="h-2 bg-[#33333375]  rounded-full" />
- 
-</div>
-      ))}
+          <div key={idx}
+            role="status"
+            className="w-80 h-75 p-4 border-5 border-[#3333332a] rounded-2xl shadow-xs animate-pulse md:p-6"
+          >
+            <div
+              role="status"
+              className="flex items-center justify-center h-40 w-full bg-neutral-quaternary rounded-base animate-pulse mb-4 sm:mb-6"
+            >
+              <svg
+                className="w-11 h-11 text-fg-disabled"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1ZM9 12h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Zm5.697 2.395v-.733l1.269-1.219v2.984l-1.268-1.032Z"
+                />
+              </svg>
+              <span className="sr-only">Loading...</span>
+            </div>
+            <div className="h-2.5 bg-[#33333375] rounded-full w-48 mb-4" />
+            <div className="h-2 bg-[#33333375]  rounded-full mb-2.5" />
+            <div className="h-2 bg-[#33333375]  rounded-full mb-2.5" />
+            <div className="h-2 bg-[#33333375]  rounded-full" />
+
+          </div>
+        ))}
 
       </div>
 
     )
   }
-
+  // Product loading animation here===================================================================
   return (
     <div className='w-full '>
       <div className='flex'>
@@ -93,7 +96,7 @@ console.log(currentPage)
 
         {/*  dropdown sorting */}
 
-        <select className=" w-35   border-b-2 !focus:border-b-2 text-sm font-medium text-primary rounded-base cursor-pointer  uppercase">
+        <select className=" w-35   border-b-2 !focus:border-b-2 outline-none  text-sm font-medium text-primary rounded-base cursor-pointer  uppercase">
           <option  >Default Select</option>
           <option value="US" >high to low</option>
           <option value="CA" >low to high</option>
@@ -111,22 +114,22 @@ console.log(currentPage)
       <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
 
         {Allshow ?
-         products.slice(fasttidx , lastidx).map((item) => (
+          products.slice(fasttidx, lastidx).map((item) => (
             <Product item={item} key={item.id} />
-          )):
-        FilterProduct.length>0 &&
+          )) :
+          FilterProduct.length > 0 &&
 
-          FilterProduct.slice(fasttidx,lastidx).map((item) => (
+          FilterProduct.slice(fasttidx, lastidx).map((item) => (
             <Product item={item} key={item.id} />
           ))
-          
+
         }
       </div>
-<div className='mt-10 text-center'>
+      <div className='mt-10 text-center'>
 
-{/* in this way i will set pagination*/ }
-<ResponsivePagination current={currentPage} total={totalPages} onPageChange={setCurrentPage}/>
-</div>
+        {/* in this way i will set pagination*/}
+        <ResponsivePagination current={currentPage} total={totalPages} onPageChange={setCurrentPage} />
+      </div>
     </div>
   )
 }
