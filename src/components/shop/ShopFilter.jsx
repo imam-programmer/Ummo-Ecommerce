@@ -5,18 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { allCat, filterProduct } from "../../slices/productSlice";
 
 
-const COLORS = [
-  // { name: "Navy", hex: "#1B2A5E" },
-  // { name: "Yellow", hex: "#E4B94C" },
-  // { name: "Black", hex: "#232323" },
-  // { name: "Light Blue", hex: "#A9CDEB" },
-  // { name: "Brown", hex: "#8C5A2B" },
-  // { name: "Gold", hex: "#D89B3D" },
-  // { name: "Peach", hex: "#F0B79E" },
-  // { name: "Gray", hex: "#B9B9B9" },
-  // { name: "Red", hex: "#D9736B" },
-  // { name: "Mint", hex: "#AEDCC0" },
-];
+
 
 const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
 
@@ -49,9 +38,9 @@ function SectionHeader({ title, open, onToggle }) {
   );
 }
 
-export default function ShopFilter({ currentPage, setCurrentPage, Allshow, setAllshow }) {
+export default function ShopFilter({ currentPage, setCurrentPage }) {
 
-
+const [Allshow, setAllshow] = useState(false)
   const [openSections, setOpenSections] = useState({
     categories: true,
     color: true,
@@ -145,12 +134,6 @@ export default function ShopFilter({ currentPage, setCurrentPage, Allshow, setAl
           </ul>
         )}
       </div>
-
-
-
-
-      {/* Sizes */}
-     
 
       {/* Brands */}
       <div className="border-b border-gray-200 py-6">

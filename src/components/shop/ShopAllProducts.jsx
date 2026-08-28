@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../../slices/productSlice'
 import ResponsivePagination from 'react-responsive-pagination';
 import 'react-responsive-pagination/themes/classic-light-dark.css';
-const ShopAllProducts = ({ currentPage, setCurrentPage, Allshow, setAllshow }) => {
+const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
   const [products, setProducts] = useState([])
   const [view, setview] = useState(3)
   const [loading, setloading] = useState(true)
   const FilterProduct = useSelector((state) => state.Products.filter)
   const [totalPages, settotalPages] = useState(0)
+  const [Dropdown, setDropdown] = useState("Default Select")
+  const [Dropshowhide, setDropshowhide] = useState(false)
 
   console.log(FilterProduct)
   const dispatch = useDispatch()
@@ -95,13 +97,36 @@ const ShopAllProducts = ({ currentPage, setCurrentPage, Allshow, setAllshow }) =
         <Breadcrumb />
 
         {/*  dropdown sorting */}
+        <div className='relative'>
 
-        <select className=" w-35   border-b-2 !focus:border-b-2 outline-none  text-sm font-medium text-primary rounded-base cursor-pointer  uppercase">
-          <option  >Default Select</option>
-          <option value="US" >high to low</option>
-          <option value="CA" >low to high</option>
+        <div onClick={()=>setDropshowhide(!Dropshowhide)} className='flex cursor-pointer  items-center w-35 border-b-2  justify-between'>
+          <button className='cursor-pointer text-sm font-medium uppercase whitespace-nowrap font-jost ' >{Dropdown}</button>
+          <span>
 
-        </select>
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.64332 5.84071C4.83765 6.05309 5.16231 6.05309 5.35713 5.84071L9.85239 0.940372C10.0492 0.725269 10.0492 0.376431 9.85239 0.161873C9.65557 -0.0532294 9.33589 -0.0532294 9.13908 0.161873L5 4.67294L0.861423 0.161327C0.664109 -0.0537752 0.344925 -0.0537752 0.147611 0.161327C-0.0492043 0.37643 -0.0492044 0.725267 0.147611 0.939826L4.64332 5.84071Z" fill="#222222" />
+            </svg>
+
+          </span>
+        </div>
+{Dropshowhide&&
+        <div className=' bg-[#bebebe]  px-2 absolute w-full z-10 py-2'>
+          <h3 className='cursor-pointer  font-medium  whitespace-nowrap font-jost' onClick={()=>{setDropdown("Default Select")
+            setDropshowhide(false)
+          }}>Default Select</h3>
+       
+          <h3 className='cursor-pointer  font-medium  whitespace-nowrap font-jost' onClick={()=>{setDropdown("low to high")
+            setDropshowhide(false)
+          }}>low to high</h3>
+          <h3 className='cursor-pointer  font-medium  whitespace-nowrap font-jost' onClick={()=>{setDropdown("high to low")
+            setDropshowhide(false)
+          }}>high to low</h3>
+        </div>
+}
+        </div>
+
+{/* =====================dropdown done======================================== */}
+
         <div className='border-l-4 ml-7.5 border-[#e4e4e4] pl-7.5'>
           <ul className='flex font-medium text-sm text-primary uppercase gap-2.75 '>
             <li >view</li>
@@ -113,15 +138,15 @@ const ShopAllProducts = ({ currentPage, setCurrentPage, Allshow, setAllshow }) =
       </div>
       <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
 
-        {Allshow ?
-          products.slice(fasttidx, lastidx).map((item) => (
-            <Product item={item} key={item.id} />
-          )) :
-          FilterProduct.length > 0 &&
+        {FilterProduct.length > 0 ?
 
           FilterProduct.slice(fasttidx, lastidx).map((item) => (
             <Product item={item} key={item.id} />
+          )) :
+          products.slice(fasttidx, lastidx).map((item) => (
+            <Product item={item} key={item.id} />
           ))
+
 
         }
       </div>
