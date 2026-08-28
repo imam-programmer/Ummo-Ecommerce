@@ -152,3 +152,44 @@ width: 100%;
   overflow: hidden;
 }
 
+/* =========pagination design customize==================== */
+.pagination .active > .page-link {
+    z-index: 3;
+    color: black !important;
+    background-color:transparent !important;
+    border: none !important;
+    font-weight: var(--pagination-active-font-weight);
+    border-radius: 0px !important;
+    position: relative;
+  
+}
+.pagination .active > .page-link::after{
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 0%;
+  left: 0;
+  background: #000;
+  bottom: 0;
+  transition: 0.3s;
+}
+.pagination .active > .page-link:hover::after{
+  width: 100%;
+}
+.pagination .page-link {
+    position: relative;
+    display: block;
+    font-size: var(--pagination-font-size, 1rem);
+    color: black !important;
+    text-decoration: none;
+    background-color: transparent !important;
+    border: none !important;
+    z-index: 999;
+    padding-bottom: 2px  !important;
+
+}
+
+
+
+
+
