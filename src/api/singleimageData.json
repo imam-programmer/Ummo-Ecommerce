@@ -1,0 +1,17 @@
+[{
+    "id":1,
+    "image":"./images/singlesmallImage1.png",
+    "alt":"singlesmallImage1"
+},{
+    "id":2,
+    "image":"./images/singlesmallImage1.png",
+    "alt":"singlesmallImage2"
+},{
+    "id":3,
+    "image":"./images/singlesmallImage1.png",
+    "alt":"singlesmallImage3"
+},{
+    "id":4,
+    "image":"./images/singlesmallImage1.png",
+    "alt":"singlesmallImage4"
+}]
