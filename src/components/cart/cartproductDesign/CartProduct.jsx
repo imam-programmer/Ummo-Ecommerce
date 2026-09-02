@@ -6,17 +6,17 @@ const CartProduct = () => {
         <div className='flex gap-61.75 items-center py-7.5 border-b border-[#E4E4E4]'>
             <div className='flex items-center gap-7.5'>
                 <Image className='h-30 w-30' src='./images/cartimage.png' />
-                <h2>Zessi Dresses</h2>
+                <h2 className='text-[16px] font-normal text-primary'>Zessi Dresses</h2>
 
             </div>
             <div className='flex items-center'>
-                <h3 className='mr-25.5'>$99</h3>
+                <h3 className='mr-25.5 text-[16px] font-normal text-gray'>$99</h3>
                 <div className='h-12.5 w-27.5 mr-14.5 leading-12.5  flex justify-between items-center px-3.75 border-3 border-[#E4E4E4]'>
-                    <button className='cursor-pointer'>-</button>
-                    <span>1</span>
-                    <button className='cursor-pointer'>+</button>
+                    <button className='cursor-pointer text-[16px] text-gray font-normal'>-</button>
+                    <span className=' text-[16px] text-gray font-normal'>1</span>
+                    <button className='cursor-pointer text-[16px] text-gray font-normal'>+</button>
                 </div>
-                <h3>$399</h3>
+                <h3 className='text-[16px] font-medium text-primary'>$399</h3>
 
 
                 <h2 className='ml-23.5 '>

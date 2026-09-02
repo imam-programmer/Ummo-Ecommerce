@@ -38,8 +38,20 @@ const CartPage = () => {
         </div>
       </div>
 
+{/* cartside design============================= */}
+<div className='mt-12.5'>
+  <div className='flex gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25'>
+<h3>PRODUCT</h3>
+<div className='flex gap-22.75'>
+  <h3>PRICE</h3>
+  <h3>QUANTITY</h3>
+  <h3>SUBTOTAL</h3>
+</div>
+  </div>
 
       <CartProduct/>
+</div>
+{/* cartside design  done============================= */}
     </div>
   )
 }
