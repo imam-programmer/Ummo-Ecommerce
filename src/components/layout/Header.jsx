@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import Image from "./common/Image";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import navData from "../../api/navbardata.json";
-
 import { IoCloseSharp } from "react-icons/io5";
+import { useSelector } from "react-redux";
+
+
 
 const Header = () => {
+  const navigate=useNavigate()
   const [menuActive, setmenuActive] = useState(false)
+  const CartProduct=useSelector((state)=>state.cart.products)
+  console.log(CartProduct.length)
+
+function handleNavigate(){
+  navigate('/cart')
+}
+
   return (
     <header className="md:pt-7.25 md:pb-7 py-4">
       <nav>
@@ -102,7 +112,7 @@ const Header = () => {
                   </defs>
                 </svg>
               </button>
-              <button className="cursor-pointer">
+              <button onClick={handleNavigate} className="cursor-pointer relative">
                 <svg
                   width="21"
                   height="20"
@@ -115,6 +125,7 @@ const Header = () => {
                     fill="#222222"
                   />
                 </svg>
+                <span className="absolute -bottom-1.5 bg-[#B9A16B] h-4 w-4 leading-4 rounded-full text-[10px] text-white">{CartProduct.length}</span>
               </button>
               <button className="cursor-pointer">
                 <svg
