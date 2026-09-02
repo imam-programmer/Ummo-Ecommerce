@@ -49,8 +49,13 @@ const [Allshow, setAllshow] = useState(false)
     price: true,
   });
   let Products = useSelector((state) => state.Products.products)
-  const AllCate = useSelector((state) => state.Products.AllCat)
 
+let Brand=Products.slice(0,40).map((item)=>(
+  item.brand
+))
+
+
+  const filteredBrands = [...new Set(Brand)];
   let Categore = Products.map(item => item.category)
 
   const CATEGORIES = [...new Set(Categore)];
@@ -79,9 +84,7 @@ const [Allshow, setAllshow] = useState(false)
       prev.includes(name) ? prev.filter((b) => b !== name) : [...prev, name]
     );
 
-  const filteredBrands = BRANDS.filter((b) =>
-    b.name.toLowerCase().includes(brandSearch.toLowerCase())
-  );
+
 
   let dispatch = useDispatch()
 
@@ -158,18 +161,18 @@ const [Allshow, setAllshow] = useState(false)
               />
             </div>
             <ul className="space-y-4">
-              {filteredBrands.map((brand) => (
-                <li key={brand.name} className="flex items-center justify-between">
+              {filteredBrands.map((brand,id) => (
+                <li key={id} className="flex items-center justify-between">
                   <label className="flex cursor-pointer items-center gap-3 text-[15px] text-primary">
                     <input
                       type="checkbox"
-                      checked={checkedBrands.includes(brand.name)}
-                      onChange={() => toggleBrand(brand.name)}
+                      checked={checkedBrands.includes(brand)}
+                      onChange={() => toggleBrand(brand)}
                       className="h-4 w-4 rounded-none border-gray-300 text-primary accent-[#222222]"
                     />
-                    {brand.name}
+                    {brand}
                   </label>
-                  <span className="text-sm text-gray">{brand.count}</span>
+                 
                 </li>
               ))}
             </ul>
