@@ -1,4 +1,5 @@
 import React from 'react'
+import CartProduct from '../components/cart/cartproductDesign/CartProduct'
 
 const CartPage = () => {
   return (
@@ -36,6 +37,9 @@ const CartPage = () => {
           </div>
         </div>
       </div>
+
+
+      <CartProduct/>
     </div>
   )
 }
