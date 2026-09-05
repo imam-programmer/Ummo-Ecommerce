@@ -65,8 +65,9 @@ let Brand=Products.slice(0,40).map((item)=>(
   const [checkedBrands, setCheckedBrands] = useState([]);
   const [minPrice, setMinPrice] = useState(29);
   const [maxPrice, setMaxPrice] = useState(937);
-
+  
   const [ActiveCategory, setActiveCategory] = useState("")
+  let dispatch = useDispatch()
 
   const PRICE_FLOOR = 29;
   const PRICE_CEIL = 937;
@@ -85,15 +86,23 @@ let Brand=Products.slice(0,40).map((item)=>(
     );
 
 
-
-  let dispatch = useDispatch()
-
+// =====================should understand this code from sir=========================
   function handleActiveCategory(item) {
     setActiveCategory(item) /*this for active style */
-    let filterProducts = Products.filter((Pitem) => Pitem.category == item)  /* this is for filtering data by category */
+    let filterProducts =item? Products.filter((Pitem) => Pitem.category == item ):[];  /* this is for filtering data by category */
     dispatch(filterProduct(filterProducts)) /* push filtering data on redux for using this data other components*/
+  }
+
+// =====================should understand this code from sir=========================
+    function handleAllCategories() {
+    setAllshow(true)      
+    setActiveCategory("")
+    dispatch(filterProduct([]))
     setCurrentPage(1)
   }
+// =====================should understand this code from sir=========================
+
+
 
   const handleMinChange = (e) => {
     const value = Math.min(Number(e.target.value), maxPrice - 1);
@@ -116,13 +125,7 @@ let Brand=Products.slice(0,40).map((item)=>(
         />
         {openSections.categories && (
           <ul className="mt-3 space-y-3">
-            <li className={`${Allshow ? "text-black" : "text-gray"} cursor-pointer`} onClick={() => {
-
-              setAllshow(true)
-              setCurrentPage(1)
-
-              setActiveCategory("") /*for active category */
-            }}>All</li>
+            <li className={`${Allshow ? "text-black" : "text-gray"} cursor-pointer`} onClick={handleAllCategories}>All</li>
             {CATEGORIES.map((cat) => (
               <li key={cat}>
                 <button className={`text-[15px]  capitalize cursor-pointer ${ActiveCategory == cat && "text-black!"} transition-colors text-gray `} onClick={() => {

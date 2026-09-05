@@ -12,16 +12,14 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
   const [view, setview] = useState(3)
   const [loading, setloading] = useState(true)
   const FilterProduct = useSelector((state) => state.Products.filter)
-  const [totalPages, settotalPages] = useState(0)
   const [Dropdown, setDropdown] = useState("Default Select")
   const [Dropshowhide, setDropshowhide] = useState(false)
+  const dispatch = useDispatch()
 
   console.log(FilterProduct)
-  const dispatch = useDispatch()
   useEffect(() => {
     axios.get('https://dummyjson.com/products?limit=200').then((res => {
       setProducts(res.data.products)
-      settotalPages(FilterProduct.length > 0 ? Math.ceil(FilterProduct.length / 12) : Math.ceil(res.data.products.length / 12))
       dispatch(addProduct(res.data.products))
       setloading(false)
 
@@ -31,15 +29,21 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
     })
 
 
-  }, [FilterProduct])
+  }, [dispatch]) // =====================should understand this code from sir=========================
 
-
-
+ const displayProducts = FilterProduct.length > 0 ? FilterProduct : products;
+const totalPages =  Math.ceil(displayProducts.length / 12);
   let fasttidx = (currentPage - 1) * 12;
   let lastidx = fasttidx + 12
+  
+// =====================should understand this code from sir=========================
+useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(1)
+    }
+  }, [currentPage, totalPages, setCurrentPage]);
+// =====================should understand this code from sir=========================
 
-
-  console.log(currentPage)
 
   function handleview(hup) {
     setview(hup)
@@ -142,12 +146,8 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
       </div>
       <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
 
-        {FilterProduct.length > 0 ?
-
-          FilterProduct.slice(fasttidx, lastidx).map((item) => (
-            <Product item={item} key={item.id} />
-          )) :
-          products.slice(fasttidx, lastidx).map((item) => (
+        {
+          displayProducts.slice(fasttidx, lastidx).map((item) => (
             <Product item={item} key={item.id} />
           ))
 
