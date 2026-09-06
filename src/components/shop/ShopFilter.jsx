@@ -9,15 +9,6 @@ import { allCat, filterProduct } from "../../slices/productSlice";
 
 const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
 
-const BRANDS = [
-  { name: "Adidas", count: 2 },
-  { name: "Balmain", count: 7 },
-  { name: "Balenciaga", count: 10 },
-  { name: "Burberry", count: 39 },
-  { name: "Kenzo", count: 95 },
-  { name: "Givenchy", count: 1092 },
-  { name: "Zara", count: 48 },
-];
 
 function SectionHeader({ title, open, onToggle }) {
   return (
@@ -50,12 +41,11 @@ const [Allshow, setAllshow] = useState(false)
   });
   let Products = useSelector((state) => state.Products.products)
 
-let Brand=Products.slice(0,40).map((item)=>(
+let Brand=Products.slice(50,90).map((item)=>(
   item.brand
 ))
-
-
-  const filteredBrands = [...new Set(Brand)];
+let RealBrand=Brand.filter(item=>item!=undefined)
+let BRANDS=[...new Set(RealBrand)]
   let Categore = Products.map(item => item.category)
 
   const CATEGORIES = [...new Set(Categore)];
@@ -164,7 +154,7 @@ let Brand=Products.slice(0,40).map((item)=>(
               />
             </div>
             <ul className="space-y-4">
-              {filteredBrands.map((brand,id) => (
+              {BRANDS.map((brand,id) => (
                 <li key={id} className="flex items-center justify-between">
                   <label className="flex cursor-pointer items-center gap-3 text-[15px] text-primary">
                     <input

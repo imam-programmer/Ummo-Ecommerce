@@ -32,17 +32,26 @@ export const cartSlice = createSlice({
     quentityDecrease:(state,action)=>{
       let Dec=state.products.find(item=>item.id==action.payload.id)
       if(Dec){
-        if(Dec.quantity>1){
-          Dec.quantity--
+        Dec.quantity--
+        if(Dec.quantity<1){
+           let FilterCart=state.products.filter(item=>item.id!=action.payload.id)
+      state.products=FilterCart
+      localStorage.setItem("carts",JSON.stringify(state.products))
         }
         localStorage.setItem("carts",JSON.stringify(state.products))
       }
 
+    },
+    RemoveItem:(state,action)=>{
+      console.log(state)
+      let FilterCart=state.products.filter(item=>item.id!=action.payload.id)
+      state.products=FilterCart
+      localStorage.setItem("carts",JSON.stringify(state.products))
     }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart,quentityIncrease,quentityDecrease } = cartSlice.actions;
+export const { addToCart,quentityIncrease,quentityDecrease ,RemoveItem} = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -15,8 +15,6 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
   const [Dropdown, setDropdown] = useState("Default Select")
   const [Dropshowhide, setDropshowhide] = useState(false)
   const dispatch = useDispatch()
-
-  console.log(FilterProduct)
   useEffect(() => {
     axios.get('https://dummyjson.com/products?limit=200').then((res => {
       setProducts(res.data.products)
