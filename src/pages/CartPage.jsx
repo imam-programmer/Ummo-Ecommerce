@@ -3,8 +3,7 @@ import CartProduct from '../components/cart/cartproductDesign/CartProduct'
 import { useSelector } from 'react-redux'
 
 const CartPage = () => {
-const cartData=useSelector(state=>state.cart.products)
-console.log(cartData)
+  const cartData = useSelector(state => state.cart.products)
   return (
     <div className='container mt-16.25'>
       <h2 className='text-[35px] font-bold text-primary uppercase'>Cart</h2>
@@ -51,12 +50,12 @@ console.log(cartData)
             <h3>SUBTOTAL</h3>
           </div>
         </div>
-{
-  cartData.map((item)=>(
+        {
+          cartData.map((item) => (
 
-    <CartProduct key={item.id} title={item.title} quantity={item.quantity} image={item.image} price={item.price}/>
-  ))
-}
+            <CartProduct key={item.id} id={item.id} title={item.title} quantity={item.quantity} image={item.image} price={item.price} />
+          ))
+        }
       </div>
       {/* cartside design  done============================= */}
     </div>

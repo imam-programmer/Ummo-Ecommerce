@@ -1,23 +1,32 @@
-import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Image from '../../layout/common/Image'
+import { quentityDecrease, quentityIncrease } from '../../../slices/cartSlice'
 
-const CartProduct = ({title,quantity,image,price}) => {
-   
+const CartProduct = (props) => {
+    const dispatch = useDispatch()
+
+    const handleIncrease = (incres) => {
+        dispatch(quentityIncrease(incres))
+    }
+    const handleDecrease=(decr)=>{
+dispatch(quentityDecrease(decr))
+    }
+
     return (
         <div className='flex gap-61.75 items-center py-7.5 border-b border-[#E4E4E4]'>
             <div className='flex items-center gap-7.5'>
-                <Image className='h-30 w-30' src={image} />
-                <h2 className='text-[16px] font-normal text-primary'>{title}</h2>
+                <Image className='h-30 w-30' src={props.image} />
+                <h2 className='text-[16px] font-normal text-primary'>{props.title}</h2>
 
             </div>
             <div className='flex items-center'>
-                <h3 className='mr-25.5 text-[16px] font-normal text-gray'>${price}</h3>
+                <h3 className='mr-25.5 text-[16px] font-normal text-gray'>${props.price}</h3>
                 <div className='h-12.5 w-27.5 mr-14.5 leading-12.5  flex justify-between items-center px-3.75 border-3 border-[#E4E4E4]'>
-                    <button className='cursor-pointer text-[16px] text-gray font-normal'>-</button>
-                    <span className=' text-[16px] text-gray font-normal'>{quantity}</span>
-                    <button className='cursor-pointer text-[16px] text-gray font-normal'>+</button>
+                    <button className='cursor-pointer text-[16px] text-gray font-normal' onClick={()=>handleDecrease(props)}>-</button>
+                    <span className=' text-[16px] text-gray font-normal'>{props.quantity}</span>
+                    <button className='cursor-pointer text-[16px] text-gray font-normal' onClick={() => handleIncrease(props)}>+</button>
                 </div>
-                <h3 className='text-[16px] font-medium text-primary'>${quantity*price}</h3>
+                <h3 className='text-[16px] font-medium text-primary'>${props.quantity * props.price}</h3>
 
 
                 <h2 className='ml-23.5 '>
