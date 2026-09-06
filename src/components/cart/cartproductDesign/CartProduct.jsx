@@ -29,7 +29,7 @@ const CartProduct = (props) => {
                     <span className=' text-[16px] text-gray font-normal'>{props.quantity}</span>
                     <button className=' px-2 cursor-pointer text-[16px] text-gray font-normal' onClick={() => handleIncrease(props)}>+</button>
                 </div>
-                <h3 className='text-[16px] font-medium text-primary'>${props.quantity * props.price}</h3>
+                <h3 className='text-[16px] font-medium text-primary'>${(props.quantity * props.price).toFixed(2)}</h3>
 
 
                 <h2 className='ml-23.5 '>
