@@ -5,11 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { allCat, filterProduct } from "../../slices/productSlice";
 
 
-
-
-const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
-
-
 function SectionHeader({ title, open, onToggle }) {
   return (
     <button
@@ -31,7 +26,7 @@ function SectionHeader({ title, open, onToggle }) {
 
 export default function ShopFilter({ currentPage, setCurrentPage }) {
 
-const [Allshow, setAllshow] = useState(false)
+  const [Allshow, setAllshow] = useState(false)
   const [openSections, setOpenSections] = useState({
     categories: true,
     color: true,
@@ -41,11 +36,11 @@ const [Allshow, setAllshow] = useState(false)
   });
   let Products = useSelector((state) => state.Products.products)
 
-let Brand=Products.slice(50,90).map((item)=>(
-  item.brand
-))
-let RealBrand=Brand.filter(item=>item!=undefined)
-let BRANDS=[...new Set(RealBrand)]
+  let Brand = Products.slice(50, 90).map((item) => (
+    item.brand
+  ))
+  let RealBrand = Brand.filter(item => item != undefined)
+  let BRANDS = [...new Set(RealBrand)]
   let Categore = Products.map(item => item.category)
 
   const CATEGORIES = [...new Set(Categore)];
@@ -55,7 +50,7 @@ let BRANDS=[...new Set(RealBrand)]
   const [checkedBrands, setCheckedBrands] = useState([]);
   const [minPrice, setMinPrice] = useState(29);
   const [maxPrice, setMaxPrice] = useState(937);
-  
+
   const [ActiveCategory, setActiveCategory] = useState("")
   let dispatch = useDispatch()
 
@@ -76,21 +71,21 @@ let BRANDS=[...new Set(RealBrand)]
     );
 
 
-// =====================should understand this code from sir=========================
+  // =====================should understand this code from sir=========================
   function handleActiveCategory(item) {
     setActiveCategory(item) /*this for active style */
-    let filterProducts =item? Products.filter((Pitem) => Pitem.category == item ):[];  /* this is for filtering data by category */
+    let filterProducts = item ? Products.filter((Pitem) => Pitem.category == item) : [];  /* this is for filtering data by category */
     dispatch(filterProduct(filterProducts)) /* push filtering data on redux for using this data other components*/
   }
 
-// =====================should understand this code from sir=========================
-    function handleAllCategories() {
-    setAllshow(true)      
+  // =====================should understand this code from sir=========================
+  function handleAllCategories() {
+    setAllshow(true)
     setActiveCategory("")
     dispatch(filterProduct([]))
     setCurrentPage(1)
   }
-// =====================should understand this code from sir=========================
+  // =====================should understand this code from sir=========================
 
 
 
@@ -154,7 +149,7 @@ let BRANDS=[...new Set(RealBrand)]
               />
             </div>
             <ul className="space-y-4">
-              {BRANDS.map((brand,id) => (
+              {BRANDS.map((brand, id) => (
                 <li key={id} className="flex items-center justify-between">
                   <label className="flex cursor-pointer items-center gap-3 text-[15px] text-primary">
                     <input
@@ -165,7 +160,7 @@ let BRANDS=[...new Set(RealBrand)]
                     />
                     {brand}
                   </label>
-                 
+
                 </li>
               ))}
             </ul>
