@@ -11,7 +11,7 @@ const Header = () => {
   const navigate=useNavigate()
   const [menuActive, setmenuActive] = useState(false)
   const CartProduct=useSelector((state)=>state.cart.products)
-  console.log(CartProduct.length)
+  console.log(CartProduct.length ,"cart length")
 
 function handleNavigate(){
   navigate('/cart')

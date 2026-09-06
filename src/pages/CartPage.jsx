@@ -1,7 +1,10 @@
 import React from 'react'
 import CartProduct from '../components/cart/cartproductDesign/CartProduct'
+import { useSelector } from 'react-redux'
 
 const CartPage = () => {
+const cartData=useSelector(state=>state.cart.products)
+console.log(cartData)
   return (
     <div className='container mt-16.25'>
       <h2 className='text-[35px] font-bold text-primary uppercase'>Cart</h2>
@@ -28,7 +31,7 @@ const CartPage = () => {
         </div>
 
 
-                <div className='flex gap-2.5 w-117.5  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-[#E4E4E4]'>
+        <div className='flex gap-2.5 w-117.5  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-[#E4E4E4]'>
           <h3 className='text-[18px] font-medium text-gray'>03</h3>
           <div>
             <h3 className='text-[18px] font-medium text-gray'>CONFIRMATION</h3>
@@ -38,20 +41,24 @@ const CartPage = () => {
         </div>
       </div>
 
-{/* cartside design============================= */}
-<div className='mt-12.5'>
-  <div className='flex gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25'>
-<h3>PRODUCT</h3>
-<div className='flex gap-22.75'>
-  <h3>PRICE</h3>
-  <h3>QUANTITY</h3>
-  <h3>SUBTOTAL</h3>
-</div>
-  </div>
+      {/* cartside design============================= */}
+      <div className='mt-12.5'>
+        <div className='flex gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25'>
+          <h3>PRODUCT</h3>
+          <div className='flex gap-22.75'>
+            <h3>PRICE</h3>
+            <h3>QUANTITY</h3>
+            <h3>SUBTOTAL</h3>
+          </div>
+        </div>
+{
+  cartData.map((item)=>(
 
-      <CartProduct/>
-</div>
-{/* cartside design  done============================= */}
+    <CartProduct key={item.id} title={item.title} quantity={item.quantity} image={item.image} price={item.price}/>
+  ))
+}
+      </div>
+      {/* cartside design  done============================= */}
     </div>
   )
 }
