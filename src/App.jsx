@@ -8,6 +8,7 @@ import ShopSingle from './pages/ShopSingle';
 import CartPage from './pages/CartPage';
 import WishListPage from './pages/WishListPage';
 import Register from './pages/Register';
+import LoginPage from './pages/LoginPage';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -19,7 +20,8 @@ const App = () => {
        {path:"shopsingle",Component:ShopSingle},
        {path:"cart",Component:CartPage},
        {path:"wish",Component:WishListPage},
-       {path:"register",Component:Register}
+       {path:"register",Component:Register},
+       {path:"login",Component:LoginPage}
    
     ],
   },

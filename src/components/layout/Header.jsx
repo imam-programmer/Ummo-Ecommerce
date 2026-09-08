@@ -16,6 +16,9 @@ const Header = () => {
 function handleNavigate(){
   navigate('/cart')
 }
+function handlelogin(){
+  navigate('/register')
+}
 
   return (
     <header className="md:pt-7.25 md:pb-7 py-4">
@@ -66,7 +69,7 @@ function handleNavigate(){
                   </defs>
                 </svg>
               </button>
-              <button className="cursor-pointer">
+              <button onClick={handlelogin}  className="cursor-pointer">
                 <svg
                   width="21"
                   height="20"

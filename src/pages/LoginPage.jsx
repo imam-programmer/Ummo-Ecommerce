@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { ref, set } from "firebase/database";
-import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
-import { auth, db } from "../../firebase.config";
-import toast, { Toaster } from 'react-hot-toast';
+
 
 function EyeIcon() {
     return (
@@ -32,63 +29,23 @@ function EyeOffIcon() {
         </svg>
     );
 }
-export default function Register() {
+export default function LoginPage() {
     const [loading, setloading] = useState(false)
     const [showPassword, setShowPassword] = useState(false);
-    const [name, setname] = useState("")
+    const [rememberMe, setRememberMe] = useState(false);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
 
 
-    const handleRegister = (e) => {
-        setloading(true)
-        setname("")
-        setEmail("")
-        setPassword("")
+    const handleLogin = (e) => {
         e.preventDefault()
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
 
-                updateProfile(auth.currentUser, {
-                    displayName: name,
-                    photoURL: "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-                }).then(() => {
-                    sendEmailVerification(auth.currentUser)
-                        .then(() => {
-                            const user = userCredential.user;
-                            toast.success('Account Created Successfully!')
-                            setloading(false)
-                            console.log(user)
-                            set(ref(db, 'users/' + user.uid), {
-                                username: name,
-                                email: email,
-                                profile_picture: "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-                            });
-                        });
-
-                }).catch((error) => {
-                    toast.error(error)
-                });
-
-
-            })
-            .catch((error) => {
-                setloading(false)
-                const errorCode = error.message;
-
-                toast.error(errorCode)
-                console.log(errorCode)
-
-            });
     }
 
     return (
         <div className="min-h-screen w-full flex  justify-center bg-white px-4 py-12 font-jost">
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-            />
+        
             <div className="w-full max-w-md">
                 {/* Tabs */}
                 <div className="flex items-center justify-center gap-8 sm:gap-10 mb-8 sm:mb-10">
@@ -97,25 +54,16 @@ export default function Register() {
 
                         className={`relative font-medium text-primary text-sm sm:text-base  `}
                     >
-                        REGISTER
+                        LOGIN
                         <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary" />
                     </button>
 
                 </div>
 
                 <form
-                    onSubmit={handleRegister}
+                    onSubmit={handleLogin}
                     className="flex flex-col gap-6"
                 >
-                    {/*name / email */}
-                    <div className="border-2 border-[#e4e4e4]">
-                        <input value={name} onChange={(e) => setname(e.target.value)}
-                            type="text"
-                            placeholder="Enter your name *"
-                            required
-                            className="w-full border-none  px-4.25 h-13.75 text-sm text-primary placeholder:text-gray focus:outline-none focus:border-primary transition-colors"
-                        />
-                    </div>
                     {/* email */}
                     <div className="border-2 border-[#e4e4e4]">
                         <input value={email} onChange={(e) => setEmail(e.target.value)}
@@ -152,10 +100,26 @@ export default function Register() {
                         </div>
                     </div>
 
-            
+                    {/* Remember me / Lost password */}
+                    <div className="flex items-center justify-between flex-wrap gap-3">
+                        <label className="flex items-center gap-2 cursor-pointer select-none">
+                            <input
+                                type="checkbox"
+                                checked={rememberMe}
+                                onChange={(e) => setRememberMe(e.target.checked)}
+                                className="w-4 h-4 border border-gray/50 accent-primary cursor-pointer"
+                            />
+                            <span className="text-sm text-primary">Remember me</span>
+                        </label>
+                        <a
+                            href="#"
+                            className="text-sm text-primary underline underline-offset-2 hover:text-gray transition-colors"
+                        >
+                            Lost password?
+                        </a>
+                    </div>
 
                     {/* Submit */}
-                    <p className="text-sm font-normal leading-6 text-gray">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.</p>
                     {loading ?
                         <button type="button" className="bg-indigo-500 justify-center flex py-4 ..." disabled>
                             <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24">
@@ -165,9 +129,9 @@ export default function Register() {
                         </button> :
                         <button
                             type="submit"
-                            className="w-full bg-primary text-white text-sm tracking-wide py-4 hover:opacity-90 transition-opacity"
+                            className="w-full cursor-pointer uppercase bg-primary text-white text-sm tracking-wide py-4 hover:opacity-90 transition-opacity"
                         >
-                            REGISTER
+                            Log In
                         </button>
                     }
 
