@@ -4,10 +4,10 @@ import { RouterProvider } from "react-router/dom";
 import Rootlayout from './components/layout/Rootlayout';
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
-import Breadcrumb from './components/layout/common/Breadcrumb';
 import ShopSingle from './pages/ShopSingle';
 import CartPage from './pages/CartPage';
 import WishListPage from './pages/WishListPage';
+import Register from './pages/Register';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -18,7 +18,8 @@ const App = () => {
       {path:"shop",Component:ShopPage},
        {path:"shopsingle",Component:ShopSingle},
        {path:"cart",Component:CartPage},
-       {path:"wish",Component:WishListPage}
+       {path:"wish",Component:WishListPage},
+       {path:"register",Component:Register}
    
     ],
   },

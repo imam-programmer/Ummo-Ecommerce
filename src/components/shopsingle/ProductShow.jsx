@@ -4,7 +4,7 @@ import Image from '../layout/common/Image'
 import Breadcrumb from '../layout/common/Breadcrumb'
 const ProductShow = () => {
   return (
-    <div className='container flex gap-[60px] '>
+    <div className='container flex gap-15 '>
       <div className='flex gap-2.5 w-220.75'>
 
       <div className='flex flex-col items-start gap-2.5'>
