@@ -3,6 +3,7 @@ import { ref, set } from "firebase/database";
 import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
 import { auth, db } from "../../firebase.config";
 import toast, { Toaster } from 'react-hot-toast';
+import { Link } from "react-router";
 
 function EyeIcon() {
     return (
@@ -173,17 +174,13 @@ export default function Register() {
 
                     {/* Footer link */}
                     <p className="text-center text-sm text-gray">
-                        No account yet?{" "}
-                        <a
-                            href="#"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setActiveTab("register");
-                            }}
+                        Allready have an account?{" "}
+                        <Link
+                            to="/login"
                             className="text-primary underline underline-offset-2 hover:text-gray transition-colors"
                         >
-                            Create Account
-                        </a>
+                            Login
+                        </Link>
                     </p>
                 </form>
 

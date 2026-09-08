@@ -17,7 +17,7 @@ function handleNavigate(){
   navigate('/cart')
 }
 function handlelogin(){
-  navigate('/register')
+  navigate('/login')
 }
 
   return (

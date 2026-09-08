@@ -1,5 +1,8 @@
 import { useState } from "react";
-
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase.config";
+import toast, { Toaster } from 'react-hot-toast';
+import { Link } from "react-router";
 
 function EyeIcon() {
     return (
@@ -39,13 +42,33 @@ export default function LoginPage() {
 
 
     const handleLogin = (e) => {
+        setEmail("")
+        setPassword("")
+        setRememberMe(false)
+        setloading(true)
         e.preventDefault()
+        signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    toast.success("Login Successfully")
+    console.log(user)
+  setloading(false)
+  })
+  .catch((error) => {
+    setloading(false)
+    const errorCode = error.code;
+    toast.error(errorCode)
+    console.log(errorCode)
+  });
 
     }
 
     return (
         <div className="min-h-screen w-full flex  justify-center bg-white px-4 py-12 font-jost">
-        
+          <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
             <div className="w-full max-w-md">
                 {/* Tabs */}
                 <div className="flex items-center justify-center gap-8 sm:gap-10 mb-8 sm:mb-10">
@@ -138,16 +161,12 @@ export default function LoginPage() {
                     {/* Footer link */}
                     <p className="text-center text-sm text-gray">
                         No account yet?{" "}
-                        <a
-                            href="#"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setActiveTab("register");
-                            }}
+                        <Link to="/register"
+                          
                             className="text-primary underline underline-offset-2 hover:text-gray transition-colors"
                         >
                             Create Account
-                        </a>
+                        </Link>
                     </p>
                 </form>
 
