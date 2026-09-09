@@ -3,11 +3,13 @@ import Image from './Image'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../../slices/cartSlice'
 import { addWishList } from '../../../slices/wishListSlice'
+import { productDetail } from '../../../slices/ProductDetailsSlice'
+import { useNavigate } from 'react-router'
+
 
 const Product = ({ item }) => {
-    const [showMore, setShowMore] = useState(false)
     const [hartSymbol, sethartSymbol] = useState(false)
-
+ const navigate=useNavigate()
 
     const dispatch = useDispatch()
 
@@ -29,6 +31,12 @@ const Product = ({ item }) => {
             image:witem.thumbnail,
             title:witem.title
         }))
+    }
+
+    const handleProductDetails=(dtail)=>{
+        dispatch(productDetail(dtail))
+        navigate("/shopsingle")
+        
     }
     return (
         <div className='max-w-82.5 group relative '>
@@ -53,7 +61,7 @@ const Product = ({ item }) => {
                         
                     </button>
                 </div>
-                <h3 onClick={() => setShowMore(!showMore)} className={showMore ? "desc" : "desc clamp"}>{item.title}</h3>
+                <h3 onClick={()=>handleProductDetails(item)} className='cursor-pointer'>{item.title}</h3>
                 <h5 className='md:text-base text-[14px] text-primary font-normal uppercase'>${item.price}</h5>
             </div>
 

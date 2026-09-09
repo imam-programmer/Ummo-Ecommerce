@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { LuShare2 } from "react-icons/lu";
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from "react-icons/md";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import Reviews from "./Reviews";
+import AdditionalInformation from "./AdditionalInformation";
+
 const ShapeArt = ({ className = "" }) => (
   <svg
     viewBox="0 0 400 400"
@@ -15,46 +19,25 @@ const ShapeArt = ({ className = "" }) => (
   </svg>
 );
 
-const thumbnails = [1, 2, 3, 4];
+
 
 export default function ProductDetails() {
+  const detailsProduct = useSelector((state) => state.clickProductDetails.Details)
   const navigate = useNavigate()
-  const [activeThumb, setActiveThumb] = useState(0);
   const [activeTab, setActiveTab] = useState("description");
 
   return (
     <div className="min-h-screen bg-white font-jost text-primary">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        {/* Top bar: breadcrumb + prev/next */}
+      <div className="mx-auto container px-4 py-8 sm:px-4 md:px-0 lg:py-12">
 
 
         {/* Main content: gallery + info */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-14">
-          {/* Gallery */}
+        <div className="grid grid-cols-1 gap-8  lg:grid-cols-2 lg:gap-25">
           <div className="flex flex-col-reverse gap-4 sm:flex-row">
-            {/* Thumbnails */}
-            <div className="flex shrink-0 gap-3 overflow-x-auto sm:w-20 sm:flex-col sm:overflow-visible">
-              {thumbnails.map((t, i) => (
-                <button
-                  key={t}
-                  onClick={() => setActiveThumb(i)}
-                  className={`h-16 w-16 shrink-0 overflow-hidden border transition-colors sm:h-20 sm:w-full ${activeThumb === i
-                      ? "border-primary"
-                      : "border-transparent hover:border-gray/40"
-                    }`}
-                  aria-label={`View image ${i + 1}`}
-                >
-                  <ShapeArt className="h-full w-full" />
-                </button>
-              ))}
-            </div>
-
-            {/* Main image */}
-            <div className="aspect-square w-full flex-1 overflow-hidden bg-[#EDECE9]">
+            <div className="aspect-square w-full  overflow-hidden bg-[#EDECE9]">
               <ShapeArt className="h-full w-full" />
             </div>
           </div>
-
           {/* Product info */}
           <div>
             <div className="mb-8 flex items-center justify-between text-sm font-medium leading-6 text-primary sm:mb-10">
@@ -81,16 +64,13 @@ export default function ProductDetails() {
 
             <div className="flex flex-col">
               <h1 className="text-2xl font-normal sm:text-[26px] text-primary">
-                Lightweight Puffer Jacket With a Hood
+                {detailsProduct.title}
               </h1>
 
-              <p className="mt-2 text-lg sm:text-[22px] font-medium text-primary">$130.00 — $170.00</p>
+              <p className="mt-2 text-lg sm:text-[22px] font-medium text-primary">${detailsProduct.price}</p>
 
               <p className="mt-6.25  text-sm leading-6 font-normal text-primary">
-                Phasellus sed volutpat orci. Fusce eget lore mauris vehicula
-                elementum gravida nec dui. Aenean aliquam varius ipsum, non
-                ultricies tellus sodales eu. Donec dignissim viverra nunc, ut
-                aliquet magna posuere eget.
+                {detailsProduct.description}
               </p>
 
               <button className="mt-7 w-fit cursor-pointer bg-primary px-8 py-3 text-sm font-normal  text-white transition-opacity hover:opacity-90">
@@ -110,18 +90,24 @@ export default function ProductDetails() {
 
               <div className="mt-8 space-y-2 border-t border-gray/15 pt-6 text-xs text-gray">
                 <p>
-                  SKU: <span className="text-primary">N/A</span>
+                  SKU: <span className="text-primary">{detailsProduct.sku}</span>
                 </p>
                 <p>
                   CATEGORIES:{" "}
                   <span className="text-primary">
-                    Casual &amp; Urban Wear, Jackets, Men
+                    {detailsProduct.category}
                   </span>
                 </p>
-                <p>
+
+
+                <ul className="flex gap-2 ">
                   TAGS:{" "}
-                  <span className="text-primary">biker, black, bomber, leather</span>
-                </p>
+                  {detailsProduct.tags?.map((item,id) => (
+
+                    <li key={id} className="text-primary">{item},</li>
+                  ))}
+                </ul>
+
               </div>
             </div>
 
@@ -141,8 +127,8 @@ export default function ProductDetails() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`relative pb-4 cursor-pointer transition-colors ${activeTab === tab.id
-                    ? "text-primary"
-                    : "text-gray hover:text-primary"
+                  ? "text-primary"
+                  : "text-gray hover:text-primary"
                   }`}
               >
                 {tab.label}
@@ -220,18 +206,13 @@ export default function ProductDetails() {
 
         {activeTab === "additional" && (
           <div className="mx-auto mt-10 max-w-3xl  text-gray sm:mt-14">
-            <ul className="flex flex-col gap-2">
-           <li className="flex items-center"> <span className="w-20 block capitalize text-primary">Brand</span> : <span className="ml-5">Black</span></li>
-           <li className="flex items-center"><span className="w-20 block capitalize text-primary">stock</span> : <span className="ml-5">Regular</span></li>
-           <li className="flex items-center"><span className="w-20 block capitalize text-primary">Weight</span> : <span className="ml-5">650g</span></li>
-           <li className="flex items-center"><span className="w-20 block capitalize text-primary">SKU</span> : <span className="ml-5">JKT-001</span></li>
-            </ul>
+         <AdditionalInformation/>
           </div>
         )}
 
         {activeTab === "reviews" && (
           <div className="mx-auto mt-10 max-w-3xl text-sm text-gray sm:mt-14">
-            Reviews content goes here.
+            <Reviews/>
           </div>
         )}
       </div>
