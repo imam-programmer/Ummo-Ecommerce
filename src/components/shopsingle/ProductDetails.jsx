@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Reviews from "./Reviews";
 import AdditionalInformation from "./AdditionalInformation";
+import Image from "../layout/common/Image";
 
 const ShapeArt = ({ className = "" }) => (
   <svg
@@ -23,6 +24,7 @@ const ShapeArt = ({ className = "" }) => (
 
 export default function ProductDetails() {
   const detailsProduct = useSelector((state) => state.clickProductDetails.Details)
+  console.log(detailsProduct.thumbnail)
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("description");
 
@@ -34,9 +36,10 @@ export default function ProductDetails() {
         {/* Main content: gallery + info */}
         <div className="grid grid-cols-1 gap-8  lg:grid-cols-2 lg:gap-25">
           <div className="flex flex-col-reverse gap-4 sm:flex-row">
-            <div className="aspect-square w-full  overflow-hidden bg-[#EDECE9]">
-              <ShapeArt className="h-full w-full" />
-            </div>
+        
+              
+              <Image className="aspect-square w-full  overflow-hidden bg-[#EDECE9]" src={detailsProduct.thumbnail}/>
+         
           </div>
           {/* Product info */}
           <div>
@@ -47,16 +50,7 @@ export default function ProductDetails() {
                 </span>
                 <span className="ml-1">/</span> THE SHOP
               </div>
-              <div className="flex items-center gap-4">
-                <button className="flex items-center gap-1 cursor-pointer transition-colors hover:text-primary">
-                  <MdOutlineChevronLeft size={14} />
-                  PREV
-                </button>
-                <button className="flex  items-center gap-1 cursor-pointer transition-colors hover:text-primary">
-                  NEXT
-                  <MdOutlineChevronRight size={14} />
-                </button>
-              </div>
+             
             </div>
 
 

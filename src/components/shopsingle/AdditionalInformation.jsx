@@ -1,73 +1,47 @@
+import { useSelector } from "react-redux";
+
 const productInfo = [
-  {
-    label: "Weight",
-    value: "0.8 kg",
-  },
-  {
-    label: "Dimensions",
-    value: "68 × 52 × 8 cm",
-  },
-  {
-    label: "Material",
-    value: "100% Polyester",
-  },
-  {
-    label: "Lining",
-    value: "100% Polyester",
-  },
-  {
-    label: "Color",
-    value: "Black",
-  },
-  {
-    label: "Size",
-    value: "S, M, L, XL, XXL",
-  },
-  {
-    label: "Fit",
-    value: "Regular Fit",
-  },
-  {
-    label: "Hood",
-    value: "Attached Hood",
-  },
-  {
-    label: "Closure",
-    value: "Full Zip",
-  },
-  {
-    label: "Care Instructions",
-    value: "Machine Wash Cold",
-  },
-  {
-    label: "Country of Origin",
-    value: "Bangladesh",
-  },
+    {
+        label: "Weight",
+
+    },
+    {
+        label: "Dimensions",
+
+    }, {
+        label: "Stock",
+
+    }, , {
+        label: 'warrantyInformation',
+
+    },
+
 ];
 
 export default function AdditionalInformation() {
-  return (
-    <section className="w-full font-jost">
-      <div className="overflow-hidden">
-        {productInfo.map((item, index) => (
-          <div
-            key={item.label}
-            className={`grid grid-cols-1 border-gray-200 py-4 sm:grid-cols-[220px_1fr] ${
-              index !== productInfo.length - 1 ? "border-b" : ""
-            }`}
-          >
-            {/* Label */}
-            <div className="mb-1 text-sm font-medium text-primary sm:mb-0">
-              {item.label}
-            </div>
+    const detailsProduct = useSelector((state) => state.clickProductDetails.Details)
+    console.log(detailsProduct)
+    return (
+        <section className="w-full font-jost">
+            <div className="overflow-hidden">
 
-            {/* Value */}
-            <div className="text-sm leading-6 text-gray">
-              {item.value}
+                <div
+
+                    className={` border-gray-200 py-2 sm:grid-cols-[220px_1fr] `}
+                >
+                    {/* Label */}
+                    <ul >
+                        <li className={`flex justify-between py-2 border-b  border-gray-200 `}><span>Weight</span> <span>{detailsProduct.weight}</span> </li>
+                        <li className={`flex justify-between py-2 border-b  border-gray-200 `}><span>Dimensions</span> <span>{`${detailsProduct.dimensions.width} x ${detailsProduct.dimensions.height} x ${detailsProduct.dimensions.depth} cm  `}</span></li>
+                        <li className={`flex justify-between py-2 border-b  border-gray-200 `}><span>Stock</span> <span>{detailsProduct.stock}</span></li>
+                         <li className={`flex justify-between py-2 border-b  border-gray-200 `}><span>warrantyInformation</span> <span>{detailsProduct.warrantyInformation}</span></li>
+                    </ul>
+
+                    {/* Value */}
+                  
+                </div>
+
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+        </section>
+    );
 }
