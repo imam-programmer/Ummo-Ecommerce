@@ -1,10 +1,8 @@
 import React from "react";
-
-import { FaRegHeart } from "react-icons/fa6";
-import { MdOutlineShoppingBag } from "react-icons/md";
 import { FiTrash2 } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
-import { CiStar } from "react-icons/ci";
+import WishListProduct from "../components/wishlistProductUI/WishListProduct";
+import { useNavigate } from "react-router";
 
 const wishlistProducts = [
   {
@@ -58,38 +56,21 @@ const wishlistProducts = [
 ];
 
 const WishListPage = () => {
+  const navigate=useNavigate()
+  function handleShop(){
+    navigate("/shop")
+  }
   return (
     <main className="min-h-screen bg-white font-jost text-primary">
       {/* Header */}
-      <section className="border-b border-gray-200">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-5 sm:px-6 lg:px-10">
-          <div>
-            <p className="mb-1 text-xs uppercase tracking-[3px] text-gray">
-              My Account
-            </p>
-
-            <h1 className="text-2xl font-medium sm:text-3xl">
-              My Wishlist
-            </h1>
-          </div>
-
-          <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gray-100">
-            <FaRegHeart size={20} strokeWidth={1.6} />
-
-            <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] text-white">
-              {wishlistProducts.length}
-            </span>
-          </div>
-        </div>
-      </section>
 
       {/* Wishlist Content */}
-      <section className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-14">
+      <section className="mx-auto max-w-360 px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-14">
         {/* Top bar */}
         <div className="mb-7 flex flex-col gap-4 border-b border-gray-200 pb-5 xs:flex-row xs:items-center xs:justify-between">
           <div>
             <h2 className="text-lg font-medium sm:text-xl">
-              Saved Items
+              Wishlist Items
             </h2>
 
             <p className="mt-1 text-sm text-gray">
@@ -99,7 +80,7 @@ const WishListPage = () => {
 
           <button
             type="button"
-            className="flex w-fit items-center gap-2 text-sm text-gray transition-colors hover:text-primary"
+            className="flex w-fit items-center cursor-pointer gap-2 text-sm text-gray transition-colors hover:text-primary"
           >
             <FiTrash2 size={16} strokeWidth={1.6} />
             Clear Wishlist
@@ -109,111 +90,7 @@ const WishListPage = () => {
         {/* Product List */}
         <div className="space-y-5">
           {wishlistProducts.map((product) => (
-            <article
-              key={product.id}
-              className="group grid grid-cols-[100px_1fr] gap-4 border-b border-gray-200 pb-5 xs:grid-cols-[130px_1fr] sm:grid-cols-[170px_1fr] sm:gap-6 lg:grid-cols-[210px_1fr]"
-            >
-              {/* Image */}
-              <div className="relative aspect-[4/5] overflow-hidden bg-[#f5f5f5]">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-
-                {product.oldPrice && (
-                  <span className="absolute left-2 top-2 bg-primary px-2 py-1 text-[9px] uppercase tracking-wider text-white sm:left-3 sm:top-3">
-                    Sale
-                  </span>
-                )}
-              </div>
-
-              {/* Product Info */}
-              <div className="flex min-w-0 flex-col justify-between py-1">
-                <div>
-                  <div className="mb-1 flex items-start justify-between gap-3">
-                    <div>
-                      <p className="mb-1 text-xs uppercase tracking-wider text-gray">
-                        {product.category}
-                      </p>
-
-                      <h3 className="text-base font-medium sm:text-lg lg:text-xl">
-                        {product.name}
-                      </h3>
-                    </div>
-
-                    <button
-                      type="button"
-                      aria-label={`Remove ${product.name}`}
-                      className="flex-shrink-0 text-gray transition-colors hover:text-red-500"
-                    >
-                      <FiTrash2 size={17} strokeWidth={1.5} />
-                    </button>
-                  </div>
-
-                  {/* Rating */}
-                  <div className="mt-2 flex items-center gap-2">
-                    <div className="flex items-center gap-0.5">
-                      {[...Array(5)].map((_, index) => (
-                        <CiStar
-                          key={index}
-                          size={13}
-                          strokeWidth={1.5}
-                          className={
-                            index < Math.round(product.rating)
-                              ? "fill-primary text-primary"
-                              : "text-gray-300"
-                          }
-                        />
-                      ))}
-                    </div>
-
-                    <span className="text-xs text-gray">
-                      {product.rating} ({product.reviews})
-                    </span>
-                  </div>
-
-                  {/* Price */}
-                  <div className="mt-3 flex items-center gap-2">
-                    <span className="text-base font-medium sm:text-lg">
-                      ${product.price.toFixed(2)}
-                    </span>
-
-                    {product.oldPrice && (
-                      <span className="text-sm text-gray line-through">
-                        ${product.oldPrice.toFixed(2)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Bottom */}
-                <div className="mt-5 flex flex-col gap-3 xs:flex-row xs:items-center xs:justify-between">
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`h-2 w-2 rounded-full ${
-                        product.inStock
-                          ? "bg-green-500"
-                          : "bg-red-500"
-                      }`}
-                    />
-
-                    <span className="text-xs text-gray">
-                      {product.inStock ? "In Stock" : "Out of Stock"}
-                    </span>
-                  </div>
-
-                  <button
-                    type="button"
-                    disabled={!product.inStock}
-                    className="flex w-full items-center justify-center gap-2 bg-primary px-4 py-2.5 text-xs uppercase tracking-wider text-white transition-all duration-300 hover:bg-black disabled:cursor-not-allowed disabled:bg-gray-300 xs:w-auto"
-                  >
-                    <MdOutlineShoppingBag size={15} strokeWidth={1.6} />
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </article>
+            <WishListProduct product={product}/>
           ))}
         </div>
 
@@ -229,9 +106,9 @@ const WishListPage = () => {
             </p>
           </div>
 
-          <button
+          <button onClick={handleShop}
             type="button"
-            className="group flex items-center gap-3 border-b border-primary pb-1 text-sm uppercase tracking-wider"
+            className="group flex cursor-pointer items-center gap-3 border-b border-primary pb-1 text-sm uppercase tracking-wider"
           >
             Continue Shopping
 

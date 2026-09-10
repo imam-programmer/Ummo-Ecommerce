@@ -19,6 +19,9 @@ function handleNavigate(){
 function handlelogin(){
   navigate('/login')
 }
+function handleWishList(){
+  navigate('/wishlist')
+}
 
   return (
     <header className="md:pt-7.25 md:pb-7 py-4 md:px-2.5">
@@ -94,7 +97,7 @@ function handlelogin(){
                   </defs>
                 </svg>
               </button>
-              <button className="cursor-pointer">
+              <button className="cursor-pointer" onClick={handleWishList}>
                 <svg
                   width="21"
                   height="20"
