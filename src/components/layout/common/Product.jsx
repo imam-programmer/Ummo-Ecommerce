@@ -40,10 +40,10 @@ const Product = ({ item }) => {
     }
     return (
         <div className='max-w-82.5 group relative '>
-            <Image className="md:h-80 md:w-50 h-40 w-30 block mx-auto object-contain" src={item.thumbnail} />
+            <Image className="md:h-80 md:w-50 h-40 w-30 block mx-auto object-contain" src={item?.thumbnail} />
             <div className='mt-3.2'>
                 <div className='flex justify-between h-5'>
-                    <h4 className='text-[12px] md:text-sm text-gray font-normal uppercase'>{item.category}</h4>
+                    <h4 className='text-[12px] md:text-sm text-gray font-normal uppercase'>{item?.category}</h4>
                     <button className='cursor-pointer' onClick={()=>handleWish(item)}>
                         {hartSymbol?
                         <p className='text-[15px]'>❤️</p>:
@@ -61,8 +61,8 @@ const Product = ({ item }) => {
                         
                     </button>
                 </div>
-                <h3 onClick={()=>handleProductDetails(item)} className='cursor-pointer'>{item.title}</h3>
-                <h5 className='md:text-base text-[14px] text-primary font-normal uppercase'>${item.price}</h5>
+                <h3 onClick={()=>handleProductDetails(item)} className='cursor-pointer'>{item?.title}</h3>
+                <h5 className='md:text-base text-[14px] text-primary font-normal uppercase'>${item?.price}</h5>
             </div>
 
 

@@ -21,7 +21,8 @@ const App = () => {
        {path:"cart",Component:CartPage},
        {path:"wish",Component:WishListPage},
        {path:"register",Component:Register},
-       {path:"login",Component:LoginPage}
+       {path:"login",Component:LoginPage},
+       {path:"wishlist",Component:WishListPage}
    
     ],
   },

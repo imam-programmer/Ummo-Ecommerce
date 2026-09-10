@@ -21,14 +21,14 @@ function handlelogin(){
 }
 
   return (
-    <header className="md:pt-7.25 md:pb-7 py-4">
+    <header className="md:pt-7.25 md:pb-7 py-4 md:px-2.5">
       <nav>
         <div className="container hidden md:block">
           <div className="flex items-center">
             <Link to="/">
               <Image src="./images/logo.png" alt="logo" />
             </Link>
-            <ul className="ml-14 flex gap-10.75">
+            <ul className="lg:ml-14 bmd:ml-10 ml-5 flex gap-5 lg:gap-10.75">
               {navData?.map((item,id) => (
                 <Link key={id} to={item.path}>
 
@@ -43,7 +43,7 @@ function handlelogin(){
             </ul>
 
             {/* ============icons ============== */}
-            <div className="ml-auto flex gap-8">
+            <div className="ml-auto flex gap-3  bmd:gap-8">
               <button className="cursor-pointer">
                 <svg
                   width="21"

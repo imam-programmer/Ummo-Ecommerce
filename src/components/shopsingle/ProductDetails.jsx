@@ -1,35 +1,20 @@
 import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { LuShare2 } from "react-icons/lu";
-import { MdOutlineChevronLeft, MdOutlineChevronRight } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Reviews from "./Reviews";
 import AdditionalInformation from "./AdditionalInformation";
 import Image from "../layout/common/Image";
 
-const ShapeArt = ({ className = "" }) => (
-  <svg
-    viewBox="0 0 400 400"
-    className={className}
-    preserveAspectRatio="xMidYMid slice"
-  >
-    <rect width="400" height="400" fill="#EDECE9" />
-    <circle cx="150" cy="230" r="120" fill="#D8D6D1" />
-    <polygon points="230,90 340,300 120,300" fill="#C7C4BD" />
-  </svg>
-);
-
-
 
 export default function ProductDetails() {
   const detailsProduct = useSelector((state) => state.clickProductDetails.Details)
-  console.log(detailsProduct.thumbnail)
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("description");
 
   return (
-    <div className="min-h-screen bg-white font-jost text-primary">
+    <div className="min-h-screen bg-white font-jost text-primary px-3">
       <div className="mx-auto container px-4 py-8 sm:px-4 md:px-0 lg:py-12">
 
 
