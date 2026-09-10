@@ -62,8 +62,7 @@ const WishListPage = () => {
   }
   return (
     <main className="min-h-screen bg-white font-jost text-primary">
-      {/* Header */}
-
+     
       {/* Wishlist Content */}
       <section className="mx-auto max-w-360 px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-14">
         {/* Top bar */}

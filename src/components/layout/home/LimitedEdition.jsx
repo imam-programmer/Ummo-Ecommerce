@@ -50,7 +50,7 @@ const LimitedEdition = () => {
           allowTouchMove: false,
         },
                  }}
-       navigation={{
+       Navigation={{
           nextEl: '.custom-next',
           prevEl: '.custom-prev',
         }} className="mySwiper">

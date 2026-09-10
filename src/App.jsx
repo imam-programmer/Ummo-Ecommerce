@@ -9,6 +9,7 @@ import CartPage from './pages/CartPage';
 import WishListPage from './pages/WishListPage';
 import Register from './pages/Register';
 import LoginPage from './pages/LoginPage';
+import NotFoundPage from './pages/NotFoundPage';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -22,10 +23,12 @@ const App = () => {
        {path:"wish",Component:WishListPage},
        {path:"register",Component:Register},
        {path:"login",Component:LoginPage},
-       {path:"wishlist",Component:WishListPage}
+       {path:"wishlist",Component:WishListPage},
+       
    
     ],
   },
+   {path:"*",Component:NotFoundPage},
 ]);
 
   return (

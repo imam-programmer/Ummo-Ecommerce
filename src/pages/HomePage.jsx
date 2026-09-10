@@ -7,7 +7,6 @@ import Starting from '../components/layout/home/Starting'
 import LimitedEdition from '../components/layout/home/LimitedEdition'
 import Sponcer from '../components/layout/home/Sponcer'
 import Services from '../components/layout/home/Services'
-import Footer from '../components/Footer'
 
 const HomePage = () => {
   return (
@@ -20,7 +19,7 @@ const HomePage = () => {
    <LimitedEdition/>
    <Sponcer/>
    <Services/>
-   <Footer/>
+   
    </>
   )
 }
