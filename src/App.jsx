@@ -10,6 +10,7 @@ import WishListPage from './pages/WishListPage';
 import Register from './pages/Register';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ShopDynamicPage from './pages/ShopDynamicPage';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const App = () => {
     ],
   },
    {path:"*",Component:NotFoundPage},
+   {path:"/shop/:id",Component:ShopDynamicPage},
 ]);
 
   return (

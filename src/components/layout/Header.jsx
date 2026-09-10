@@ -29,7 +29,7 @@ function handleWishList(){
         <div className="container hidden md:block">
           <div className="flex items-center">
             <Link to="/">
-              <Image src="./images/logo.png" alt="logo" />
+              <Image src="../images/logo.png" alt="logo" />
             </Link>
             <ul className="lg:ml-14 bmd:ml-10 ml-5 flex gap-5 lg:gap-10.75">
               {navData?.map((item,id) => (
@@ -176,7 +176,7 @@ function handleWishList(){
           </ul>
       
           <Link to="/">
-            <Image src="./images/logo.png" alt="logo" />
+            <Image src="../images/logo.png" alt="logo" />
           </Link>
           <button className="relative" onClick={handleNavigate}>
 
