@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ShopDynamicPage from './pages/ShopDynamicPage';
+import JournalPage from './pages/JournalPage';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const App = () => {
        {path:"register",Component:Register},
        {path:"login",Component:LoginPage},
        {path:"wishlist",Component:WishListPage},
+       {path:"journal",Component:JournalPage}
        
    
     ],
