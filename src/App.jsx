@@ -12,6 +12,7 @@ import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ShopDynamicPage from './pages/ShopDynamicPage';
 import JournalPage from './pages/JournalPage';
+import FAQPage from './pages/FAQPage';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -26,7 +27,8 @@ const App = () => {
        {path:"register",Component:Register},
        {path:"login",Component:LoginPage},
        {path:"wishlist",Component:WishListPage},
-       {path:"journal",Component:JournalPage}
+       {path:"journal",Component:JournalPage},
+       {path:"faq",Component:FAQPage}
        
    
     ],
