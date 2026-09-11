@@ -15,7 +15,7 @@ export default function AboutHero() {
 
   return (
     <div
-      className="container py-10 px-2 md:py-19.25 bg-white"
+      className="container pt-10 px-2 md:pt-19.25 bg-white"
 
     >
       <div className="">

@@ -1,0 +1,30 @@
+[
+{
+    "id":1,
+    "image":"./images/aboutbrand1.png"
+},
+{
+    "id":2,
+    "image":"./images/aboutbrand2.png"
+},
+{
+    "id":3,
+    "image":"./images/aboutbrand3.png"
+},
+{
+    "id":4,
+    "image":"./images/aboutbrand4.png"
+},
+{
+    "id":5,
+    "image":"./images/aboutbrand5.png"
+},
+{
+    "id":6,
+    "image":"./images/aboutbrand6.png"
+},
+{
+    "id":7,
+    "image":"./images/aboutbrand7.png"
+}
+]
