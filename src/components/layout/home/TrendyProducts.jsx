@@ -31,8 +31,8 @@ const TrendyProducts = () => {
     }
 
     return (
-        <section className='md:mt-23.5 md:mb-25 mt-9.25'>
-            <div className="container  px-3 md:px-0">
+        <section className='md:mt-23.5 md:mb-25 mt-9.25 px-2 xl:px-0 '>
+            <div className="container  ">
                 <Title name="our trendy" namebold="products" />
                 <ul className='flex justify-center flex-wrap md:gap-13.5  gap-x-8 gap-y-2 mb-10 mt-7.5'>
 
@@ -44,7 +44,7 @@ const TrendyProducts = () => {
                     ))}
 
                 </ul>
-                <div className='grid grid-cols-2 md:grid-cols-4 gap-3 gap-x-3.5 md:gap-x-0'>
+                <div className='grid  justify-center  bmd:grid-cols-3  grid-cols-2 xl:grid-cols-4 gap-5 bmd:gap-x-1  lg:gap-x-2'>
 
                     {filterProducts.length > 0 ?
                         filterProducts.map((item) => (

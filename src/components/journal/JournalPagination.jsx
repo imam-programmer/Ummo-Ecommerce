@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const JournalPagination = () => {
     const [shown, setshown] = useState(0)
-    //  const shown = 4;
   const total = 49;
   const progress = Math.min(100, Math.ceil((shown / total) * 100));
   return (
