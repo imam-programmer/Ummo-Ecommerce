@@ -14,6 +14,7 @@ import ShopDynamicPage from './pages/ShopDynamicPage';
 import JournalPage from './pages/JournalPage';
 import FAQPage from './pages/FAQPage';
 import AboutPage from './pages/AboutPage';
+import TermsConditionPage from './pages/TermsConditionPage';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const App = () => {
        {path:"journal",Component:JournalPage},
        {path:"faq",Component:FAQPage},
        {path:"about",Component:AboutPage},
+       {path:"terms",Component:TermsConditionPage},
        
    
     ],
