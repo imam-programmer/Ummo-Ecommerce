@@ -11,10 +11,12 @@ import Register from './pages/Register';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ShopDynamicPage from './pages/ShopDynamicPage';
-import JournalPage from './pages/JournalPage';
+
 import FAQPage from './pages/FAQPage';
 import AboutPage from './pages/AboutPage';
 import TermsConditionPage from './pages/TermsConditionPage';
+import BlogPage from './pages/Blogpage';
+import ContactPage from './pages/ContactPage';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -29,10 +31,11 @@ const App = () => {
        {path:"register",Component:Register},
        {path:"login",Component:LoginPage},
        {path:"wishlist",Component:WishListPage},
-       {path:"journal",Component:JournalPage},
+       {path:"blog",Component:BlogPage},
        {path:"faq",Component:FAQPage},
        {path:"about",Component:AboutPage},
        {path:"terms",Component:TermsConditionPage},
+       {path:"contact",Component:ContactPage},
        
    
     ],

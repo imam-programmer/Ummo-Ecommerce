@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import JournalCart from "../components/journal/JournalCart";
-import JournalPagination from "../components/journal/JournalPagination";
+import BlogCart from "../components/blog/BlogCart";
+import BlogPagination from "../components/blog/BlogPagination";
 
-/**
- * THE BLOG — listing page
- * Fonts / colors are pulled from the project's CSS variables:
- *   --font-jost, --color-primary, --color-gray
- * (declared globally via the @theme block, so we just reference them)
- */
 
 const CATEGORIES = ["ALL", "COMPANY", "FASHION", "STYLE", "TRENDS", "BEAUTY"];
 
@@ -108,13 +102,13 @@ export default function BlogPage() {
         {/* Post grid */}
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {POSTS.map((post) => (
-            <JournalCart key={post.id} post={post} />
+            <BlogCart key={post.id} post={post} />
         
           ))}
         </div>
 
         {/* Footer / pagination */}
-       <JournalPagination/>
+       <BlogPagination/>
       </div>
     </div>
   );

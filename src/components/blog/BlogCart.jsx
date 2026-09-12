@@ -1,6 +1,6 @@
 import React from 'react'
 
-function JournalCart({ post }) {
+function BlogCart({ post }) {
   return (
     <article className="group flex flex-col">
       <div className="aspect-3/2 w-full overflow-hidden bg-[#EDEDED]">
@@ -41,4 +41,4 @@ function JournalCart({ post }) {
   );
 }
 
-export default JournalCart
+export default BlogCart

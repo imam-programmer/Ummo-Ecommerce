@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const JournalPagination = () => {
+const BlogPagination = () => {
     const [shown, setshown] = useState(0)
   const total = 49;
   const progress = Math.min(100, Math.ceil((shown / total) * 100));
@@ -31,4 +31,4 @@ const JournalPagination = () => {
   )
 }
 
-export default JournalPagination
+export default BlogPagination
