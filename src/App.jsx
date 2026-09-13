@@ -17,6 +17,7 @@ import AboutPage from './pages/AboutPage';
 import TermsConditionPage from './pages/TermsConditionPage';
 import BlogPage from './pages/Blogpage';
 import ContactPage from './pages/ContactPage';
+import LocationPage from './pages/LocationPage';
 const App = () => {
   const router=createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const App = () => {
        {path:"about",Component:AboutPage},
        {path:"terms",Component:TermsConditionPage},
        {path:"contact",Component:ContactPage},
+       {path:"location",Component:LocationPage},
        
    
     ],
