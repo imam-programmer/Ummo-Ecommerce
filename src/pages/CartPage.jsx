@@ -1,11 +1,12 @@
 import React from 'react'
 import CartProduct from '../components/cart/cartproductDesign/CartProduct'
 import { useSelector } from 'react-redux'
+import CartFirstTotalBox from '../components/cart/cartfirstTotalbox/CartFirstTotalBox'
 
 const CartPage = () => {
   const cartData = useSelector(state => state.cart.products)
   return (
-    <div className='container mt-16.25'>
+    <div className='container mt-16.25 mb-25 px-2.5 xl-px-0'>
       <h2 className='text-[35px] font-bold text-primary uppercase'>Cart</h2>
 
       <div className='mt-12 pb-2.5 flex '>
@@ -41,8 +42,11 @@ const CartPage = () => {
       </div>
 
       {/* cartside design============================= */}
-      <div className='mt-12.5'>
-        <div className='flex gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25'>
+
+<div className=' flex mt-12.5 gap-14.5 flex-col lg:flex-row '>
+
+      <div className=''>
+        <div className='flex gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25 '>
           <h3>PRODUCT</h3>
           <div className='flex gap-22.75'>
             <h3>PRICE</h3>
@@ -50,13 +54,18 @@ const CartPage = () => {
             <h3>SUBTOTAL</h3>
           </div>
         </div>
+        <div className='xl:w-232.5 max-w-232.5'>
         {
           cartData.map((item) => (
 
             <CartProduct key={item.id} id={item.id} title={item.title} quantity={item.quantity} image={item.image} price={item.price} />
           ))
         }
+        </div>
+       
       </div>
+      <CartFirstTotalBox/>
+</div>
       {/* cartside design  done============================= */}
     </div>
   )

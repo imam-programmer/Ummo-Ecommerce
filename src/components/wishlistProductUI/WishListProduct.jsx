@@ -4,6 +4,7 @@ import { FiTrash2 } from 'react-icons/fi'
 import { MdOutlineShoppingBag } from 'react-icons/md'
 
 const WishListProduct = ({product}) => {
+  console.log(product)
   return (
     <article
               key={product.id}
@@ -16,12 +17,6 @@ const WishListProduct = ({product}) => {
                   alt={product.name}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-
-                {product.oldPrice && (
-                  <span className="absolute left-2 top-2 bg-primary px-2 py-1 text-[9px] uppercase tracking-wider text-white sm:left-3 sm:top-3">
-                    Sale
-                  </span>
-                )}
               </div>
 
               {/* Product Info */}

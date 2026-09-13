@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router'
 
 const Product = ({ item }) => {
     const [hartSymbol, sethartSymbol] = useState(false)
+    console.log(item)
  const navigate=useNavigate()
 
     const dispatch = useDispatch()
@@ -25,12 +26,7 @@ const Product = ({ item }) => {
 
     const handleWish=(witem)=>{
         sethartSymbol(!hartSymbol)
-        dispatch(addWishList({
-            id:witem.id,
-            price:witem.price,
-            image:witem.thumbnail,
-            title:witem.title
-        }))
+        dispatch(addWishList(witem))
     }
 
     const handleProductDetails=(dtail)=>{

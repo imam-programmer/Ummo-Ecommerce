@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  wishProduct: [],
+  wishProduct:localStorage.getItem("wishList")?JSON.parse(localStorage.getItem("wishList")) :[],
 }
 
 export const wishListSlice = createSlice({
@@ -11,6 +11,7 @@ export const wishListSlice = createSlice({
 
     addWishList: (state, action) => {
       state.wishProduct.push(action.payload)
+      localStorage.setItem("wishList",JSON.stringify(state.wishProduct))
     },
   },
 })

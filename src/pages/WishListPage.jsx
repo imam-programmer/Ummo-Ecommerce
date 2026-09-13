@@ -3,59 +3,12 @@ import { FiTrash2 } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
 import WishListProduct from "../components/wishlistProductUI/WishListProduct";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
-const wishlistProducts = [
-  {
-    id: 1,
-    name: "Classic Cotton T-Shirt",
-    category: "T-Shirts",
-    price: 39.99,
-    oldPrice: 49.99,
-    rating: 4.8,
-    reviews: 124,
-    image:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80",
-    inStock: true,
-  },
-  {
-    id: 2,
-    name: "Minimal Leather Bag",
-    category: "Bags",
-    price: 89.99,
-    oldPrice: null,
-    rating: 4.6,
-    reviews: 87,
-    image:
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80",
-    inStock: true,
-  },
-  {
-    id: 3,
-    name: "Classic Running Shoes",
-    category: "Shoes",
-    price: 74.99,
-    oldPrice: 99.99,
-    rating: 4.9,
-    reviews: 215,
-    image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80",
-    inStock: true,
-  },
-  {
-    id: 4,
-    name: "Premium Wrist Watch",
-    category: "Accessories",
-    price: 129.99,
-    oldPrice: null,
-    rating: 4.7,
-    reviews: 65,
-    image:
-      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=80",
-    inStock: false,
-  },
-];
 
 const WishListPage = () => {
+  const WishData=useSelector(state=>state.wishList.wishProduct)
+
   const navigate=useNavigate()
   function handleShop(){
     navigate("/shop")
@@ -73,7 +26,7 @@ const WishListPage = () => {
             </h2>
 
             <p className="mt-1 text-sm text-gray">
-              {wishlistProducts.length} items in your wishlist
+              {WishData.length} items in your wishlist
             </p>
           </div>
 
@@ -88,8 +41,8 @@ const WishListPage = () => {
 
         {/* Product List */}
         <div className="space-y-5">
-          {wishlistProducts.map((product) => (
-            <WishListProduct product={product}/>
+          {WishData.map((product,idx) => (
+            <WishListProduct key={idx} product={product}/>
           ))}
         </div>
 
