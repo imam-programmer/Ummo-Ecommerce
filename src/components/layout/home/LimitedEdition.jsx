@@ -23,7 +23,7 @@ const LimitedEdition = () => {
     }, [])
 
     return (
-        <section className='md:mt-22.75 mt-9.25 px-2 md:px-0 '>
+        <section className='md:mt-22.75 mt-9.25 px-2 xl:px-0 '>
             <div className="container ">
                 <Title name="LIMITED" namebold="EDITION" />
                 <div className='relative'>
