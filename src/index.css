@@ -8,7 +8,7 @@
   --color-primary: #222222;
   --color-gray: #767676;
   --breakpoint-xs: 390px;
-   --breakpoint-bmd: 900px;
+  --breakpoint-bmd: 900px;
 }
 
 .swiper-pagination-bullet {
@@ -37,7 +37,7 @@
   bottom: 58px !important;
 }
 
-.clamp{
+.clamp {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -47,17 +47,16 @@
   font-weight: 400;
   margin-top: 9px;
   text-transform: uppercase;
-
 }
-.desc{
+.desc {
   line-height: 1.6;
-    font-size: 1rem;
+  font-size: 1rem;
   color: #222222;
   font-weight: 400;
   margin-top: 9px;
   text-transform: uppercase;
 }
-@media (min-width: 300px) and (max-width: 575px) {
+@media (min-width: 300px) and (max-width: 640px) {
   .swiper-pagination {
     margin-left: 40px !important;
     bottom: 20px !important;
@@ -80,7 +79,45 @@
     height: 20px;
     border: 1px solid #222222;
   }
-  .clamp{
+  .clamp {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  .desc {
+    margin-top: 5px;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+  #my-class .swiper-pagination-clickable {
+    position: absolute !important;
+    bottom: 2px !important;
+
+    text-align: center !important;
+    margin-left: 0 !important;
+  }
+  #my-class {
+    padding-bottom: 30px !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+  .swiper-pagination {
+    margin-left: 60px !important;
+    bottom: 30px !important;
+  }
+  .swiper-pagination-bullet {
+    margin-right: 14px !important;
+  }
+  .swiper-pagination-bullet {
+    width: 7px !important;
+    height: 7px !important;
+  }
+  .swiper-pagination-bullet-active::after {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #222222;
+  }
+  /* .clamp{
   margin-top: 5px;
   font-size: 14px;
 
@@ -102,52 +139,82 @@
 }
 #my-class{
   padding-bottom: 30px !important;
+} */
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .swiper-pagination {
+    margin-left: 120px !important;
+    bottom: 50px !important;
+  }
+  .swiper-pagination-bullet {
+    margin-right: 16px !important;
+  }
+  .swiper-pagination-bullet {
+    width: 7px !important;
+    height: 7px !important;
+  }
+  .swiper-pagination-bullet-active::after {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #222222;
+  }
 }
-@media (min-width:800px) {
-  #my-class .swiper-pagination-clickable{
- display: none !important;
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .swiper-pagination {
+    margin-left: 200px !important;
+    bottom: 58px !important;
+  }
+  .swiper-pagination-bullet {
+    margin-right: 28px !important;
+  }
 }
+/* only home banner pagination responsive============================= */
+
+@media (min-width: 800px) {
+  #my-class .swiper-pagination-clickable {
+    display: none !important;
+  }
 }
-.hup{
+.hup {
   display: grid;
   grid-template-columns: 5;
   row-gap: 200px;
 }
-.shoplist{
+.shoplist {
   position: relative;
   transition: 0.5s;
   padding: 5px 5px;
 }
-.shoplist::after{
+.shoplist::after {
   content: "";
-position: absolute;
-height: 3.5px;
-width:0;
-bottom: 0;
-left: 0;
+  position: absolute;
+  height: 3.5px;
+  width: 0;
+  bottom: 0;
+  left: 0;
   background-color: rgb(0, 255, 13);
   border-radius: 50%;
   transition: 0.5s;
 }
-.shoplist::before{
+.shoplist::before {
   content: "";
-position: absolute;
-height: 3px;
-width: 0;
-top: 0;
-right: 0;
+  position: absolute;
+  height: 3px;
+  width: 0;
+  top: 0;
+  right: 0;
   background-color: rgb(9, 255, 0);
   border-radius: 50%;
   transition: 0.5s;
 }
-.shoplist:hover::after{
-width: 100%;
+.shoplist:hover::after {
+  width: 100%;
 }
-.shoplist:hover::before{
-width: 100%;
+.shoplist:hover::before {
+  width: 100%;
 }
-.shoplist:hover{
+.shoplist:hover {
   background-color: black;
   border-radius: 20px;
   color: white;
@@ -156,19 +223,18 @@ width: 100%;
 
 /* =========pagination design customize==================== */
 .pagination .active > .page-link {
-    z-index: 3;
-    color: black !important;
-    background-color:transparent !important;
-    border: none !important;
-    font-weight: var(--pagination-active-font-weight);
-    border-radius: 0px !important;
-    position: relative;
-  
-}
-.pagination .active{
+  z-index: 3;
+  color: black !important;
+  background-color: transparent !important;
+  border: none !important;
+  font-weight: var(--pagination-active-font-weight);
+  border-radius: 0px !important;
   position: relative;
 }
-.pagination .active::after{
+.pagination .active {
+  position: relative;
+}
+.pagination .active::after {
   content: "";
   position: absolute;
   height: 2px;
@@ -180,26 +246,18 @@ width: 100%;
 }
 
 .pagination .page-link {
-    position: relative;
-    display: block;
-    font-size: var(--pagination-font-size, 1rem);
-    color: black !important;
-    text-decoration: none;
-    background-color: transparent !important;
-    border: none !important;
-    z-index: 999;
-    padding: 0 !important;
-    margin-left: 30px !important;
-
+  position: relative;
+  display: block;
+  font-size: var(--pagination-font-size, 1rem);
+  color: black !important;
+  text-decoration: none;
+  background-color: transparent !important;
+  border: none !important;
+  z-index: 999;
+  padding: 0 !important;
+  margin-left: 30px !important;
 }
 .pagination {
   display: flex !important;
   align-items: center !important;
-
 }
-
-
-
-
-
-
