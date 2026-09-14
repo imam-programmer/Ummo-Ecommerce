@@ -36,7 +36,7 @@ function handleWishList(){
                 <Link key={id} to={item.path}>
 
                 <li
-                  className='text-primary cursor-pointer after:bg-primary relative text-sm leading-6 font-medium after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:duration-300 after:content-[""] hover:after:w-[70%]'
+                  className='text-primary cursor-pointer after:bg-primary relative text-sm md:text-[12px] lg:text-sm leading-6 font-medium after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:duration-300 after:content-[""] hover:after:w-[70%]'
                   key={item.id}
                 >
                   {item?.title}
@@ -46,10 +46,10 @@ function handleWishList(){
             </ul>
 
             {/* ============icons ============== */}
-            <div className="ml-auto flex gap-3  bmd:gap-8">
-              <button className="cursor-pointer">
-                <svg
-                  width="21"
+            <div className="ml-auto flex gap-5  bmd:gap-8">
+              <button className="cursor-pointer ">
+                <svg className="w-3.75 lg:w-5"
+         
                   height="20"
                   viewBox="0 0 21 20"
                   fill="none"
@@ -74,7 +74,7 @@ function handleWishList(){
               </button>
               <button onClick={handlelogin}  className="cursor-pointer">
                 <svg
-                  width="21"
+                   className="w-3.75 lg:w-5"
                   height="20"
                   viewBox="0 0 21 20"
                   fill="none"
@@ -99,7 +99,7 @@ function handleWishList(){
               </button>
               <button className="cursor-pointer" onClick={handleWishList}>
                 <svg
-                  width="21"
+                   className="w-3.75 lg:w-5"
                   height="20"
                   viewBox="0 0 21 20"
                   fill="none"
@@ -120,7 +120,7 @@ function handleWishList(){
               </button>
               <button onClick={handleNavigate} className="cursor-pointer relative">
                 <svg
-                  width="21"
+                 className="w-3.75 lg:w-5"
                   height="20"
                   viewBox="0 0 21 20"
                   fill="none"
@@ -135,7 +135,7 @@ function handleWishList(){
               </button>
               <button className="cursor-pointer">
                 <svg
-                  width="26"
+                   className="w-3.75 lg:w-5"
                   height="18"
                   viewBox="0 0 26 18"
                   fill="none"
