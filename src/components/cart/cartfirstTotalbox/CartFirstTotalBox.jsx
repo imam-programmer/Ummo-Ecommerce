@@ -16,7 +16,7 @@ export default function CartFirstTotalBox() {
   const total = subtotal + vat + shippingCost;
 
   return (
-    <div className="font-jost  md:w-105 !w-full">
+    <div className="font-jost  md:w-105 w-full!">
       <div className="border  mb-5 ">
         <div className="pt-9.5 px-10.25 ">
           {/* Heading */}
@@ -46,7 +46,8 @@ export default function CartFirstTotalBox() {
                   <input
                     type="checkbox"
                     checked={shipping === option.id}
-                    onChange={() => setShipping(option.id)}
+                    
+                    onChange={()=>setShipping(option.id)}
                     className="h-4 w-4 rounded-none border border-primary/40 text-primary accent-primary cursor-pointer"
                   />
                   {option.label}

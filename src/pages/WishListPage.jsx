@@ -41,8 +41,8 @@ const WishListPage = () => {
 
         {/* Product List */}
         <div className="space-y-5">
-          {WishData.map((product,idx) => (
-            <WishListProduct key={idx} product={product}/>
+          {WishData.map((product) => (
+            <WishListProduct key={product.id} product={product}/>
           ))}
         </div>
 
