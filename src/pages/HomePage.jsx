@@ -14,8 +14,8 @@ const HomePage = () => {
    <Banner/>
    <Category/>
    <TrendyProducts/>
-   {/* <SpringCollection/> */}
-   {/* <Starting/> */}
+   <SpringCollection/>
+   <Starting/>
    {/* <LimitedEdition/> */}
    {/* <Sponcer/> */}
    {/* <Services/> */}

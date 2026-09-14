@@ -122,7 +122,7 @@ const TrendyProducts = () => {
     }
 
     return (
-        <section className='mt-9 mb-12 md:mt-20 md:mb-24 px-4 sm:px-6 xl:px-0'>
+        <section className='mt-9 mb-12 md:mt-20 md:mb-24 px-4 sm:px-6 xl:px-0 overflow-x-hidden'>
             <div className="container mx-auto">
                 <Title name="our trendy" namebold="products" />
 

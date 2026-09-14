@@ -7,7 +7,7 @@ const Starting = () => {
     return (
         <section className='md:mt-25 mt-3.75'>
             <div className="container">
-                <div className='flex justify-between gap-y-3.75 flex-col md:flex-row '>
+                <div className='flex justify-between gap-y-3.75 flex-col md:flex-row md:gap-2 '>
                     <div className='md:w-172.5 h-77.5 md:h-99.5  bg-[#D6001C] flex justify-between md:pl-12.5 pl-5.75 md:pr-2.5 items-end'>
 
                         <div className='mb-12.75'>
@@ -23,7 +23,7 @@ const Starting = () => {
                             <Image className="h-full " src={startingimage} alt="startingimage" />
                             <div className='h-full bg-[#d6001dda]   absolute w-full top-0 left-0'></div>
                         </div>
-                        
+
                     </div>
 
                     <div className='md:w-172.5 h-77.5 md:h-99.5 relative'>
