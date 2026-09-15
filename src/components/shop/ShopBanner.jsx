@@ -6,19 +6,15 @@ const ShopBanner = () => {
     const [first, setfirst] = useState(9)
     return (
         <div className='lg:px-15 relative'>
-
-            {/*  =======dynamically image showing============= */}
             <Image className="w-full hidden lg:block" src={shopBg} alt="shopbg" />
 
-
-
             <div className='lg:absolute relative  lg:top-2/4 lg:left-2/4 lg:-translate-2/4 text-center '>
-                <h2 className='font-bold text-[30px] lg:text-[60px] text-black uppercase'>{first==1?"#STAYHOME":first==2?"NEW IN":first==3?"JACKETS":first==4?"HOODIES":first==5?"MEN":first==6?"WOMEN":first==7?"TROUSERS":first==8?"ACCESSORIES":"SHOES"}</h2>
+                <h2 className='font-bold text-[30px] lg:text-[60px] text-black uppercase'>{first == 1 ? "#STAYHOME" : first == 2 ? "NEW IN" : first == 3 ? "JACKETS" : first == 4 ? "HOODIES" : first == 5 ? "MEN" : first == 6 ? "WOMEN" : first == 7 ? "TROUSERS" : first == 8 ? "ACCESSORIES" : "SHOES"}</h2>
                 <ul className='flex  justify-center lg:gap-7.5 flex-wrap gap-x-2 lg:gap-x-0'>
-                    {ShopBannerData.map((item)=>(
-                    <li key={item.id} onClick={()=>setfirst(item.id)} className='font-bold text-[12px]   lg:text-base text-black whitespace-nowrap cursor-pointer shoplist  '>{item.name}</li>
+                    {ShopBannerData.map((item) => (
+                        <li key={item.id} onClick={() => setfirst(item.id)} className='font-bold text-[12px]   lg:text-base text-black whitespace-nowrap cursor-pointer shoplist  '>{item.name}</li>
                     ))}
-                  
+
                 </ul>
             </div>
         </div>

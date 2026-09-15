@@ -29,17 +29,13 @@ const Product = ({ item }) => {
 
     }
     const handleTrueWish = (trwish) => {
-      
         setLoveIcon(true)
         dispatch(addWishList(trwish))
-       
-
     }
 
     const handleProductDetails = (dtail) => {
         dispatch(productDetail(dtail))
         navigate("/shopsingle")
-
     }
     return (
         <div className='max-w-82.5 group relative '>
@@ -68,14 +64,14 @@ const Product = ({ item }) => {
                     }
 
                 </div>
-                <h3 onClick={() => handleProductDetails(item)} className='cursor-pointer'>{item?.title}</h3>
+                <h3 onClick={() => handleProductDetails(item)} className='cursor-pointer clamp '>{item?.title}</h3>
                 <h5 className='md:text-base text-[14px] text-primary font-normal uppercase'>${item?.price}</h5>
             </div>
 
 
             <div>
 
-                <button onClick={() => handleAddtoCart(item)} className='absolute group-hover:visible cursor-pointer bottom-18 md:bottom-25 left-[50%] translate-[-50%] invisible w-[90%] md:w-77.5 shadow-xl shadow-[#3333335b] font-medium text-sm bg-white  text-black h-7 md:h-12.5 text-center '>ADD TO CART</button>
+                <button onClick={() => handleAddtoCart(item)} className='absolute md:invisible  md:group-hover:visible cursor-pointer bottom-18 md:bottom-25 left-[50%] translate-[-50%]  w-[90%] md:w-77.5 shadow-xl shadow-[#3333335b] font-medium  text-[12px] md:text-sm bg-white  text-black h-7 md:h-12.5 text-center '>ADD TO CART</button>
             </div>
         </div>
     )
