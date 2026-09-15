@@ -11,6 +11,8 @@ const Header = () => {
   const navigate=useNavigate()
   const [menuActive, setmenuActive] = useState(false)
   const CartProduct=useSelector((state)=>state.cart.products)
+const WishProduct=useSelector((state)=>state.wishList.wishProduct)
+
 
 
 function handleNavigate(){
@@ -96,8 +98,11 @@ function handleWishList(){
                     </clipPath>
                   </defs>
                 </svg>
+                
               </button>
-              <button className="cursor-pointer" onClick={handleWishList}>
+
+
+              <button className="cursor-pointer relative" onClick={handleWishList}>
                 <svg
                    className="w-3.75 lg:w-5"
                   height="20"
@@ -117,6 +122,7 @@ function handleWishList(){
                     </clipPath>
                   </defs>
                 </svg>
+                <span className="absolute -bottom-1.5 bg-[#B9A16B] h-4 w-4 leading-4 rounded-full text-[10px] text-white">{WishProduct.length}</span>
               </button>
               <button onClick={handleNavigate} className="cursor-pointer relative">
                 <svg

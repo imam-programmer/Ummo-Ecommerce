@@ -8,10 +8,10 @@ const ShopPage = () => {
   return (
     <div className='mb-25.25'>
       <ShopBanner />
-      <div className='container flex justify-between mt-9 gap-15'>
+      {/* <div className='container flex justify-between mt-9 gap-15'>
         <ShopFilter currentPage={currentPage} setCurrentPage={setCurrentPage} />
         <ShopAllProducts currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      </div>
+      </div> */}
 
     </div>
   )

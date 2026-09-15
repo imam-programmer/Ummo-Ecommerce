@@ -9,8 +9,7 @@ import { useNavigate } from 'react-router'
 
 const Product = ({ item }) => {
     const navigate = useNavigate()
-    const boolvalue = useSelector(state => state.wishList.boolean)
-    console.log(boolvalue)
+    const [LoveIcon, setLoveIcon] = useState(false)
     const dispatch = useDispatch()
 
     function handleAddtoCart(Citem) {
@@ -24,13 +23,17 @@ const Product = ({ item }) => {
     }
 
     const handlefalseWish = (witem) => {
-        
-        dispatch(deletebydoubleckick(false))
+
+      setLoveIcon(false)
         dispatch(deleteWishEndevisual(witem))
+
     }
     const handleTrueWish = (trwish) => {
-            dispatch(deletebydoubleckick(true))
+      
+        setLoveIcon(true)
         dispatch(addWishList(trwish))
+       
+
     }
 
     const handleProductDetails = (dtail) => {
@@ -44,7 +47,7 @@ const Product = ({ item }) => {
             <div className='mt-3.2'>
                 <div className='flex justify-between h-5'>
                     <h4 className='text-[12px] md:text-sm text-gray font-normal uppercase'>{item?.category}</h4>
-                    {boolvalue ?
+                    {LoveIcon ?
                         <button className='cursor-pointer' onClick={() => handlefalseWish(item)}>
                             <p className='text-[15px]'>❤️</p>
                         </button>
