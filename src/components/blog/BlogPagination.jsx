@@ -4,6 +4,7 @@ const BlogPagination = () => {
     const [shown, setshown] = useState(0)
   const total = 49;
   const progress = Math.min(100, Math.ceil((shown / total) * 100));
+  console.log(progress)
   return (
      <div className="mt-16 flex flex-col items-center gap-3">
           <span

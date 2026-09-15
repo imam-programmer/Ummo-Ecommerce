@@ -56,11 +56,6 @@ const POSTS = [
   },
 ];
 
-
-
-
-
-
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("ALL");
 

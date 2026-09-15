@@ -9,17 +9,17 @@ const ShopResponsive = () => {
   const [FilterOpen, setFilterOpen] = useState(false)
   const [InitialPage, setInitialPage] = useState(1)
   const AllProduct = useSelector(state => state.Products.products)
+  const productPerPage = Math.ceil(AllProduct.length / 20)
+  const lastIdx = InitialPage * productPerPage;
+  const firstIdx = lastIdx - productPerPage
+  const progress = Math.min(100, Math.ceil((lastIdx / AllProduct.length) * 100))
 
-const productPerPage=Math.ceil(AllProduct.length/20)
-
-
-const lastIdx=InitialPage * productPerPage;
-const firstIdx=lastIdx - productPerPage
- function pagination(){
-  if(lastIdx<=AllProduct.length){
-    setInitialPage(InitialPage+1)
+  console.log(progress)
+  function pagination() {
+    if (lastIdx <= AllProduct.length) {
+      setInitialPage(InitialPage + 1)
+    }
   }
- }
 
   return (
     <div className="container px-2.5">
@@ -66,7 +66,7 @@ const firstIdx=lastIdx - productPerPage
       <div className="grid gap-x-2 grid-cols-2 sm:grid-cols-3 mt-5">
 
         {
-          AllProduct.slice(firstIdx,lastIdx).map((item) => (
+          AllProduct.slice(firstIdx, lastIdx).map((item) => (
             <Product item={item} />
           ))
         }
@@ -74,13 +74,13 @@ const firstIdx=lastIdx - productPerPage
 
 
       <div className="text-center mt-5">
-        <h3><span>SHOWING</span> <span>{Math.min(lastIdx,AllProduct.length)}</span> of <span>{AllProduct.length}</span> Items</h3>
- 
+        <h3><span>SHOWING</span> <span>{Math.min(lastIdx, AllProduct.length)}</span> of <span>{AllProduct.length}</span> Items</h3>
+
 
         <div className="w-full sm:w-75 mx-auto h-1.5 bg-[#E4E4E4] rounded-2xl relative overflow-hidden ">
-          <div className="absolute top-0 left-0 bg-amber-600 h-1.5 w-5"></div>
+          <div className={`absolute top-0 left-0 bg-amber-600 h-1.5 `} style={{width:`${progress}%`}}></div>
         </div>
-    
+
         <button onClick={pagination} className=" text-sm font-medium relative leading-6 text-primary mt-4.25 after:content-[''] after:absolute after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:duration-300 cursor-pointer after:transition-all after:bottom-0 after:left-0 pb-1">SHOW MORE</button>
       </div>
     </div>
