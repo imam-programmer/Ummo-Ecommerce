@@ -29,24 +29,22 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
 
   }, [dispatch]) // =====================should understand this code from sir=========================
 
- const displayProducts = FilterProduct.length > 0 ? FilterProduct : products;
-const totalPages =  Math.ceil(displayProducts.length / 12);
+  const displayProducts = FilterProduct.length > 0 ? FilterProduct : products;
+  const totalPages = Math.ceil(displayProducts.length / 12);
   let fasttidx = (currentPage - 1) * 12;
   let lastidx = fasttidx + 12
-  
-// =====================should understand this code from sir=========================
-useEffect(() => {
+
+  // =====================should understand this code from sir=========================
+  useEffect(() => {
     if (currentPage > totalPages) {
       setCurrentPage(1)
     }
   }, [currentPage, totalPages, setCurrentPage]);
-// =====================should understand this code from sir=========================
-
+  // =====================should understand this code from sir=========================
 
   function handleview(hup) {
     setview(hup)
   }
-
 
   // Product loading animation here===================================================================
   if (loading) {
@@ -143,13 +141,10 @@ useEffect(() => {
         </div>
       </div>
       <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
-
         {
           displayProducts.slice(fasttidx, lastidx).map((item) => (
             <Product item={item} key={item.id} />
           ))
-
-
         }
       </div>
       <div className='mt-10 text-center'>
@@ -157,23 +152,23 @@ useEffect(() => {
         {/* in this way i will set pagination*/}
         <ResponsivePagination current={currentPage} total={totalPages} onPageChange={setCurrentPage}
           previousLabel={
-        <span className='flex items-center uppercase text-sm font-medium gap-2.5 mr-5'>
-         
-<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.159285 4.64332C-0.0530952 4.83765 -0.0530951 5.16231 0.159285 5.35713L5.05963 9.85239C5.27473 10.0492 5.62357 10.0492 5.83813 9.85239C6.05323 9.65557 6.05323 9.33589 5.83813 9.13907L1.32706 5L5.83867 0.861422C6.05377 0.664108 6.05377 0.344925 5.83867 0.14761C5.62357 -0.0492051 5.27473 -0.0492051 5.06017 0.14761L0.159285 4.64332Z" fill="#222222"/>
-</svg>
- Prev
-        </span>
-      }
-        nextLabel={
-  <span className="flex items-center gap-2.5 uppercase ml-5">
-    Next 
-<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.84071 5.35668C6.05309 5.16235 6.05309 4.83769 5.84072 4.64287L0.940372 0.147612C0.725269 -0.0492042 0.376431 -0.0492043 0.161873 0.147612C-0.0532293 0.344428 -0.0532294 0.664109 0.161873 0.860925L4.67294 5L0.161327 9.13858C-0.0537748 9.33589 -0.0537748 9.65507 0.161327 9.85239C0.37643 10.0492 0.725268 10.0492 0.939826 9.85239L5.84071 5.35668Z" fill="#222222"/>
-</svg>
+            <span className='flex items-center uppercase text-sm font-medium gap-2.5 mr-5'>
 
-  </span>
-} />
+              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.159285 4.64332C-0.0530952 4.83765 -0.0530951 5.16231 0.159285 5.35713L5.05963 9.85239C5.27473 10.0492 5.62357 10.0492 5.83813 9.85239C6.05323 9.65557 6.05323 9.33589 5.83813 9.13907L1.32706 5L5.83867 0.861422C6.05377 0.664108 6.05377 0.344925 5.83867 0.14761C5.62357 -0.0492051 5.27473 -0.0492051 5.06017 0.14761L0.159285 4.64332Z" fill="#222222" />
+              </svg>
+              Prev
+            </span>
+          }
+          nextLabel={
+            <span className="flex items-center gap-2.5 uppercase ml-5">
+              Next
+              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.84071 5.35668C6.05309 5.16235 6.05309 4.83769 5.84072 4.64287L0.940372 0.147612C0.725269 -0.0492042 0.376431 -0.0492043 0.161873 0.147612C-0.0532293 0.344428 -0.0532294 0.664109 0.161873 0.860925L4.67294 5L0.161327 9.13858C-0.0537748 9.33589 -0.0537748 9.65507 0.161327 9.85239C0.37643 10.0492 0.725268 10.0492 0.939826 9.85239L5.84071 5.35668Z" fill="#222222" />
+              </svg>
+
+            </span>
+          } />
       </div>
     </div>
   )
