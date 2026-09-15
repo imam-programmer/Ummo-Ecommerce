@@ -200,20 +200,7 @@
   grid-template-columns: 5;
   row-gap: 200px;
 }
-.shoplist {
-  position: relative;
-  transition: 0.5s;
-  padding: 5px 5px;
-}
 
-
-
-.shoplist:hover {
-  background-color: black;
-  border-radius: 20px;
-  color: white;
-  overflow: hidden;
-}
 
 /* =========pagination design customize==================== */
 .pagination .active > .page-link {

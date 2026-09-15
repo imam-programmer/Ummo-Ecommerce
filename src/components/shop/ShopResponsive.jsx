@@ -2,35 +2,53 @@ import { useState } from "react";
 import { LuSlidersHorizontal } from "react-icons/lu";
 import { useSelector } from "react-redux";
 import Product from "../layout/common/Product";
-
+import ShopFilter from "./ShopFilter";
+import { GoX } from "react-icons/go";
 const ShopResponsive = () => {
   const [Dropshowhide, setDropshowhide] = useState(false)
   const [Dropdown, setDropdown] = useState("Default Select")
-  const [FilterOpen, setFilterOpen] = useState(false)
   const [InitialPage, setInitialPage] = useState(1)
+  const [showSlide, setshowSlide] = useState(false)
   const AllProduct = useSelector(state => state.Products.products)
+
+
+// this are for pagination =============================================//
   const productPerPage = Math.ceil(AllProduct.length / 20)
   const lastIdx = InitialPage * productPerPage;
   const firstIdx = lastIdx - productPerPage
   const progress = Math.min(100, Math.ceil((lastIdx / AllProduct.length) * 100))
+//  this are for pagination===========================================
 
-  console.log(progress)
+
   function pagination() {
     if (lastIdx <= AllProduct.length) {
       setInitialPage(InitialPage + 1)
     }
   }
+function handleShowSlide(){
+  setshowSlide(!showSlide)
+}
 
   return (
     <div className="container px-2.5">
-      <div className="flex items-center justify-between border-b border-neutral-200 py-4">
+      <div className="flex items-center justify-between border-b border-neutral-200 py-4 relative"> 
         <button
-          onClick={() => setFilterOpen(true)}
+          onClick={() =>handleShowSlide() }
           className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
         >
+          {showSlide?
+          
+          <GoX  className="h-4 w-4"/>
+          :
           <LuSlidersHorizontal className="h-4 w-4" />
+        }
           Filter
         </button>
+        
+          <div className={`absolute bg-[#bebebe] z-10 top-13 ${showSlide?"left-0":"-left-full"} duration-300 transition-all h-100 overflow-auto`}>
+            <ShopFilter/>
+          </div>
+        
 
         <div className='relative'>
           <div onClick={() => setDropshowhide(!Dropshowhide)} className='flex cursor-pointer  items-center w-27 border-b-2  justify-between'>
@@ -76,9 +94,8 @@ const ShopResponsive = () => {
       <div className="text-center mt-5">
         <h3><span>SHOWING</span> <span>{Math.min(lastIdx, AllProduct.length)}</span> of <span>{AllProduct.length}</span> Items</h3>
 
-
         <div className="w-full sm:w-75 mx-auto h-1.5 bg-[#E4E4E4] rounded-2xl relative overflow-hidden ">
-          <div className={`absolute top-0 left-0 bg-amber-600 h-1.5 `} style={{width:`${progress}%`}}></div>
+          <div className={`absolute top-0 left-0 bg-primary h-1.5 `} style={{width:`${progress}%`}}></div>
         </div>
 
         <button onClick={pagination} className=" text-sm font-medium relative leading-6 text-primary mt-4.25 after:content-[''] after:absolute after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:duration-300 cursor-pointer after:transition-all after:bottom-0 after:left-0 pb-1">SHOW MORE</button>

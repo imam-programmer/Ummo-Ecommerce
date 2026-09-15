@@ -11,13 +11,12 @@ function SectionHeader({ title, open, onToggle }) {
       onClick={onToggle}
       className="flex w-full items-center justify-between py-2 text-left"
     >
-      <span className="font-jost text-lg font-semibold uppercase tracking-wide text-primary">
+      <span className="font-jost text-[12px] text-nowrap xl:text-lg font-semibold uppercase tracking-wide text-primary">
         {title}
       </span>
       <FaChevronUp
-        size={18}
         strokeWidth={2}
-        className={`text-primary transition-transform duration-200 ${open ? "" : "rotate-180"
+        className={`text-primary text-sm xl:text-lg transition-transform duration-200 ${open ? "" : "rotate-180"
           }`}
       />
     </button>
@@ -35,17 +34,11 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
     price: true,
   });
   let Products = useSelector((state) => state.Products.products)
-
-  let Brand = Products.slice(50, 90).map((item) => (
-    item.brand
-  ))
-  let RealBrand = Brand.filter(item => item != undefined)
-  let BRANDS = [...new Set(RealBrand)]
   let Categore = Products.map(item => item.category)
-
+  let brand = Products.map(item => item.brand)
+  let filterbrand = brand.filter((item) => item != undefined)
+  let BRANDS = [...new Set(filterbrand)]
   const CATEGORIES = [...new Set(Categore)];
-
-  const [selectedSizes, setSelectedSizes] = useState([]);
   const [brandSearch, setBrandSearch] = useState("");
   const [checkedBrands, setCheckedBrands] = useState([]);
   const [minPrice, setMinPrice] = useState(29);
@@ -59,11 +52,6 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
 
   const toggleSection = (key) =>
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
-
-  const toggleSize = (size) =>
-    setSelectedSizes((prev) =>
-      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
-    );
 
   const toggleBrand = (name) =>
     setCheckedBrands((prev) =>
@@ -100,7 +88,7 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
   };
 
   return (
-    <div className="font-jost w-full max-w-75 px-1 text-primary -mt-2">
+    <div className="font-jost w-45 xl:w-full  xl:px-1 text-primary -mt-2 px-2 pt-2 xl:pt-0">
       {/* Product Categories */}
       <div className="border-b border-gray-200 pb-6">
         <SectionHeader
@@ -109,11 +97,11 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
           onToggle={() => toggleSection("categories")}
         />
         {openSections.categories && (
-          <ul className="mt-3 space-y-3">
-            <li className={`${Allshow ? "text-black" : "text-gray"} cursor-pointer`} onClick={handleAllCategories}>All</li>
+          <ul className="xl:mt-3 xl:space-y-3 space-y-px">
+            <li className={`${Allshow ? "text-black" : "text-gray"} cursor-pointer text-[12px] xl:text-[15px]`} onClick={handleAllCategories}>All</li>
             {CATEGORIES.map((cat) => (
               <li key={cat}>
-                <button className={`text-[15px]  capitalize cursor-pointer ${ActiveCategory == cat && "text-black!"} transition-colors text-gray `} onClick={() => {
+                <button className={`xl:text-[15px] text-[12px]  capitalize cursor-pointer ${ActiveCategory == cat && "text-black!"} transition-colors text-gray `} onClick={() => {
                   handleActiveCategory(cat)
                   setAllshow(false)
                 }}>
@@ -148,15 +136,15 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray"
               />
             </div>
-            <ul className="space-y-4">
-              {BRANDS.map((brand, id) => (
+            <ul className="xl:space-y-4 space-y-2">
+              {BRANDS.slice(9,20).map((brand, id) => (
                 <li key={id} className="flex items-center justify-between">
-                  <label className="flex cursor-pointer items-center gap-3 text-[15px] text-primary">
+                  <label className="flex cursor-pointer items-center gap-3 text-[12px] xl:text-[15px] text-primary">
                     <input
                       type="checkbox"
                       checked={checkedBrands.includes(brand)}
                       onChange={() => toggleBrand(brand)}
-                      className="h-4 w-4 rounded-none border-gray-300 text-primary accent-[#222222]"
+                      className="lg:h-4 lg:w-4 rounded-none border-gray-300 text-primary accent-primary"
                     />
                     {brand}
                   </label>
