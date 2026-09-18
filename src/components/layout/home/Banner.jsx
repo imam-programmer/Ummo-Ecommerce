@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 import bannerData from "../../../api/bannerdata.json";
 import Image from "../common/Image";
 import 'swiper/css';
@@ -13,7 +13,13 @@ const Banner = () => {
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
+        modules={[Autoplay,Pagination]}
+          autoplay={{
+          delay: 2000,                   
+          disableOnInteraction: false,  
+          pauseOnMouseEnter: true,      
+        }}
+        loop={true}
         className="mySwiper"
       >
         {bannerData.map((item) => (

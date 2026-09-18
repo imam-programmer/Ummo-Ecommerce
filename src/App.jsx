@@ -18,33 +18,35 @@ import TermsConditionPage from './pages/TermsConditionPage';
 import BlogPage from './pages/Blogpage';
 import ContactPage from './pages/ContactPage';
 import LocationPage from './pages/LocationPage';
+import CollectionPage from './pages/CollectionPage';
 const App = () => {
-  const router=createBrowserRouter([
-  {
-    path: "/",
-    Component: Rootlayout,
-    children: [
-      { index: true, Component: HomePage },
-      {path:"shop",Component:ShopPage},
-       {path:"shopsingle",Component:ShopSingle},
-       {path:"cart",Component:CartPage},
-       {path:"wish",Component:WishListPage},
-       {path:"register",Component:Register},
-       {path:"login",Component:LoginPage},
-       {path:"wishlist",Component:WishListPage},
-       {path:"blog",Component:BlogPage},
-       {path:"faq",Component:FAQPage},
-       {path:"about",Component:AboutPage},
-       {path:"terms",Component:TermsConditionPage},
-       {path:"contact",Component:ContactPage},
-       {path:"location",Component:LocationPage},
-       
-   
-    ],
-  },
-   {path:"*",Component:NotFoundPage},
-   {path:"/shop/:id",Component:ShopDynamicPage},
-]);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      Component: Rootlayout,
+      children: [
+        { index: true, Component: HomePage },
+        { path: "shop", Component: ShopPage },
+        { path: "shopsingle", Component: ShopSingle },
+        { path: "cart", Component: CartPage },
+        { path: "wish", Component: WishListPage },
+        { path: "register", Component: Register },
+        { path: "login", Component: LoginPage },
+        { path: "wishlist", Component: WishListPage },
+        { path: "blog", Component: BlogPage },
+        { path: "faq", Component: FAQPage },
+        { path: "about", Component: AboutPage },
+        { path: "terms", Component: TermsConditionPage },
+        { path: "contact", Component: ContactPage },
+        { path: "location", Component: LocationPage },
+        { path: "collection", Component: CollectionPage },
+
+
+      ],
+    },
+    { path: "*", Component: NotFoundPage },
+    { path: "/shop/:id", Component: ShopDynamicPage },
+  ]);
 
   return (
     <RouterProvider router={router}></RouterProvider>

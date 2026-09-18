@@ -3,7 +3,7 @@ import { ref, set } from "firebase/database";
 import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
 import { auth, db } from "../../firebase.config";
 import toast, { Toaster } from 'react-hot-toast';
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function EyeIcon() {
     return (
@@ -39,7 +39,7 @@ export default function Register() {
     const [name, setname] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
+const navigate=useNavigate()
 
 
     const handleRegister = (e) => {
@@ -50,7 +50,6 @@ export default function Register() {
         e.preventDefault()
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-
                 updateProfile(auth.currentUser, {
                     displayName: name,
                     photoURL: "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
@@ -60,13 +59,13 @@ export default function Register() {
                             const user = userCredential.user;
                             toast.success('Account Created Successfully!')
                             setloading(false)
-                            console.log(user)
                             set(ref(db, 'users/' + user.uid), {
                                 username: name,
                                 email: email,
+                                password:password,
                                 profile_picture: "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
                             });
-                        });
+                        }).then(()=>navigate("/login"))
 
                 }).catch((error) => {
                     toast.error(error)

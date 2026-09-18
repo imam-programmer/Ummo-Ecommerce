@@ -88,7 +88,7 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
   };
 
   return (
-    <div className="font-jost w-45 xl:w-full  xl:px-1 text-primary -mt-2 px-2 pt-2 xl:pt-0">
+    <div className="font-jost w-45 xl:w-90  xl:px-1 text-primary -mt-2 px-2 pt-2 xl:pt-0">
       {/* Product Categories */}
       <div className="border-b border-gray-200 pb-6">
         <SectionHeader

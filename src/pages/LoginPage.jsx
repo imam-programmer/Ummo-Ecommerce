@@ -2,7 +2,8 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import toast, { Toaster } from 'react-hot-toast';
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+
 
 function EyeIcon() {
     return (
@@ -38,7 +39,7 @@ export default function LoginPage() {
     const [rememberMe, setRememberMe] = useState(false);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
+    const navigate = useNavigate()
 
 
     const handleLogin = (e) => {
@@ -48,24 +49,27 @@ export default function LoginPage() {
         setloading(true)
         e.preventDefault()
         signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    toast.success("Login Successfully")
-    console.log(user)
-  setloading(false)
-  })
-  .catch((error) => {
-    setloading(false)
-    const errorCode = error.code;
-    toast.error(errorCode)
-    console.log(errorCode)
-  });
+            .then((userCredential) => {
+                const user = userCredential.user;
+
+                console.log(user)
+                setloading(false)
+                navigate('/')
+                toast.success("Login Successfully")
+
+            })
+            .catch((error) => {
+                setloading(false)
+                const errorCode = error.code;
+                toast.error(`${errorCode} (No match)`)
+                navigate('/register')
+            });
 
     }
 
     return (
         <div className="min-h-screen w-full flex  justify-center bg-white px-4 py-12 font-jost">
-          <Toaster
+            <Toaster
                 position="top-center"
                 reverseOrder={false}
             />
@@ -162,7 +166,7 @@ export default function LoginPage() {
                     <p className="text-center text-sm text-gray">
                         No account yet?{" "}
                         <Link to="/register"
-                          
+
                             className="text-primary underline underline-offset-2 hover:text-gray transition-colors"
                         >
                             Create Account
