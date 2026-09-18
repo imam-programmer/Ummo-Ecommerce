@@ -13,7 +13,7 @@ const Starting = () => {
                         <div className='mb-12.75'>
 
                             <h3 className='lg:text-[18px] whitespace-nowrap font-medium  text-white'>STARTİNG AT $39</h3>
-                            <h2 className='lg:text-[26px] whitespace-nowrap text-[22px]  font-medium  shrink-0 text-white lg:mb-3.75 lg:mt-2'>Women’s T-Shirts</h2>
+                            <h2 className='lg:text-[26px] whitespace-nowrap text-[22px]  font-medium  shrink-0 text-white lg:mb-3.75 lg:mt-2'>Women’s Dresses</h2>
                             <Link className='uppercase text-white text-[12px] lg:text-sm leading-6 after:content-[""] after:w-0 after:duration-300 hover:after:w-12.5 after:h-0.5 after:bg-white after:absolute after:bottom-0 relative after:left-0 font-medium'>
                                 SHOP NOW
                             </Link>
