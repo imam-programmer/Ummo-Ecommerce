@@ -98,9 +98,9 @@ export default function CollectionPage() {
     const [sortBy, setSortBy] = useState("featured");
     const [maxPrice, setMaxPrice] = useState(20);
     const [showFilters, setShowFilters] = useState(false);
-    const Data=useSelector(state=>state.AllProduct.Products)
+    const Data = useSelector(state => state.AllProduct.Products)
     console.log(Data[0].category
-)
+    )
     function scrollToProducts() {
         productsSectionRef.current?.scrollIntoView({
             behavior: "smooth",
@@ -258,7 +258,7 @@ export default function CollectionPage() {
                 {filteredProducts.length > 0 ? (
                     <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4">
                         {filteredProducts.map((product) => (
-                            <Product item={product}/>
+                            <Product item={product} />
                         ))}
                     </div>
                 ) : (

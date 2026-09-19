@@ -19,19 +19,19 @@ const Starting = () => {
                             </Link>
                         </div>
 
-                        <div className='h-full relative'>
-                            <Image className="h-full " src={startingimage} alt="startingimage" />
-                            <div className='h-full bg-[#d6001dda]   absolute w-full top-0 left-0'></div>
+                        <div className='h-full relative '>
+                            <Image className="h-full w-full object-cover" src='../images/startingImage1.png' alt="startingimage" />
+                            <div className='h-full    absolute w-full top-0 left-0'></div>
                         </div>
 
                     </div>
 
                     <div className='md:w-172.5 h-77.5 md:h-99.5 relative'>
-                        <Image className="w-full h-full" src={startingimage2} alt="startingimage2" />
+                        <Image className="w-full h-full object-cover" src='./images/startingImage2.png' alt="startingimage2" />
                         <div className='absolute bottom-12.75 lg:left-12.5 left-5.75'>
-                            <h3 className='lg:text-lg font-medium text-primary '>STARTİNG AT $39</h3>
-                            <h2 className='text-[22px] lg:text-[26px] font-medium text-primary  lg:mb-3.75 lg:mt-2 '>Men’s Sportswear</h2>
-                            <Link className='uppercase text-primary text-[12px] lg:text-sm leading-6 after:content-[""] after:w-0 after:duration-300 hover:after:w-12.5 after:h-0.5 after:bg-primary after:absolute after:bottom-0 relative after:left-0 font-medium'>
+                            <h3 className='lg:text-lg font-medium text-black '>STARTİNG AT $39</h3>
+                            <h2 className='text-[22px] lg:text-[26px] font-medium text-black  lg:mb-3.75 lg:mt-2 '>Men’s Sportswear</h2>
+                            <Link className='uppercase text-black text-[12px] lg:text-sm leading-6 after:content-[""] after:w-0 after:duration-300 hover:after:w-12.5 hover:text-white transition-all after:h-0.5 after:bg-white after:absolute after:bottom-0 relative after:left-0 font-medium'>
                                 SHOP NOW
                             </Link>
 
