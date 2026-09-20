@@ -21,7 +21,6 @@ const Starting = () => {
 
                         <div className='h-full flex items-center'>
                             <Image className="xl:h-full w-full  h-30 sm:h-60 md:h-50 lg:h-70 object-cover" src='../images/startingImage1.png' alt="startingimage" />
-                            <div className='h-full absolute w-full top-0 left-0'></div>
                         </div>
 
                     </div>
