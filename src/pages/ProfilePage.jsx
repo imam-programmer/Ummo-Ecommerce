@@ -6,11 +6,12 @@ import { LogOut } from "lucide-react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import toast, { Toaster } from "react-hot-toast";
-
+import {signOut } from "firebase/auth";
+import { useNavigate } from "react-router";
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+const navigate=useNavigate()
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
@@ -26,7 +27,14 @@ export default function ProfilePage() {
     return () => unsubscribe();
   }, []);
 
-
+// logout functionality================
+function handleLogOut(){
+    signOut(auth).then(() => {
+   toast.success('Log out Successfully!')
+}).catch((error) => {
+  toast.error(error)
+});
+}
 
   if (loading) {
     return (
@@ -38,11 +46,58 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-          <p className="text-gray-700">You are not logged in.</p>
-        </div>
+
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-indigo-50 flex items-center justify-center px-4">
+  <div className="w-full max-w-md">
+    <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-xl shadow-gray-200/50 text-center">
+      {/* Icon */}
+      <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50">
+        <svg
+          className="h-8 w-8 text-indigo-600"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.8}
+            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+          />
+        </svg>
       </div>
+
+      {/* Content */}
+      <h2 className="text-2xl font-bold text-gray-900">
+        Welcome back
+      </h2>
+
+      <p className="mt-2 text-sm leading-6 text-gray-500">
+        You need to be logged in to access this page.
+      </p>
+
+      {/* Button */}
+      <button onClick={()=>navigate('/login')}
+        className="mt-6 w-full rounded-xl bg-indigo-600 px-5 py-3
+                   text-sm font-semibold text-white
+                   shadow-lg shadow-indigo-200
+                   transition-all duration-200
+                   hover:bg-indigo-700 hover:shadow-indigo-300
+                   focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      >
+        Log in
+      </button>
+
+      <p className="mt-4 text-xs text-gray-400">
+        Don't have an account?{" "}
+        <span className="font-medium text-indigo-600 cursor-pointer hover:text-indigo-700" onClick={()=>navigate("/register")}>
+          Sign up
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+
     );
   }
 
@@ -123,7 +178,7 @@ export default function ProfilePage() {
               </p>
             </div>
 
-            <button
+            <button onClick={handleLogOut}
               
               className="flex cursor-pointer hover:bg-gray-100 items-center gap-1.5 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg px-3 py-1.5 transition-colors"
             >
