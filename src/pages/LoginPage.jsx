@@ -46,26 +46,27 @@ export default function LoginPage() {
     const provider = new GoogleAuthProvider();
 
     const handleLogin = (e) => {
-        setEmail("")
-        setPassword("")
-        setRememberMe(false)
-        setloading(true)
         e.preventDefault()
-        signInWithEmailAndPassword(auth, email)
-            .then((userCredential) => {
-                const user = userCredential.user;
-
-                console.log(user)
+        setloading(true)
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user; 
+            console.log(user)
+            setRememberMe(false)
+                setEmail("")
+                setPassword("")
                 setloading(false)
-                navigate('/')
                 toast.success("Login Successfully")
+                setTimeout(() => {
+
+                    navigate('/')
+                }, 2000)
 
             })
             .catch((error) => {
                 setloading(false)
                 const errorCode = error.code;
                 toast.error(`${errorCode} (No match)`)
-                navigate('/register')
             });
 
     }
@@ -74,14 +75,15 @@ export default function LoginPage() {
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
-                set(ref(db,"user/"+user.uid),{
-                    email:user.email,
-                    image:"https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
-                    name:user.displayName
+                set(ref(db, "user/" + user.uid), {
+                    email: user.email,
+                    image: user.photoURL,
+                    name: user.displayName
 
-                }).then(()=>{
+                }).then(() => {
                     toast.success("Login Successfully")
                     navigate("/")
+                    console.log(user)
                 })
 
             }).catch((error) => {

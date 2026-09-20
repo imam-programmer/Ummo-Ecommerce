@@ -20,6 +20,7 @@ import ContactPage from './pages/ContactPage';
 import LocationPage from './pages/LocationPage';
 import CollectionPage from './pages/CollectionPage';
 import ForgotPassword from './pages/ForgorPage';
+import ProfilePage from './pages/ProfilePage';
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -41,6 +42,7 @@ const App = () => {
         { path: "contact", Component: ContactPage },
         { path: "location", Component: LocationPage },
         { path: "collection", Component: CollectionPage },
+        { path: "profile", Component: ProfilePage },
         
         
       ],

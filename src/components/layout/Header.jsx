@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "./common/Image";
 import { Link, useNavigate } from "react-router";
 import navData from "../../api/navbardata.json";
 import { IoCloseSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
-
+import {  onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../firebase.config";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Header = () => {
@@ -12,9 +14,22 @@ const Header = () => {
   const [menuActive, setmenuActive] = useState(false)
   const CartProduct=useSelector((state)=>state.cart.products)
 const WishProduct=useSelector((state)=>state.wishList.wishProduct)
+const [User, setuser] = useState(null)
+
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setuser(user);
+    } else {
+       toast.success('Log out!')
+    }
+  });
+  return () => unsubscribe();
+}, []);
 
 
 
+console.log(User)
 function handleNavigate(){
   navigate('/cart')
 }
