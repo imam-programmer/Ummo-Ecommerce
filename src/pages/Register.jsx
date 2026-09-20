@@ -39,7 +39,7 @@ export default function Register() {
     const [name, setname] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-const navigate=useNavigate()
+    const navigate = useNavigate()
 
 
     const handleRegister = (e) => {
@@ -62,10 +62,10 @@ const navigate=useNavigate()
                             set(ref(db, 'users/' + user.uid), {
                                 username: name,
                                 email: email,
-                                password:password,
+                                password: password,
                                 profile_picture: "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
                             });
-                        }).then(()=>navigate("/login"))
+                        }).then(() => navigate("/login"))
 
                 }).catch((error) => {
                     toast.error(error)
@@ -152,7 +152,7 @@ const navigate=useNavigate()
                         </div>
                     </div>
 
-            
+
 
                     {/* Submit */}
                     <p className="text-sm font-normal leading-6 text-gray">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.</p>

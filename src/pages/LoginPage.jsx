@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase.config";
+import { auth, db } from "../../firebase.config";
 import toast, { Toaster } from 'react-hot-toast';
 import { Link, useNavigate } from "react-router";
-
+import Google from "../assets/images/Google.png"
+import Image from "../components/layout/common/Image";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { ref, set } from "firebase/database";
 
 function EyeIcon() {
     return (
@@ -40,7 +43,7 @@ export default function LoginPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
-
+    const provider = new GoogleAuthProvider();
 
     const handleLogin = (e) => {
         setEmail("")
@@ -48,7 +51,7 @@ export default function LoginPage() {
         setRememberMe(false)
         setloading(true)
         e.preventDefault()
-        signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email)
             .then((userCredential) => {
                 const user = userCredential.user;
 
@@ -65,6 +68,27 @@ export default function LoginPage() {
                 navigate('/register')
             });
 
+    }
+
+    function handleGooleLogin() {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                set(ref(db,"user/"+user.uid),{
+                    email:user.email,
+                    image:"https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
+                    name:user.displayName
+
+                }).then(()=>{
+                    toast.success("Login Successfully")
+                    navigate("/")
+                })
+
+            }).catch((error) => {
+
+                const errorCode = error.code;
+                console.log(errorCode)
+            });
     }
 
     return (
@@ -86,6 +110,12 @@ export default function LoginPage() {
                     </button>
 
                 </div>
+
+
+                <button onClick={handleGooleLogin} className="w-full flex bg-[#bebebe38] cursor-pointer justify-center h-13.75 inset-shadow-2xs shadow-md border-primary  mb-5   transition-colors">
+
+                    <Image className="h-full" src={Google} alt="Google Logo" />
+                </button>
 
                 <form
                     onSubmit={handleLogin}
@@ -138,12 +168,12 @@ export default function LoginPage() {
                             />
                             <span className="text-sm text-primary">Remember me</span>
                         </label>
-                        <a
-                            href="#"
+                        <Link
+                            to="/forgot"
                             className="text-sm text-primary underline underline-offset-2 hover:text-gray transition-colors"
                         >
                             Lost password?
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Submit */}
