@@ -20,7 +20,6 @@ const CartPage = () => {
         </div>
 
 
-
         <div className='flex gap-2.5 w-117.5  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-[#E4E4E4]'>
           <h3 className='text-[18px] font-medium text-gray'>02</h3>
           <div>
@@ -40,6 +39,9 @@ const CartPage = () => {
           </div>
         </div>
       </div>
+
+      {/* responsive cart top   */}
+      
 
       {/* cartside design============================= */}
 

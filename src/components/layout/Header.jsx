@@ -89,6 +89,11 @@ function handleWishList(){
                   </defs>
                 </svg>
               </button>
+              {User?
+            <button  className=" w-7 rounded-full cursor-pointer" onClick={()=>navigate("/profile")}>
+            <Image   className=" w-full rounded-full" src={User.photoURL} alt="user Image"/>
+            </button>
+            :  
               <button onClick={handlelogin}  className="cursor-pointer">
                 <svg
                    className="w-3.75 lg:w-5"
@@ -115,6 +120,7 @@ function handleWishList(){
                 </svg>
                 
               </button>
+            }
 
 
               <button className="cursor-pointer relative" onClick={handleWishList}>

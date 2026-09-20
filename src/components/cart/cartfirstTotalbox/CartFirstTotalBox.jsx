@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const SHIPPING_OPTIONS = [
   { id: "free", label: "Free shipping", price: null },
@@ -8,8 +9,11 @@ const SHIPPING_OPTIONS = [
 
 export default function CartFirstTotalBox() {
   const [shipping, setShipping] = useState("free");
-
-  const subtotal = 1300;
+const cartProduct=useSelector(state=>state.cart.products)
+const sum=cartProduct.reduce((pre,curr)=>pre + curr.price,0)
+console.log(sum)
+// console.log(cartProduct)
+  const subtotal = sum;
   const vat = 19;
   const shippingCost =
     SHIPPING_OPTIONS.find((o) => o.id === shipping)?.price || 0;
