@@ -96,11 +96,11 @@ export default function CollectionPage() {
     const productsSectionRef = useRef(null);
     const [activeCategory, setActiveCategory] = useState("All");
     const [sortBy, setSortBy] = useState("featured");
-    const [maxPrice, setMaxPrice] = useState(20);
+    const [maxPrice, setMaxPrice] = useState(100);
     const [showFilters, setShowFilters] = useState(false);
     const Data = useSelector(state => state.AllProduct.Products)
-    console.log(Data[0].category
-    )
+  console.log(Data)
+    
     function scrollToProducts() {
         productsSectionRef.current?.scrollIntoView({
             behavior: "smooth",
