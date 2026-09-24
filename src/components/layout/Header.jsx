@@ -21,6 +21,7 @@ useEffect(() => {
     if (user) {
       setuser(user);
     } else {
+      setuser(null)
        toast.success('Log out!')
     }
   });
