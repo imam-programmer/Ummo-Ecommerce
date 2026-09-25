@@ -1,23 +1,25 @@
 import { useState } from "react";
 import { LuSlidersHorizontal } from "react-icons/lu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setShopOptions } from "../../slices/productSlice";
 import Product from "../layout/common/Product";
 import ShopFilter from "./ShopFilter";
 import { GoX } from "react-icons/go";
 const ShopResponsive = () => {
   const [Dropshowhide, setDropshowhide] = useState(false)
-  const [Dropdown, setDropdown] = useState("Default Select")
   const [InitialPage, setInitialPage] = useState(1)
   const [showSlide, setshowSlide] = useState(false)
-  const AllProduct = useSelector(state => state.Products.products)
+  const AllProduct = useSelector(state => state.Products.filter)
+  const options = useSelector(state => state.Products.options)
+  const dispatch = useDispatch()
 
 
-// this are for pagination =============================================//
+  // this are for pagination =============================================//
   const productPerPage = Math.ceil(AllProduct.length / 20)
   const lastIdx = InitialPage * productPerPage;
   const firstIdx = lastIdx - productPerPage
   const progress = Math.min(100, Math.ceil((lastIdx / AllProduct.length) * 100))
-//  this are for pagination===========================================
+  //  this are for pagination===========================================
 
 
   function pagination() {
@@ -25,34 +27,34 @@ const ShopResponsive = () => {
       setInitialPage(InitialPage + 1)
     }
   }
-function handleShowSlide(){
-  setshowSlide(!showSlide)
-}
+  function handleShowSlide() {
+    setshowSlide(!showSlide)
+  }
 
   return (
     <div className="container px-2.5">
-      <div className="flex items-center justify-between border-b border-neutral-200 py-4 relative"> 
+      <div className="flex items-center justify-between border-b border-neutral-200 py-4 relative">
         <button
-          onClick={() =>handleShowSlide() }
+          onClick={() => handleShowSlide()}
           className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
         >
-          {showSlide?
-          
-          <GoX  className="h-4 w-4"/>
-          :
-          <LuSlidersHorizontal className="h-4 w-4" />
-        }
+          {showSlide ?
+
+            <GoX className="h-4 w-4" />
+            :
+            <LuSlidersHorizontal className="h-4 w-4" />
+          }
           Filter
         </button>
-        
-          <div className={`absolute bg-[#bebebe] z-10 top-13 ${showSlide?"left-0":"-left-full"} duration-300 transition-all h-100 overflow-auto`}>
-            <ShopFilter/>
-          </div>
-        
+
+        <div className={`absolute bg-[#bebebe] z-10 top-13 ${showSlide ? "left-0" : "-left-full"} duration-300 transition-all h-100 overflow-auto`}>
+          <ShopFilter setCurrentPage={() => setInitialPage(1)} />
+        </div>
+
 
         <div className='relative'>
           <div onClick={() => setDropshowhide(!Dropshowhide)} className='flex cursor-pointer  items-center w-27 border-b-2  justify-between'>
-            <button className='cursor-pointer text-[12px] font-medium uppercase whitespace-nowrap font-jost ' >{Dropdown}</button>
+            <button className='cursor-pointer text-[12px] font-medium uppercase whitespace-nowrap font-jost ' >{options.sort === 'low' ? 'low to high' : options.sort === 'high' ? 'high to low' : 'Default Select'}</button>
             <span>
 
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,16 +66,19 @@ function handleShowSlide(){
           {Dropshowhide &&
             <div className=' bg-[#bebebe]  px-2 absolute w-full z-10 py-2 flex flex-col gap-2.5'>
               <h3 className='cursor-pointer text-[12px]  font-medium uppercase  whitespace-nowrap font-jost' onClick={() => {
-                setDropdown("Default Select")
+                dispatch(setShopOptions({ sort: 'default' }))
+                setInitialPage(1)
                 setDropshowhide(false)
               }}>Default Select</h3>
 
               <h3 className='cursor-pointer text-[12px]  font-medium uppercase  whitespace-nowrap font-jost' onClick={() => {
-                setDropdown("low to high")
+                dispatch(setShopOptions({ sort: 'low' }))
+                setInitialPage(1)
                 setDropshowhide(false)
               }}>low to high</h3>
               <h3 className='cursor-pointer text-[12px] font-medium uppercase  whitespace-nowrap font-jost' onClick={() => {
-                setDropdown("high to low")
+                dispatch(setShopOptions({ sort: 'high' }))
+                setInitialPage(1)
                 setDropshowhide(false)
               }}>high to low</h3>
             </div>
@@ -85,7 +90,7 @@ function handleShowSlide(){
 
         {
           AllProduct.slice(firstIdx, lastIdx).map((item) => (
-            <Product item={item} />
+            <Product item={item} key={item.id} />
           ))
         }
       </div>
@@ -95,7 +100,7 @@ function handleShowSlide(){
         <h3><span>SHOWING</span> <span>{Math.min(lastIdx, AllProduct.length)}</span> of <span>{AllProduct.length}</span> Items</h3>
 
         <div className="w-full sm:w-75 mx-auto h-1.5 bg-[#E4E4E4] rounded-2xl relative overflow-hidden ">
-          <div className={`absolute top-0 left-0 bg-primary h-1.5 `} style={{width:`${progress}%`}}></div>
+          <div className={`absolute top-0 left-0 bg-primary h-1.5 `} style={{ width: `${progress}%` }}></div>
         </div>
 
         <button onClick={pagination} className=" text-sm font-medium relative leading-6 text-primary mt-4.25 after:content-[''] after:absolute after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:duration-300 cursor-pointer after:transition-all after:bottom-0 after:left-0 pb-1">SHOW MORE</button>

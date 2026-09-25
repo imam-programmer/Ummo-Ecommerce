@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaChevronUp } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
-import { allCat, filterProduct } from "../../slices/productSlice";
+import { setShopOptions } from "../../slices/productSlice";
 
 
 function SectionHeader({ title, open, onToggle }) {
@@ -23,9 +23,8 @@ function SectionHeader({ title, open, onToggle }) {
   );
 }
 
-export default function ShopFilter({ currentPage, setCurrentPage }) {
+export default function ShopFilter({ setCurrentPage = () => { } }) {
 
-  const [Allshow, setAllshow] = useState(false)
   const [openSections, setOpenSections] = useState({
     categories: true,
     color: true,
@@ -33,59 +32,39 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
     brands: true,
     price: true,
   });
-  let Products = useSelector((state) => state.Products.products)
-  let Categore = Products.map(item => item.category)
-  let brand = Products.map(item => item.brand)
-  let filterbrand = brand.filter((item) => item != undefined)
-  let BRANDS = [...new Set(filterbrand)]
-  const CATEGORIES = [...new Set(Categore)];
+  const Products = useSelector((state) => state.Products.products)
+  const options = useSelector((state) => state.Products.options)
+  const CATEGORIES = [...new Set(Products.map((item) => item.category).filter(Boolean))];
+  const BRANDS = [...new Set(Products.map((item) => item.brand).filter(Boolean))];
   const [brandSearch, setBrandSearch] = useState("");
-  const [checkedBrands, setCheckedBrands] = useState([]);
-  const [minPrice, setMinPrice] = useState(29);
-  const [maxPrice, setMaxPrice] = useState(937);
-
-  const [ActiveCategory, setActiveCategory] = useState("")
   let dispatch = useDispatch()
 
-  const PRICE_FLOOR = 29;
-  const PRICE_CEIL = 937;
+  const prices = Products.map((item) => item.price).filter((price) => typeof price === "number");
+  const PRICE_FLOOR = prices.length ? Math.floor(Math.min(...prices)) : 0;
+  const PRICE_CEIL = prices.length ? Math.ceil(Math.max(...prices)) : 1000;
+
+  const minPrice = options.minPrice ?? PRICE_FLOOR;
+  const maxPrice = options.maxPrice ?? PRICE_CEIL;
 
   const toggleSection = (key) =>
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
 
-  const toggleBrand = (name) =>
-    setCheckedBrands((prev) =>
-      prev.includes(name) ? prev.filter((b) => b !== name) : [...prev, name]
-    );
-
-
-  // =====================should understand this code from sir=========================
-  function handleActiveCategory(item) {
-    setActiveCategory(item) /*this for active style */
-    let filterProducts = item ? Products.filter((Pitem) => Pitem.category == item) : [];  /* this is for filtering data by category */
-    dispatch(filterProduct(filterProducts)) /* push filtering data on redux for using this data other components*/
-  }
-
-  // =====================should understand this code from sir=========================
-  function handleAllCategories() {
-    setAllshow(true)
-    setActiveCategory("")
-    dispatch(filterProduct([]))
+  function updateOptions(changes) {
+    dispatch(setShopOptions(changes))
     setCurrentPage(1)
   }
-  // =====================should understand this code from sir=========================
-
-
 
   const handleMinChange = (e) => {
     const value = Math.min(Number(e.target.value), maxPrice - 1);
-    setMinPrice(value);
+    updateOptions({ minPrice: value })
   };
 
   const handleMaxChange = (e) => {
     const value = Math.max(Number(e.target.value), minPrice + 1);
-    setMaxPrice(value);
+    updateOptions({ maxPrice: value })
   };
+
+  const filteredBrands = BRANDS.filter((brand) => brand.toLowerCase().includes(brandSearch.toLowerCase()));
 
   return (
     <div className="font-jost w-45 xl:w-90  xl:px-1 text-primary -mt-2 px-2 pt-2 xl:pt-0">
@@ -98,12 +77,13 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
         />
         {openSections.categories && (
           <ul className="xl:mt-3 xl:space-y-3 space-y-px">
-            <li className={`${Allshow ? "text-black" : "text-gray"} cursor-pointer text-[12px] xl:text-[15px]`} onClick={handleAllCategories}>All</li>
+            <li className={`${!options.category ? "text-black" : "text-gray"} cursor-pointer text-[12px] xl:text-[15px]`} onClick={() => {
+              updateOptions({ category: '' })
+            }}>All</li>
             {CATEGORIES.map((cat) => (
               <li key={cat}>
-                <button className={`xl:text-[15px] text-[12px]  capitalize cursor-pointer ${ActiveCategory == cat && "text-black!"} transition-colors text-gray `} onClick={() => {
-                  handleActiveCategory(cat)
-                  setAllshow(false)
+                <button className={`xl:text-[15px] text-[12px] capitalize cursor-pointer ${options.category === cat ? "text-black!" : ""} transition-colors text-gray`} onClick={() => {
+                  updateOptions({ category: cat })
                 }}>
                   {cat}
                 </button>
@@ -137,13 +117,17 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
               />
             </div>
             <ul className="xl:space-y-4 space-y-2">
-              {BRANDS.slice(9,20).map((brand, id) => (
-                <li key={id} className="flex items-center justify-between">
+              {filteredBrands.map((brand) => (
+                <li key={brand} className="flex items-center justify-between">
                   <label className="flex cursor-pointer items-center gap-3 text-[12px] xl:text-[15px] text-primary">
                     <input
                       type="checkbox"
-                      checked={checkedBrands.includes(brand)}
-                      onChange={() => toggleBrand(brand)}
+                      checked={options.brands.includes(brand)}
+                      onChange={() => updateOptions({
+                        brands: options.brands.includes(brand)
+                          ? options.brands.filter((selectedBrand) => selectedBrand !== brand)
+                          : [...options.brands, brand],
+                      })}
                       className="lg:h-4 lg:w-4 rounded-none border-gray-300 text-primary accent-primary"
                     />
                     {brand}
@@ -192,8 +176,8 @@ export default function ShopFilter({ currentPage, setCurrentPage }) {
               />
             </div>
             <div className="mt-4 flex items-center justify-between text-sm">
-              <span className="text-primary">Min Price: ${minPrice}</span>
-              <span className="text-primary">Max Price: ${maxPrice}</span>
+              <span className="text-primary">Min Price: ${minPrice ?? PRICE_FLOOR}</span>
+              <span className="text-primary">Max Price: ${maxPrice ?? PRICE_CEIL}</span>
             </div>
           </div>
         )}

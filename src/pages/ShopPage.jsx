@@ -17,7 +17,7 @@ const ShopPage = () => {
       </div>
 
       <div className='lg:hidden'>
-<ShopResponsive/>
+        <ShopResponsive />
       </div>
     </div>
   )

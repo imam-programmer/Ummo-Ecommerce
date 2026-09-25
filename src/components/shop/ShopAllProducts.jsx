@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Breadcrumb from '../layout/common/Breadcrumb'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import axios from 'axios'
 import Product from "../layout/common/Product"
 import { useDispatch, useSelector } from 'react-redux'
-import { addProduct } from '../../slices/productSlice'
+import { addProduct, setShopOptions } from '../../slices/productSlice'
 import ResponsivePagination from 'react-responsive-pagination';
 import 'react-responsive-pagination/themes/classic-light-dark.css';
 const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
-  const [products, setProducts] = useState([])
   const [view, setview] = useState(3)
   const [loading, setloading] = useState(true)
   const FilterProduct = useSelector((state) => state.Products.filter)
-  const [Dropdown, setDropdown] = useState("Default Select")
   const [Dropshowhide, setDropshowhide] = useState(false)
+  const options = useSelector((state) => state.Products.options)
   const dispatch = useDispatch()
   useEffect(() => {
     axios.get('https://dummyjson.com/products?limit=200').then((res => {
-      setProducts(res.data.products)
       dispatch(addProduct(res.data.products))
       setloading(false)
 
@@ -29,7 +26,7 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
 
   }, [dispatch]) // =====================should understand this code from sir=========================
 
-  const displayProducts = FilterProduct.length > 0 ? FilterProduct : products;
+  const displayProducts = FilterProduct;
   const totalPages = Math.ceil(displayProducts.length / 12);
   let fasttidx = (currentPage - 1) * 12;
   let lastidx = fasttidx + 12
@@ -101,7 +98,7 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
         <div className='relative'>
 
           <div onClick={() => setDropshowhide(!Dropshowhide)} className='flex cursor-pointer  items-center w-35 border-b-2  justify-between'>
-            <button className='cursor-pointer text-sm font-medium uppercase whitespace-nowrap font-jost ' >{Dropdown}</button>
+            <button className='cursor-pointer text-sm font-medium uppercase whitespace-nowrap font-jost ' >{options.sort === 'low' ? 'low to high' : options.sort === 'high' ? 'high to low' : 'Default Select'}</button>
             <span>
 
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -113,16 +110,19 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
           {Dropshowhide &&
             <div className=' bg-[#bebebe]  px-2 absolute w-full z-10 py-2 flex flex-col gap-2.5'>
               <h3 className='cursor-pointer  font-medium uppercase  whitespace-nowrap font-jost' onClick={() => {
-                setDropdown("Default Select")
+                dispatch(setShopOptions({ sort: 'default' }))
+                setCurrentPage(1)
                 setDropshowhide(false)
               }}>Default Select</h3>
 
               <h3 className='cursor-pointer  font-medium uppercase  whitespace-nowrap font-jost' onClick={() => {
-                setDropdown("low to high")
+                dispatch(setShopOptions({ sort: 'low' }))
+                setCurrentPage(1)
                 setDropshowhide(false)
               }}>low to high</h3>
               <h3 className='cursor-pointer  font-medium uppercase  whitespace-nowrap font-jost' onClick={() => {
-                setDropdown("high to low")
+                dispatch(setShopOptions({ sort: 'high' }))
+                setCurrentPage(1)
                 setDropshowhide(false)
               }}>high to low</h3>
             </div>
