@@ -5,7 +5,7 @@ import ShopBannerData from "../../api/ShopBannerData.json"
 const ShopBanner = () => {
     const [first, setfirst] = useState(9)
     return (
-        <div className='xl:px-15 relative'>
+        <div className='2xl:px-5 relative'>
             <Image className="w-full hidden lg:block" src={shopBg} alt="shopbg" />
 
             <div className='lg:absolute relative  lg:top-2/4 lg:left-2/4 lg:-translate-2/4 text-center '>

@@ -47,11 +47,11 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
   if (loading) {
     return (
       <div className='grid grid-cols-3  gap-5 content-start'>
-        {Array.from({ length: 6 }, (hup, idx) => (
+        {Array.from({ length: 8 }, (hup, idx) => (
 
           <div key={idx}
             role="status"
-            className="w-80 h-75 p-4 border-5 border-[#3333332a] rounded-2xl shadow-xs animate-pulse md:p-6"
+            className="  h-75 p-4 border-5 border-[#3333332a] rounded-2xl shadow-xs animate-pulse md:p-6"
           >
             <div
               role="status"
@@ -89,7 +89,7 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
   }
   // Product loading animation here===================================================================
   return (
-    <div className='w-full '>
+    <div className='w-full px-2'>
       <div className='flex'>
 
         <Breadcrumb />
@@ -131,16 +131,17 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
 
         {/* =====================dropdown done======================================== */}
 
-        <div className='border-l-4 ml-7.5 border-[#e4e4e4] pl-7.5'>
+        <div className='border-l-4 ml-3 xl:ml-7.5 border-[#e4e4e4] xl:pl-7.5 pl-3 hidden xl:block'>
           <ul className='flex font-medium text-sm text-primary uppercase gap-2.75 '>
             <li >view</li>
             <li onClick={() => handleview(2)} className='cursor-pointer'>2</li>
             <li onClick={() => handleview(3)} className='cursor-pointer'>3</li>
-            <li onClick={() => handleview(4)} className='cursor-pointer'>4</li>
+            
+            <li  onClick={() => handleview(4)} className='cursor-pointer'>4</li>
           </ul>
         </div>
       </div>
-      <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
+      <div style={view == 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr" } : view == 4 ? { display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", columnGap: "20px" } : { display: "grid", gridTemplateColumns: "1fr 1fr 1fr",columnGap: "10px" }}>
         {
           displayProducts.slice(fasttidx, lastidx).map((item) => (
             <Product item={item} key={item.id} />

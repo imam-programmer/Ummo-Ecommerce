@@ -67,7 +67,7 @@ export default function ShopFilter({ setCurrentPage = () => { } }) {
   const filteredBrands = BRANDS.filter((brand) => brand.toLowerCase().includes(brandSearch.toLowerCase()));
 
   return (
-    <div className="font-jost w-45 xl:w-90  xl:px-1 text-primary -mt-2 px-2 pt-2 xl:pt-0">
+    <div className="font-jost w-45 lg:w-60  xl:w-90  xl:px-1 text-primary -mt-3 xl:-mt-2  px-2 pt-2 xl:pt-0">
       {/* Product Categories */}
       <div className="border-b border-gray-200 pb-6">
         <SectionHeader
