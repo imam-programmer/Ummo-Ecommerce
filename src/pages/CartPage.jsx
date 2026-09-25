@@ -8,7 +8,7 @@ const CartPage = () => {
   const cartData = useSelector(state => state.cart.products)
   const navigate = useNavigate()
   return (
-    <div className='container mt-16.25 mb-25 px-2.5 xl-px-0'>
+    <div className='container mt-16.25 mb-25 px-2.5 xl:px-0'>
       <h2 className='text-[35px] font-bold text-primary uppercase'>Cart</h2>
 
       <div className='mt-12 pb-2.5 flex '>
