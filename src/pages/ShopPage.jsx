@@ -7,7 +7,6 @@ import ShopResponsive from '../components/shop/ShopResponsive'
 const ShopPage = () => {
   const [FilterOpen, setFilterOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
-
   return (
     <div className='mb-25.25 overflow-x-hidden px-2'>
       <ShopBanner />
@@ -17,7 +16,7 @@ const ShopPage = () => {
       </div>
 
       <div className='lg:hidden'>
-        <ShopResponsive />
+        <ShopResponsive/>
       </div>
     </div>
   )

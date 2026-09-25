@@ -47,7 +47,7 @@ const ShopResponsive = () => {
           Filter
         </button>
 
-        <div className={`absolute bg-[#bebebe] z-10 top-13 ${showSlide ? "left-0" : "-left-full"} duration-300 transition-all h-100 overflow-auto`}>
+        <div className={`absolute bg-[#bebebe] z-10 top-13 ${showSlide ? "left-0" : "-left-full"} duration-300 transition-all h-120 overflow-auto`}>
           <ShopFilter setCurrentPage={() => setInitialPage(1)} />
         </div>
 
