@@ -46,7 +46,7 @@ const ShopAllProducts = ({ currentPage, setCurrentPage }) => {
   // Product loading animation here===================================================================
   if (loading) {
     return (
-      <div className='grid grid-cols-3  gap-5 content-start'>
+      <div className='grid grid-cols-3 2xl:grid-cols-4 gap-5 content-start'>
         {Array.from({ length: 8 }, (hup, idx) => (
 
           <div key={idx}

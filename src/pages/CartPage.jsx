@@ -2,9 +2,11 @@ import React from 'react'
 import CartProduct from '../components/cart/cartproductDesign/CartProduct'
 import { useSelector } from 'react-redux'
 import CartFirstTotalBox from '../components/cart/cartfirstTotalbox/CartFirstTotalBox'
+import { useNavigate } from 'react-router'
 
 const CartPage = () => {
   const cartData = useSelector(state => state.cart.products)
+  const navigate = useNavigate()
   return (
     <div className='container mt-16.25 mb-25 px-2.5 xl-px-0'>
       <h2 className='text-[35px] font-bold text-primary uppercase'>Cart</h2>
@@ -41,33 +43,41 @@ const CartPage = () => {
       </div>
 
       {/* responsive cart top   */}
-      
+
 
       {/* cartside design============================= */}
 
-<div className=' flex mt-12.5 gap-14.5 flex-col lg:flex-row '>
+      <div className=' flex mt-12.5 gap-14.5 flex-col lg:flex-row '>
 
-      <div className=''>
-        <div className='flex gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25 '>
-          <h3>PRODUCT</h3>
-          <div className='flex gap-22.75'>
-            <h3>PRICE</h3>
-            <h3>QUANTITY</h3>
-            <h3>SUBTOTAL</h3>
+        <div className=''>
+          <div className='flex gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25 '>
+            <h3>PRODUCT</h3>
+            <div className='flex gap-22.75'>
+              <h3>PRICE</h3>
+              <h3>QUANTITY</h3>
+              <h3>SUBTOTAL</h3>
+            </div>
           </div>
-        </div>
-        <div className='xl:w-232.5 max-w-232.5'>
-        {
-          cartData.map((item) => (
 
-            <CartProduct key={item.id} id={item.id} title={item.title} quantity={item.quantity} image={item.image} price={item.price} />
-          ))
-        }
+          <div className='xl:w-232.5 max-w-232.5'>
+            {cartData.length === 0 ? 
+            <div className='flex flex-col items-center justify-center gap-5 mt-20'>
+              <h3 className='text-[18px] font-medium text-primary mt-5'>Your cart is empty.</h3>
+              <button className='bg-primary text-white py-2 px-4 rounded-md cursor-pointer' onClick={() => navigate('/shop')}>
+                Go to Shop
+              </button>
+            </div>
+             : 
+              cartData.map((item) => (
+
+                <CartProduct key={item.id} id={item.id} title={item.title} quantity={item.quantity} image={item.image} price={item.price} />
+              ))
+            }
+          </div>
+
         </div>
-       
+        <CartFirstTotalBox />
       </div>
-      <CartFirstTotalBox/>
-</div>
       {/* cartside design  done============================= */}
     </div>
   )
