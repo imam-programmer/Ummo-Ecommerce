@@ -22,6 +22,7 @@ import CollectionPage from './pages/CollectionPage';
 import ForgotPassword from './pages/ForgorPage';
 import ProfilePage from './pages/ProfilePage';
 import BillingPage from './pages/BillingPage';
+import OrderSuccessPage from './pages/OrderSuccessPage';
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -45,6 +46,7 @@ const App = () => {
         { path: "collection", Component: CollectionPage },
         { path: "profile", Component: ProfilePage },
          { path: "billing", Component: BillingPage },
+         { path: "ordercomplete", Component: OrderSuccessPage },
         
         
       ],

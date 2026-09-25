@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router";
+import toast, { Toaster } from 'react-hot-toast';
 const SHIPPING_OPTIONS = [
   { id: "free", label: "Free shipping", price: null },
   { id: "flat", label: "Flat rate: $49", price: 49 },
@@ -9,18 +10,30 @@ const SHIPPING_OPTIONS = [
 
 export default function CartFirstTotalBox() {
   const [shipping, setShipping] = useState("free");
-const cartProduct=useSelector(state=>state.cart.products)
-const sum=cartProduct.reduce((pre,curr)=>pre + curr.price,0)
-console.log(sum)
-// console.log(cartProduct)
+  const cartProduct = useSelector(state => state.cart.products)
+  const sum = cartProduct.reduce((pre, curr) => pre + curr.price, 0)
+  const navigate = useNavigate()
   const subtotal = sum;
   const vat = 19;
   const shippingCost =
     SHIPPING_OPTIONS.find((o) => o.id === shipping)?.price || 0;
   const total = subtotal + vat + shippingCost;
 
+
+  function handleCheckout() {
+    if (cartProduct.length === 0) {
+      toast.error("Your cart is empty. Please add items to proceed to checkout.");
+
+    } else {
+      navigate("/billing");
+    }
+  }
   return (
     <div className="font-jost  md:w-105 w-full!">
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
       <div className="border  mb-5 ">
         <div className="pt-9.5 px-10.25 ">
           {/* Heading */}
@@ -50,8 +63,8 @@ console.log(sum)
                   <input
                     type="checkbox"
                     checked={shipping === option.id}
-                    
-                    onChange={()=>setShipping(option.id)}
+
+                    onChange={() => setShipping(option.id)}
                     className="h-4 w-4 rounded-none border border-primary/40 text-primary accent-primary cursor-pointer"
                   />
                   {option.label}
@@ -88,8 +101,9 @@ console.log(sum)
 
         {/* CTA */}
       </div>
-      <button
-        type="button"
+      <button onClick={handleCheckout}
+
+
         className="w-full bg-primary cursor-pointer text-white text-sm font-medium  uppercase py-5 hover:bg-primary/90 transition-colors"
       >
         Proceed to checkout
