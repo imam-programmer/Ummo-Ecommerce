@@ -69,7 +69,7 @@ const CartPage = () => {
             </div>
           </div>
 
-          <div className='w-232.5 sm:block hidden'>
+          <div className='w-232.5 md:block hidden'>
             {cartData.length === 0 ? 
             <div className='flex flex-col items-center justify-center gap-5 mt-20'>
               <h3 className='text-[18px] font-medium text-primary mt-5'>Your cart is empty.</h3>
@@ -87,7 +87,7 @@ const CartPage = () => {
 
 
 {/* // responsive cart side design============================= */}
-          <div className='sm:hidden flex flex-col gap-5 justify-center'>
+          <div className='md:hidden flex flex-col gap-5 justify-center'>
               {cartData.length === 0 ? 
             <div className='flex flex-col items-center justify-center gap-5 my-20'>
               <h3 className='text-[18px] font-medium text-primary '>Your cart is empty.</h3>
