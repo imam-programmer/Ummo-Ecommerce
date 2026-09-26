@@ -46,7 +46,7 @@ export default function CartFirstTotalBox() {
             <span className="text-primary text-sm font-medium leading-6  uppercase ">
               Subtotal
             </span>
-            <span className="text-primary text-sm font-medium leading-6">${subtotal}</span>
+            <span className="text-primary text-sm font-medium leading-6">${subtotal.toFixed(2)}</span>
           </div>
 
           {/* Shipping */}
@@ -73,12 +73,7 @@ export default function CartFirstTotalBox() {
 
               <p className="text-primary font-normal leading-6 text-sm">Shipping to AL.</p>
 
-              <button
-                type="button"
-                className="text-primary text-sm font-medium  uppercase  border-b-2 cursor-pointer leading-6  w-fit"
-              >
-                Change address
-              </button>
+       
             </div>
           </div>
 
@@ -95,7 +90,7 @@ export default function CartFirstTotalBox() {
             <span className="text-primary text-sm font-medium leading-6  uppercase">
               Total
             </span>
-            <span className="text-primary leading-6 font-medium text-sm">${total}</span>
+            <span className="text-primary leading-6 font-medium text-sm">${total.toFixed(2)}</span>
           </div>
         </div>
 

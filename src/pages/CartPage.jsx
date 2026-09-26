@@ -8,10 +8,10 @@ const CartPage = () => {
   const cartData = useSelector(state => state.cart.products)
   const navigate = useNavigate()
   return (
-    <div className='container mt-16.25 mb-25 px-2.5 xl:px-0'>
-      <h2 className='text-[35px] font-bold text-primary uppercase'>Cart</h2>
+    <div className='container mt-5 sm:mt-16.25 mb-25 px-2.5 xl:px-0'>
+      <h2 className='text-[25px] sm:text-[35px] font-bold text-primary uppercase'>Cart</h2>
 
-      <div className='mt-12 pb-2.5 flex '>
+      <div className='mt-12 pb-2.5 lg:flex hidden '>
         <div className='flex gap-2.5 w-117.5  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-primary'>
           <h3 className='text-[18px] font-medium text-primary'>01</h3>
           <div>
@@ -43,14 +43,24 @@ const CartPage = () => {
       </div>
 
       {/* responsive cart top   */}
+   <div className='mt-12 pb-2.5 lg:hidden  '>
+        <div className='flex gap-2.5 w-full justify-center  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-primary'>
+          <h3 className='text-[18px] font-medium text-primary '>01</h3>
+          <div>
+            <h3 className='text-[18px] font-medium text-primary'>SHOPPING BAG</h3>
 
+            <h4 className='text-[14px] font-normal leading-7.5 text-gray'>Manage Your Items List</h4>
+          </div>
+        </div>
+ 
+      </div>
 
       {/* cartside design============================= */}
 
       <div className=' flex mt-12.5 gap-14.5 flex-col lg:flex-row '>
 
         <div className=''>
-          <div className='flex gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25 '>
+          <div className='lg:flex hidden lg:gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25 '>
             <h3>PRODUCT</h3>
             <div className='flex gap-22.75'>
               <h3>PRICE</h3>
@@ -59,7 +69,7 @@ const CartPage = () => {
             </div>
           </div>
 
-          <div className='xl:w-232.5 max-w-232.5'>
+          <div className='w-232.5 sm:block hidden'>
             {cartData.length === 0 ? 
             <div className='flex flex-col items-center justify-center gap-5 mt-20'>
               <h3 className='text-[18px] font-medium text-primary mt-5'>Your cart is empty.</h3>
@@ -75,10 +85,31 @@ const CartPage = () => {
             }
           </div>
 
+
+{/* // responsive cart side design============================= */}
+          <div className='sm:hidden flex flex-col gap-5 justify-center'>
+              {cartData.length === 0 ? 
+            <div className='flex flex-col items-center justify-center gap-5 my-20'>
+              <h3 className='text-[18px] font-medium text-primary '>Your cart is empty.</h3>
+              <button className='bg-primary text-white py-2 px-4 rounded-md cursor-pointer' onClick={() => navigate('/shop')}>
+                Go to Shop
+              </button>
+            </div>
+             : 
+              cartData.map((item) => (
+
+                <CartProduct key={item.id} id={item.id} title={item.title} quantity={item.quantity} image={item.image} price={item.price} />
+              ))
+            }
+
+
+          </div>
+
         </div>
+        
         <CartFirstTotalBox />
-      </div>
-      {/* cartside design  done============================= */}
+      </div> 
+  
     </div>
   )
 }
