@@ -1,6 +1,5 @@
 import BillingInformation from "../components/billing/BillingInformation";
 
-
 export default function BillingPage() {
   return (
    <div className="container mt-16.25 mb-25 px-2.5 xl:px-0">

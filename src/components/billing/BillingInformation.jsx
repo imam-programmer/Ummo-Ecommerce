@@ -1,13 +1,12 @@
 import React from 'react'
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useSelector } from 'react-redux';
+import Image from '../layout/common/Image';
+import { useNavigate } from 'react-router';
 
 const COUNTRIES = ["Turkey", "United States", "United Kingdom", "Germany", "France", "Bangladesh"];
 
-const ORDER_ITEMS = [
-    { name: "Zessi Dresses x2", subtotal: 32.5 },
-    { name: "Kirby T-Shirt", subtotal: 29.9 },
-];
 
 const PAYMENT_METHODS = [
     {
@@ -21,6 +20,9 @@ const PAYMENT_METHODS = [
     { id: "paypal", label: "PayPal" },
 ];
 const BillingInformation = () => {
+    const ORDER_ITEMS = useSelector((state) => state.cart.products); // get data from cart slice =======
+const navigate = useNavigate();
+    //the following states are used to store the form data=================================
     const [firstName, setfirstName] = useState("")
     const [lastName, setlastName] = useState("")
     const [company, setcompany] = useState("")
@@ -33,34 +35,17 @@ const BillingInformation = () => {
     const [phone, setphone] = useState("")
     const [email, setemail] = useState("")
     const [orderNotes, setorderNotes] = useState("")
-   
-    const [form, setForm] = useState({
-        // firstName: "",
-        // lastName: "",
-        // company: "",
-        // country: "Turkey",
-        // streetAddress: "",
-        // apartment: "",
-        // city: "",
-        // postcode: "",
-        // province: "",
-        phone: "",
-        email: "",
-        orderNotes: "",
-    });
 
-
+    //the following states are used to store the payment method and the submitting state==========
     const [paymentMethod, setPaymentMethod] = useState("bank-transfer");
     const [submitting, setSubmitting] = useState(false);
 
-    const subtotal = ORDER_ITEMS.reduce((sum, item) => sum + item.subtotal, 0);
+    //the following states are used to store the order data=================================
+    const subtotal = ORDER_ITEMS.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const vat = 19;
     const total = subtotal + vat;
 
-    function updateField(field, value) {
-        setForm((prev) => ({ ...prev, [field]: value }));
-    }
-
+    //the following function is used to handle the form submission=========================
     async function handlePlaceOrder(e) {
         e.preventDefault();
         setSubmitting(true);
@@ -72,13 +57,13 @@ const BillingInformation = () => {
             //   body: JSON.stringify({ ...form, paymentMethod }),
             // });
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            alert("Order placed!");
+            navigate("/ordercomplete");
         } finally {
             setSubmitting(false);
         }
     }
 
-
+    //the following function is used to render the summary row=========================
     function SummaryRow({ label, value, bold, border, large }) {
         return (
             <div
@@ -132,7 +117,7 @@ const BillingInformation = () => {
                             <div className="relative">
                                 <select
                                     value={country}
-                                    onChange={(e) => setcountry( e.target.value)}
+                                    onChange={(e) => setcountry(e.target.value)}
                                     required
                                     className="w-full appearance-none border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 bg-white"
                                 >
@@ -149,26 +134,26 @@ const BillingInformation = () => {
                             </div>
                         </div>
 
-                     
+
                         <input type="text" placeholder='Street Address *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={streetAddress} onChange={(v) => setstreetAddress(v.target.value)} />
                         <input type="text" placeholder='Apartment, suite, unit, etc. (optional)' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={apartment} onChange={(v) => setapartment(v.target.value)} />
                         <input type="text" placeholder='Town / City *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={city} onChange={(v) => setcity(v.target.value)} />
                         <input type="text" placeholder='Postcode / ZIP *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={postcode} onChange={(v) => setpostcode(v.target.value)} />
-                        <input type="text" placeholder='Province *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={province} onChange={(v) => setprovince(v.target.value)} />    
-                     
-                        
-                      
+                        <input type="text" placeholder='Province *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={province} onChange={(v) => setprovince(v.target.value)} />
+
+
+
                         <input type="tel" placeholder='Phone *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={phone} onChange={(v) => setphone(v.target.value)} />
                         <input type="email" placeholder='Your E-mail *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={email} onChange={(v) => setemail(v.target.value)} />
-                      
+
 
                         {/* Checkboxes */}
 
 
                         <textarea
                             placeholder="Order Notes (optional)"
-                            value={form.orderNotes}
-                            onChange={(e) => updateField("orderNotes", e.target.value)}
+                            value={orderNotes}
+                            onChange={(e) => setorderNotes(e.target.value)}
                             rows={4}
                             className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none"
                         />
@@ -190,11 +175,15 @@ const BillingInformation = () => {
                         <div className="space-y-2.5 mb-3">
                             {ORDER_ITEMS.map((item) => (
                                 <div
-                                    key={item.name}
-                                    className="flex justify-between text-sm text-gray-600"
+                                    key={item.id}
+                                    className="flex justify-between text-sm text-gray-600 items-center "
                                 >
-                                    <span>{item.name}</span>
-                                    <span>${item.subtotal.toFixed(2)}</span>
+                                    <div className="flex items-center gap-3">
+
+                                    <Image src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded-md" />
+                                    <span>{item.title}</span>
+                                    </div>
+                                    <span>${(item.price * item.quantity).toFixed(2)}</span>
                                 </div>
                             ))}
                         </div>

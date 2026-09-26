@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-
+import { Link } from "react-router";
 const ORDER_ITEMS = [
   { name: "Zessi Dresses x2", subtotal: 32.5 },
   { name: "Kirby T-Shirt", subtotal: 29.9 },
@@ -89,12 +89,12 @@ export default function OrderComplete() {
 
         {/* Optional: continue shopping button */}
         <div className="flex justify-center mt-10">
-          <a
-            href="/"
-            className="inline-block bg-gray-900 text-white text-sm font-semibold tracking-widest px-8 py-3.5 rounded-md hover:bg-gray-800 transition-colors"
+          <Link
+            to="/shop"
+            className="inline-block bg-gray-900 text-white text-sm font-semibold  px-8 py-3.5 rounded-md hover:bg-gray-800 transition-colors"
           >
             CONTINUE SHOPPING
-          </a>
+          </Link>
         </div>
       </div>
     </div>
