@@ -11,18 +11,17 @@ import Register from './pages/Register';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ShopDynamicPage from './pages/ShopDynamicPage';
-
 import FAQPage from './pages/FAQPage';
 import AboutPage from './pages/AboutPage';
 import TermsConditionPage from './pages/TermsConditionPage';
 import BlogPage from './pages/Blogpage';
 import ContactPage from './pages/ContactPage';
 import LocationPage from './pages/LocationPage';
-import CollectionPage from './pages/CollectionPage';
 import ForgotPassword from './pages/ForgorPage';
 import ProfilePage from './pages/ProfilePage';
 import BillingPage from './pages/BillingPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
+
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -56,7 +55,12 @@ const App = () => {
   ]);
 
   return (
-    <RouterProvider router={router}></RouterProvider>
+    <>
+    <RouterProvider router={router}>
+
+
+    </RouterProvider>
+    </>
   )
 }
 
