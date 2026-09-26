@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Image from '../layout/common/Image';
 import { useNavigate } from 'react-router';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from '../../../firebase.config';
+import { push, ref, set } from 'firebase/database';
+import toast, { Toaster } from "react-hot-toast";
+import { EmptyCart } from '../../slices/cartSlice';
+
 
 const COUNTRIES = ["Turkey", "United States", "United Kingdom", "Germany", "France", "Bangladesh"];
-
-
 const PAYMENT_METHODS = [
     {
         id: "bank-transfer",
@@ -21,7 +25,8 @@ const PAYMENT_METHODS = [
 ];
 const BillingInformation = () => {
     const ORDER_ITEMS = useSelector((state) => state.cart.products); // get data from cart slice =======
-const navigate = useNavigate();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     //the following states are used to store the form data=================================
     const [firstName, setfirstName] = useState("")
     const [lastName, setlastName] = useState("")
@@ -36,6 +41,9 @@ const navigate = useNavigate();
     const [email, setemail] = useState("")
     const [orderNotes, setorderNotes] = useState("")
 
+
+    const [user, setuser] = useState(null) //the following state is used to get current user from Firebase storage=========
+
     //the following states are used to store the payment method and the submitting state==========
     const [paymentMethod, setPaymentMethod] = useState("bank-transfer");
     const [submitting, setSubmitting] = useState(false);
@@ -45,23 +53,68 @@ const navigate = useNavigate();
     const vat = 19;
     const total = subtotal + vat;
 
+
+    //the following useEffect is used to get the current user from Firebase storage=========
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setuser(user);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
+
+    console.log(user);
+
+
     //the following function is used to handle the form submission=========================
     async function handlePlaceOrder(e) {
         e.preventDefault();
+        dispatch(EmptyCart()) // Clear the cart after placing the order
+
+        if (!user) {
+            toast.error("Please log in before placing your order.");
+            return;
+        }
         setSubmitting(true);
         try {
-            // Replace with your real order submission logic, e.g.:
-            // await fetch("/api/orders", {
-            //   method: "POST",
-            //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify({ ...form, paymentMethod }),
-            // });
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            navigate("/ordercomplete");
+            const orderRef = push(ref(db, `orders/${user.uid}`));
+            await set(orderRef, {
+                username: `${firstName} ${lastName}`.trim(),
+                firstName,
+                lastName,
+                email: email,
+                id: user.uid,
+                OrderItems: ORDER_ITEMS,
+                subtotal,
+                shipping: 0,
+                vat: vat,
+                total: total,
+                paymentMethod: paymentMethod,
+                date: new Date().toISOString(),
+                billing: {
+                    company,
+                    country,
+                    streetAddress,
+                    apartment,
+                    city,
+                    postcode,
+                    province,
+                    phone,
+                    orderNotes,
+                },
+            })
+            toast.success("Order placed successfully!");
+            navigate(`/ordercomplete?orderId=${orderRef.key}`);
+        } catch (error) {
+            console.error("Error placing order: ", error);
+            toast.error("Could not place your order. Please try again.");
         } finally {
             setSubmitting(false);
         }
     }
+
+
 
     //the following function is used to render the summary row=========================
     function SummaryRow({ label, value, bold, border, large }) {
@@ -87,8 +140,10 @@ const navigate = useNavigate();
     }
 
 
+
     return (
         <div className="min-h-screen bg-white px-4 sm:px-6 lg:px-10 py-10">
+            <Toaster position="top-center" reverseOrder={false} />
             <form
                 onSubmit={handlePlaceOrder}
                 className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16"
@@ -136,14 +191,17 @@ const navigate = useNavigate();
 
 
                         <input type="text" placeholder='Street Address *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={streetAddress} onChange={(v) => setstreetAddress(v.target.value)} />
+
                         <input type="text" placeholder='Apartment, suite, unit, etc. (optional)' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={apartment} onChange={(v) => setapartment(v.target.value)} />
+
                         <input type="text" placeholder='Town / City *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={city} onChange={(v) => setcity(v.target.value)} />
+
                         <input type="text" placeholder='Postcode / ZIP *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={postcode} onChange={(v) => setpostcode(v.target.value)} />
+
                         <input type="text" placeholder='Province *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={province} onChange={(v) => setprovince(v.target.value)} />
 
-
-
                         <input type="tel" placeholder='Phone *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={phone} onChange={(v) => setphone(v.target.value)} />
+
                         <input type="email" placeholder='Your E-mail *' className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900" value={email} onChange={(v) => setemail(v.target.value)} />
 
 
@@ -180,8 +238,8 @@ const navigate = useNavigate();
                                 >
                                     <div className="flex items-center gap-3">
 
-                                    <Image src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded-md" />
-                                    <span>{item.title}</span>
+                                        <Image src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded-md" />
+                                        <span>{item.title}</span>
                                     </div>
                                     <span>${(item.price * item.quantity).toFixed(2)}</span>
                                 </div>

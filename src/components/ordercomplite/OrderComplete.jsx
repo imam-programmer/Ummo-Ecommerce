@@ -1,21 +1,96 @@
 import { Check } from "lucide-react";
-import { Link } from "react-router";
-const ORDER_ITEMS = [
-  { name: "Zessi Dresses x2", subtotal: 32.5 },
-  { name: "Kirby T-Shirt", subtotal: 29.9 },
-];
+import { Link, useSearchParams } from "react-router";
+import { onAuthStateChanged } from "firebase/auth";
+import { onValue, ref } from "firebase/database";
+import { auth, db } from "../../../firebase.config";
+import { useEffect, useState } from "react";
+
+const currency = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
 
 export default function OrderComplete() {
-  const order = {
-    number: "13119",
-    date: "27/11/2020",
-    total: "$40.10",
-    paymentMethod: "Direct Bank Transfer",
-  };
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get("orderId");
+  const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const subtotal = ORDER_ITEMS.reduce((sum, item) => sum + item.subtotal, 0);
-  const vat = 19;
-  const grandTotal = subtotal + vat;
+  useEffect(() => {
+    let unsubscribeOrder;
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        setError("Please log in to view your order.");
+        setLoading(false);
+        return;
+      }
+      if (!orderId) {
+        setError("No order was selected.");
+        setLoading(false);
+        return;
+      }
+
+      unsubscribeOrder = onValue(
+        ref(db, `orders/${user.uid}/${orderId}`),
+        (snapshot) => {
+          if (snapshot.exists()) {
+            setOrder(snapshot.val());
+            setError("");
+          } else {
+            setError("We could not find this order.");
+          }
+          setLoading(false);
+        },
+        () => {
+          setError("We could not load your order. Please try again.");
+          setLoading(false);
+        },
+      );
+    });
+
+    return () => {
+      unsubscribeAuth();
+      unsubscribeOrder?.();
+    };
+  }, [orderId]);
+
+  if (loading || error || !order) {
+    return (
+      <div className="min-h-64 flex flex-col items-center justify-center gap-4 px-4 text-center">
+        <p className="text-sm text-gray-600">
+          {loading ? "Loading your order..." : error || "Order unavailable."}
+        </p>
+        {!loading && (
+          <Link to="/shop" className="text-sm font-semibold underline">
+            Continue shopping
+          </Link>
+        )}
+      </div>
+    );
+  }
+
+  const items = Array.isArray(order.OrderItems)
+    ? order.OrderItems
+    : Object.values(order.OrderItems || {});
+  const subtotal = Number(
+    order.subtotal ?? items.reduce((sum, item) => sum + Number(item.price || 0) * Number(item.quantity || 1), 0),
+  );
+  const shipping = Number(order.shipping || 0);
+  const vat = Number(order.vat || 0);
+  const total = Number(order.total ?? subtotal + shipping + vat);
+  const billing = order.billing || {};
+  const formattedDate = order.date
+    ? new Date(order.date).toLocaleString()
+    : "Not available";
+  const paymentMethod = {
+    "bank-transfer": "Direct bank transfer",
+    check: "Check payments",
+    cod: "Cash on delivery",
+    paypal: "PayPal",
+  }[order.paymentMethod] || order.paymentMethod || "Not available";
+
+
 
   return (
     <div className="min-h-screen bg-white px-4 sm:px-6 py-12 sm:py-16">
@@ -40,10 +115,10 @@ export default function OrderComplete() {
         {/* Dashed order info box */}
         <div className="border-2 border-dashed border-gray-300 rounded-md px-6 py-5 mb-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-4">
-            <OrderMeta label="Order Number" value={order.number} />
-            <OrderMeta label="Date" value={order.date} />
-            <OrderMeta label="Total" value={order.total} />
-            <OrderMeta label="Payment Method" value={order.paymentMethod} />
+            <OrderMeta label="Order Number" value={orderId} />
+            <OrderMeta label="Date" value={formattedDate} />
+            <OrderMeta label="Total" value={currency.format(total)} />
+            <OrderMeta label="Payment Method" value={paymentMethod} />
           </div>
         </div>
 
@@ -61,30 +136,42 @@ export default function OrderComplete() {
 
           {/* Line items */}
           <div className="space-y-2.5 pb-3 mb-1 border-b border-gray-200">
-            {ORDER_ITEMS.map((item) => (
+            {items.map((item, index) => (
               <div
-                key={item.name}
+                key={item.id || `${item.title || item.name}-${index}`}
                 className="flex justify-between text-sm text-gray"
               >
-                <span>{item.name}</span>
-                <span>${item.subtotal.toFixed(2)}</span>
+                <span>{item.title || item.name} x{item.quantity || 1}</span>
+                <span>{currency.format(Number(item.price || 0) * Number(item.quantity || 1))}</span>
               </div>
             ))}
           </div>
 
-          <SummaryRow label="SUBTOTAL" value={`$${subtotal.toFixed(2)}`} />
-          <SummaryRow label="SHIPPING" value="Free shipping" />
-          <SummaryRow label="VAT" value={`$${vat}`} />
-          <SummaryRow
-            label="PAYMENT METHOD"
-            value={order.paymentMethod === "Direct Bank Transfer" ? "Direct bank transfer" : order.paymentMethod}
-          />
+          <SummaryRow label="SUBTOTAL" value={currency.format(subtotal)} />
+          <SummaryRow label="SHIPPING" value={shipping ? currency.format(shipping) : "Free shipping"} />
+          <SummaryRow label="VAT" value={currency.format(vat)} />
+          <SummaryRow label="PAYMENT METHOD" value={paymentMethod} />
           <SummaryRow
             label="TOTAL"
-            value={`$${grandTotal.toFixed(2)}`}
+            value={currency.format(total)}
             bold
             noBorder
           />
+        </div>
+
+        <div className="mt-6 border border-gray-200 rounded-md px-6 py-6">
+          <h2 className="text-xs font-semibold text-primary mb-5">BILLING DETAILS</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-600">
+            <OrderMeta label="Name" value={order.username || "Not provided"} />
+            <OrderMeta label="Email" value={order.email || "Not provided"} />
+            <OrderMeta label="Company" value={billing.company || "Not provided"} />
+            <OrderMeta label="Phone" value={billing.phone || "Not provided"} />
+            <OrderMeta label="Address" value={[billing.streetAddress, billing.apartment].filter(Boolean).join(", ") || "Not provided"} />
+            <OrderMeta label="City / Province" value={[billing.city, billing.province].filter(Boolean).join(", ") || "Not provided"} />
+            <OrderMeta label="Country" value={billing.country || "Not provided"} />
+            <OrderMeta label="Postcode" value={billing.postcode || "Not provided"} />
+            {billing.orderNotes && <OrderMeta label="Order Notes" value={billing.orderNotes} />}
+          </div>
         </div>
 
         {/* Optional: continue shopping button */}
@@ -113,21 +200,18 @@ function OrderMeta({ label, value }) {
 function SummaryRow({ label, value, bold, noBorder }) {
   return (
     <div
-      className={`flex justify-between items-center py-3 ${
-        noBorder ? "" : "border-b border-gray-200"
-      }`}
+      className={`flex justify-between items-center py-3 ${noBorder ? "" : "border-b border-gray-200"
+        }`}
     >
       <span
-        className={`text-xs font-semibold  text-primary  ${
-          bold ? "font-semibold" : "font-normal"
-        }`}
+        className={`text-xs font-semibold  text-primary  ${bold ? "font-semibold" : "font-normal"
+          }`}
       >
         {label}
       </span>
       <span
-        className={`text-gray ${
-          bold ? "text-base font-semibold" : "text-sm"
-        }`}
+        className={`text-gray ${bold ? "text-base font-semibold" : "text-sm"
+          }`}
       >
         {value}
       </span>

@@ -43,7 +43,6 @@ const App = () => {
         { path: "terms", Component: TermsConditionPage },
         { path: "contact", Component: ContactPage },
         { path: "location", Component: LocationPage },
-        { path: "collection", Component: CollectionPage },
         { path: "profile", Component: ProfilePage },
          { path: "billing", Component: BillingPage },
          { path: "ordercomplete", Component: OrderSuccessPage },

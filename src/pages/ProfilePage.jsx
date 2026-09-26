@@ -28,7 +28,7 @@ export default function ProfilePage() {
   // logout functionality================
   function handleLogOut() {
     signOut(auth).then(() => {
-   
+
     })
       .catch((error) => {
         toast.error(error)
@@ -43,7 +43,7 @@ export default function ProfilePage() {
     );
   }
 
-  
+
   const joinedDate = user?.metadata?.creationTime
     ? new Date(user.metadata.creationTime).toLocaleDateString("en-US", {
       year: "numeric",

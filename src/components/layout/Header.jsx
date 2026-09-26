@@ -28,9 +28,6 @@ useEffect(() => {
   return () => unsubscribe();
 }, []);
 
-
-
-console.log(User)
 function handleNavigate(){
   navigate('/cart')
 }
@@ -92,7 +89,7 @@ function handleWishList(){
               </button>
               {User?
             <button  className=" w-7 rounded-full cursor-pointer" onClick={()=>navigate("/profile")}>
-            <Image   className=" w-full rounded-full" src={User.photoURL} alt="user Image"/>
+            <Image   className=" w-full rounded-full" src={User?.photoURL} alt="user Image"/>
             </button>
             :  
               <button onClick={handlelogin}  className="cursor-pointer">

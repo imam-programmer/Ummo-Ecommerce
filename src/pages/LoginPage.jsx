@@ -49,16 +49,15 @@ export default function LoginPage() {
         e.preventDefault()
         setloading(true)
         signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user; 
-            console.log(user)
-            setRememberMe(false)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user)
+                setRememberMe(false)
                 setEmail("")
                 setPassword("")
                 setloading(false)
                 toast.success("Login Successfully")
                 setTimeout(() => {
-
                     navigate('/')
                 }, 2000)
 
