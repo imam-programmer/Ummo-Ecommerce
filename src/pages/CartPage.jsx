@@ -60,16 +60,16 @@ const CartPage = () => {
       <div className=' flex mt-12.5 gap-14.5 flex-col lg:flex-row '>
 
         <div className=''>
-          <div className='lg:flex hidden lg:gap-105 border-b w-232.5 border-[#E4E4E4] pb-2.25 '>
+          <div className='lg:flex hidden xl:gap-105 border-b xl:w-232.5 w-150 justify-between border-[#E4E4E4] pb-2.25 '>
             <h3>PRODUCT</h3>
-            <div className='flex gap-22.75'>
-              <h3>PRICE</h3>
+            <div className='flex xl:gap-22.75'>
+              <h3  className='mr-9 xl:mr-auto'>PRICE</h3>
               <h3>QUANTITY</h3>
-              <h3>SUBTOTAL</h3>
+              <h3 className='ml-10 xl:ml-auto'>SUBTOTAL</h3>
             </div>
           </div>
 
-          <div className='w-232.5 md:block hidden'>
+          <div className='xl:w-232.5  lg:block hidden'>
             {cartData.length === 0 ? 
             <div className='flex flex-col items-center justify-center gap-5 mt-20'>
               <h3 className='text-[18px] font-medium text-primary mt-5'>Your cart is empty.</h3>
@@ -87,7 +87,7 @@ const CartPage = () => {
 
 
 {/* // responsive cart side design============================= */}
-          <div className='md:hidden flex flex-col gap-5 justify-center'>
+          <div className='lg:hidden flex flex-col gap-5 justify-center'>
               {cartData.length === 0 ? 
             <div className='flex flex-col items-center justify-center gap-5 my-20'>
               <h3 className='text-[18px] font-medium text-primary '>Your cart is empty.</h3>

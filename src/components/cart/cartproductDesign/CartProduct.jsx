@@ -18,15 +18,15 @@ const CartProduct = (props) => {
     return (
         <>
             {/* //Desktop cart side design============================= */}
-            <div className='sm:flex md:gap-15 gap-7 hidden w-full lg:w-230   items-center py-7.5 border-b border-[#E4E4E4]'>
-                <div className='flex items-center gap-3 md:gap-7.5'>
+            <div className='sm:flex lg:gap-15  gap-7 hidden w-full lg:w-150 xl:w-230  items-center py-7.5 border-b border-[#E4E4E4]'>
+                <div className='flex items-center gap-4 xl:gap-7.5 '>
                     <Image className='h-30 w-30 ' src={props.image} />
-                    <h2 className='text-[16px] font-normal text-primary lg:w-70  '>{props.title}</h2>
+                    <h2 className='text-[16px] font-normal text-primary   xl:w-70  '>{props.title}</h2>
 
                 </div>
-                <div className='flex  items-center bg-yellow-700 w-2/4'>
-                    <h3 className='md:mr-15 text-[16px] font-normal text-gray'>${props.price}</h3>
-                    <div className='lg:h-12.5 lg:w-27.5 h-10 w-20 lg:mr-20.5 leading-12.5  flex justify-between items-center lg:px-3.75 border-3 border-[#E4E4E4]'>
+                <div className='flex  items-center  w-2/4 justify-between '>
+                    <h3 className='xl:mr-15 text-[16px] font-normal text-gray'>${props.price}</h3>
+                    <div className='xl:h-12.5 xl:w-27.5 h-10 w-20 xl:mr-20.5 leading-12.5  flex justify-between items-center lg:px-3.75 border-3 border-[#E4E4E4]'>
                         <button className='  px-2 cursor-pointer text-[16px] text-gray font-normal' onClick={() => handleDecrease(props)}>-</button>
                         <span className=' text-[16px] text-gray font-normal'>{props.quantity}</span>
                         <button className=' px-2 cursor-pointer text-[16px] text-gray font-normal' onClick={() => handleIncrease(props)}>+</button>
@@ -34,7 +34,7 @@ const CartProduct = (props) => {
                     <h3 className='text-[16px] font-medium text-primary'>${(props.quantity * props.price).toFixed(2)}</h3>
 
 
-                    <h2 className='lg:ml-15 '>
+                    <h2 className='xl:ml-15 '>
                         <button className='cursor-pointer' onClick={() => handleRemove(props)}>
                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" fill="#767676" />
