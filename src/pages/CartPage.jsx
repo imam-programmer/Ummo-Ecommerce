@@ -43,7 +43,7 @@ const CartPage = () => {
       </div>
 
       {/* responsive cart top   */}
-   <div className='mt-12 pb-2.5 lg:hidden  '>
+   <div className='mt-5 pb-2.5 lg:hidden  '>
         <div className='flex gap-2.5 w-full justify-center  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-primary'>
           <h3 className='text-[18px] font-medium text-primary '>01</h3>
           <div>

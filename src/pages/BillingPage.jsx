@@ -3,8 +3,8 @@ import BillingInformation from "../components/billing/BillingInformation";
 export default function BillingPage() {
   return (
    <div className="container mt-16.25 mb-25 px-2.5 xl:px-0">
-    <h2 className='text-[35px] font-bold text-primary uppercase'>SHIPPING AND CHECKOUT</h2>
-    <div className='mt-12 pb-2.5 flex '>
+    <h2 className='text-[25px] sm:text-[35px] font-bold text-primary uppercase'>SHIPPING AND CHECKOUT</h2>
+    <div className='mt-12 pb-2.5  lg:flex hidden'>
         <div className='flex gap-2.5 w-117.5  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-primary'>
           <h3 className='text-[18px] font-medium text-primary'>01</h3>
           <div>
@@ -13,8 +13,6 @@ export default function BillingPage() {
             <h4 className='text-[14px] font-normal leading-7.5 text-gray'>Manage Your Items List</h4>
           </div>
         </div>
-
-
         <div className='flex gap-2.5 w-117.5  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-primary'>
           <h3 className='text-[18px] font-medium text-primary'>02</h3>
           <div>
@@ -23,8 +21,6 @@ export default function BillingPage() {
             <h4 className='text-[14px] font-normal leading-7.5 text-gray'>Checkout Your Items List</h4>
           </div>
         </div>
-
-
         <div className='flex gap-2.5 w-117.5  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-[#E4E4E4]'>
           <h3 className='text-[18px] font-medium text-gray'>03</h3>
           <div>
@@ -33,6 +29,19 @@ export default function BillingPage() {
             <h4 className='text-[14px] font-normal leading-7.5 text-gray'>Review And Submit Your Order</h4>
           </div>
         </div>
+
+      </div>
+      {/* responsive billing top   */}
+   <div className='mt-5 pb-2.5 '>
+        <div className='flex gap-2.5 w-full justify-center  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-primary'>
+          <h3 className='text-[18px] font-medium text-primary '>02</h3>
+          <div>
+            <h3 className='text-[18px] font-medium text-primary'>SHIPPING AND CHECKOUT</h3>
+
+            <h4 className='text-[14px] font-normal leading-7.5 text-gray'>Checkout Your Items List</h4>
+          </div>
+        </div>
+ 
       </div>
     <BillingInformation/>
    </div>

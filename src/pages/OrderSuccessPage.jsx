@@ -4,9 +4,9 @@ import OrderComplete from '../components/ordercomplite/OrderComplete'
 const OrderSuccessPage = () => {
   return (
     <div className='container mt-16.25 mb-25 px-2.5 xl:px-0'>
-          <h2 className='text-[35px] font-bold text-primary uppercase'>Order received</h2>
+          <h2 className='text-[25px] sm:text-[35px] font-bold text-primary uppercase'>Order received</h2>
 
-      <div className='mt-12 pb-2.5 flex '>
+      <div className='mt-12 pb-2.5 lg:flex  hidden'>
         <div className='flex gap-2.5 w-117.5  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-primary'>
           <h3 className='text-[18px] font-medium text-primary'>01</h3>
           <div>
@@ -35,6 +35,18 @@ const OrderSuccessPage = () => {
             <h4 className='text-[14px] font-normal leading-7.5 text-gray'>Review And Submit Your Order</h4>
           </div>
         </div>
+      </div>
+   {/* responsive completion page top   */}
+   <div className='mt-5 pb-2.5 '>
+        <div className='flex gap-2.5 w-full justify-center  relative before:absolute before:-bottom-2.5 before:left-0 before:h-0.5 before:w-full before:bg-primary'>
+          <h3 className='text-[18px] font-medium text-primary '>03</h3>
+          <div>
+            <h3 className='text-[18px] font-medium text-primary'>CONFIRMATION</h3>
+
+            <h4 className='text-[14px] font-normal leading-7.5 text-gray'>Review And Submit Your Order</h4>
+          </div>
+        </div>
+ 
       </div>
         <OrderComplete/>
     </div>
