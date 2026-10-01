@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Image from "./common/Image";
+import { FaAngleRight } from "react-icons/fa6";
+import { IoSearchOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
 import navData from "../../api/navbardata.json";
 import { IoCloseSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import {  onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase.config";
-import toast, { Toaster } from 'react-hot-toast';
+
 
 
 const Header = () => {
@@ -22,7 +24,6 @@ useEffect(() => {
       setuser(user);
     } else {
       setuser(null)
-       toast.success('Log out!')
     }
   });
   return () => unsubscribe();
@@ -177,26 +178,44 @@ function handleWishList(){
 
         {/* =========mobile ===responsive header========== */}
         <div className="flex  justify-between items-center mx-4 md:hidden">
+          {menuActive ?<button>
+
+            <IoCloseSharp onClick={()=>setmenuActive(false)} size={25} />
+          </button> 
+           : 
           <button onClick={()=>setmenuActive(true)}>
             <svg width="25" height="18" viewBox="0 0 25 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="25" height="2" fill="#222222" />
               <rect y="8" width="20" height="2" fill="#222222" />
               <rect y="16" width="25" height="2" fill="#222222" />
-            </svg>
+            </svg>    
           </button>
+            }
         
           
-          <ul className={`z-50 absolute duration-750 w-full ${menuActive?"left-0":"-left-full"}  pt-10 h-screen bg-black top-0`}>
-            <IoCloseSharp onClick={()=>setmenuActive(false)} size={25} className="absolute right-4 top-2 text-white"/>
-            {navData?.map((item) => (
+          <ul className={`z-50 border-t-2 border-[#bebebe] absolute duration-350 w-full px-2 ${menuActive?"left-0":"-left-full"}  pt-5 h-screen bg-white top-15 `}>
+           
+           <div className="flex justify-between items-center w-full relative">
+           <input type="text"
+
+            placeholder="Search Products..." className="w-full border-2 border-[#E4E4E4] h-10 px-3.5 mb-5" />
+          <button>
+            < IoSearchOutline size={25} className="absolute right-3 top-2.5" />
+          </button>
+
+           </div>
+
+            {navData?.map((item) => (      
               <Link key={item.id} to={item.path} onClick={()=>setmenuActive(false)}>
               <li
-                className='text-white leading-8 cursor-pointer text-sm text-center font-medium '
-                
+                className='text-primary leading-10 cursor-pointer text-sm  font-medium flex items-center justify-between '             
               >
                 {item?.title}
+                <FaAngleRight />
+
               </li>
               </Link>
+            
             ))}
           </ul>
       
