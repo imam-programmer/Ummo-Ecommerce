@@ -6,38 +6,40 @@ import { Link, useNavigate } from "react-router";
 import navData from "../../api/navbardata.json";
 import { IoCloseSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import {  onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase.config";
+import SearchOpan from "./common/SearchOpan";
 
 
 
 const Header = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const [menuActive, setmenuActive] = useState(false)
-  const CartProduct=useSelector((state)=>state.cart.products)
-const WishProduct=useSelector((state)=>state.wishList.wishProduct)
-const [User, setuser] = useState(null)
+  const CartProduct = useSelector((state) => state.cart.products)
+  const WishProduct = useSelector((state) => state.wishList.wishProduct)
+  const [User, setuser] = useState(null)
+  const [searchOpen, setsearchOpen] = useState(false)
 
-useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setuser(user);
-    } else {
-      setuser(null)
-    }
-  });
-  return () => unsubscribe();
-}, []);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setuser(user);
+      } else {
+        setuser(null)
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
-function handleNavigate(){
-  navigate('/cart')
-}
-function handlelogin(){
-  navigate('/login')
-}
-function handleWishList(){
-  navigate('/wishlist')
-}
+  function handleNavigate() {
+    navigate('/cart')
+  }
+  function handlelogin() {
+    navigate('/login')
+  }
+  function handleWishList() {
+    navigate('/wishlist')
+  }
 
   return (
     <header className="md:pt-7.25 md:pb-7 py-4 md:px-2.5">
@@ -48,24 +50,24 @@ function handleWishList(){
               <Image src="../images/logo.png" alt="logo" />
             </Link>
             <ul className="lg:ml-14 bmd:ml-10 ml-5 flex gap-5 lg:gap-10.75">
-              {navData?.map((item,id) => (
+              {navData?.map((item, id) => (
                 <Link key={id} to={item.path}>
 
-                <li
-                  className='text-primary cursor-pointer after:bg-primary relative text-sm md:text-[12px] lg:text-sm leading-6 font-medium after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:duration-300 after:content-[""] hover:after:w-[70%]'
-                  key={item.id}
-                >
-                  {item?.title}
-                </li>
+                  <li
+                    className='text-primary cursor-pointer after:bg-primary relative text-sm md:text-[12px] lg:text-sm leading-6 font-medium after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:duration-300 after:content-[""] hover:after:w-[70%]'
+                    key={item.id}
+                  >
+                    {item?.title}
+                  </li>
                 </Link>
               ))}
             </ul>
 
             {/* ============icons ============== */}
             <div className="ml-auto flex gap-5  bmd:gap-8">
-              <button className="cursor-pointer ">
+              <button className="cursor-pointer " onClick={() => setsearchOpen(!searchOpen)}>
                 <svg className="w-3.75 lg:w-5"
-         
+
                   height="20"
                   viewBox="0 0 21 20"
                   fill="none"
@@ -88,43 +90,43 @@ function handleWishList(){
                   </defs>
                 </svg>
               </button>
-              {User?
-            <button  className=" w-7 rounded-full cursor-pointer" onClick={()=>navigate("/profile")}>
-            <Image   className=" w-full rounded-full" src={User?.photoURL} alt="user Image"/>
-            </button>
-            :  
-              <button onClick={handlelogin}  className="cursor-pointer">
-                <svg
-                   className="w-3.75 lg:w-5"
-                  height="20"
-                  viewBox="0 0 21 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g clipPath="url(#clip0_6_29)">
-                    <path
-                      d="M10.0175 11.2652C3.99775 11.2652 0.682495 14.108 0.682495 19.2701C0.682495 19.6732 1.00982 20 1.41369 20H18.6212C19.0251 20 19.3524 19.6732 19.3524 19.2701C19.3524 14.1083 16.0372 11.2652 10.0175 11.2652ZM2.17149 18.5402C2.4591 14.6805 5.09505 12.7251 10.0175 12.7251C14.9399 12.7251 17.5759 14.6805 17.8637 18.5402H2.17149Z"
-                      fill="#222222"
-                    />
-                    <path
-                      d="M10.0174 0C7.25222 0 5.16711 2.12336 5.16711 4.93895C5.16711 7.83699 7.34292 10.1944 10.0174 10.1944C12.6918 10.1944 14.8676 7.83699 14.8676 4.93918C14.8676 2.12336 12.7825 0 10.0174 0ZM10.0174 8.7348C8.14917 8.7348 6.6295 7.03211 6.6295 4.93918C6.6295 2.92313 8.05436 1.45984 10.0174 1.45984C11.949 1.45984 13.4053 2.95547 13.4053 4.93918C13.4053 7.03211 11.8856 8.7348 10.0174 8.7348Z"
-                      fill="#222222"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_6_29">
-                      <rect width="20.0348" height="20" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                
-              </button>
-            }
+              {User ?
+                <button className=" w-7 rounded-full cursor-pointer" onClick={() => navigate("/profile")}>
+                  <Image className=" w-full rounded-full" src={User?.photoURL} alt="user Image" />
+                </button>
+                :
+                <button onClick={handlelogin} className="cursor-pointer">
+                  <svg
+                    className="w-3.75 lg:w-5"
+                    height="20"
+                    viewBox="0 0 21 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clipPath="url(#clip0_6_29)">
+                      <path
+                        d="M10.0175 11.2652C3.99775 11.2652 0.682495 14.108 0.682495 19.2701C0.682495 19.6732 1.00982 20 1.41369 20H18.6212C19.0251 20 19.3524 19.6732 19.3524 19.2701C19.3524 14.1083 16.0372 11.2652 10.0175 11.2652ZM2.17149 18.5402C2.4591 14.6805 5.09505 12.7251 10.0175 12.7251C14.9399 12.7251 17.5759 14.6805 17.8637 18.5402H2.17149Z"
+                        fill="#222222"
+                      />
+                      <path
+                        d="M10.0174 0C7.25222 0 5.16711 2.12336 5.16711 4.93895C5.16711 7.83699 7.34292 10.1944 10.0174 10.1944C12.6918 10.1944 14.8676 7.83699 14.8676 4.93918C14.8676 2.12336 12.7825 0 10.0174 0ZM10.0174 8.7348C8.14917 8.7348 6.6295 7.03211 6.6295 4.93918C6.6295 2.92313 8.05436 1.45984 10.0174 1.45984C11.949 1.45984 13.4053 2.95547 13.4053 4.93918C13.4053 7.03211 11.8856 8.7348 10.0174 8.7348Z"
+                        fill="#222222"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_6_29">
+                        <rect width="20.0348" height="20" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+
+                </button>
+              }
 
 
               <button className="cursor-pointer relative" onClick={handleWishList}>
                 <svg
-                   className="w-3.75 lg:w-5"
+                  className="w-3.75 lg:w-5"
                   height="20"
                   viewBox="0 0 21 20"
                   fill="none"
@@ -146,7 +148,7 @@ function handleWishList(){
               </button>
               <button onClick={handleNavigate} className="cursor-pointer relative">
                 <svg
-                 className="w-3.75 lg:w-5"
+                  className="w-3.75 lg:w-5"
                   height="20"
                   viewBox="0 0 21 20"
                   fill="none"
@@ -161,7 +163,7 @@ function handleWishList(){
               </button>
               <button className="cursor-pointer">
                 <svg
-                   className="w-3.75 lg:w-5"
+                  className="w-3.75 lg:w-5"
                   height="18"
                   viewBox="0 0 26 18"
                   fill="none"
@@ -175,50 +177,55 @@ function handleWishList(){
             </div>
           </div>
         </div>
+{searchOpen&&
+<SearchOpan/>
+
+}
+
 
         {/* =========mobile ===responsive header========== */}
         <div className="flex  justify-between items-center mx-4 md:hidden">
-          {menuActive ?<button>
+          {menuActive ? <button>
 
-            <IoCloseSharp onClick={()=>setmenuActive(false)} size={25} />
-          </button> 
-           : 
-          <button onClick={()=>setmenuActive(true)}>
-            <svg width="25" height="18" viewBox="0 0 25 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="25" height="2" fill="#222222" />
-              <rect y="8" width="20" height="2" fill="#222222" />
-              <rect y="16" width="25" height="2" fill="#222222" />
-            </svg>    
+            <IoCloseSharp onClick={() => setmenuActive(false)} size={25} />
           </button>
-            }
-        
-          
-          <ul className={`z-50 border-t-2 border-[#bebebe] absolute duration-350 w-full px-2 ${menuActive?"left-0":"-left-full"}  pt-5 h-screen bg-white top-15 `}>
-           
-           <div className="flex justify-between items-center w-full relative">
-           <input type="text"
+            :
+            <button onClick={() => setmenuActive(true)}>
+              <svg width="25" height="18" viewBox="0 0 25 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="25" height="2" fill="#222222" />
+                <rect y="8" width="20" height="2" fill="#222222" />
+                <rect y="16" width="25" height="2" fill="#222222" />
+              </svg>
+            </button>
+          }
 
-            placeholder="Search Products..." className="w-full border-2 border-[#E4E4E4] h-10 px-3.5 mb-5" />
-          <button>
-            < IoSearchOutline size={25} className="absolute right-3 top-2.5" />
-          </button>
 
-           </div>
+          <ul className={`z-50 border-t-2 border-[#bebebe] absolute duration-350 w-full px-2 ${menuActive ? "left-0" : "-left-full"}  pt-5 h-screen bg-white top-15 `}>
 
-            {navData?.map((item) => (      
-              <Link key={item.id} to={item.path} onClick={()=>setmenuActive(false)}>
-              <li
-                className='text-primary leading-10 cursor-pointer text-sm  font-medium flex items-center justify-between '             
-              >
-                {item?.title}
-                <FaAngleRight />
+            <div className="flex justify-between items-center w-full relative">
+              <input type="text"
 
-              </li>
+                placeholder="Search Products..." className="w-full border-2 border-[#E4E4E4] h-10 px-3.5 mb-5" />
+              <button>
+                < IoSearchOutline size={25} className="absolute right-3 top-2.5" />
+              </button>
+
+            </div>
+
+            {navData?.map((item) => (
+              <Link key={item.id} to={item.path} onClick={() => setmenuActive(false)}>
+                <li
+                  className='text-primary leading-10 cursor-pointer text-sm  font-medium flex items-center justify-between '
+                >
+                  {item?.title}
+                  <FaAngleRight />
+
+                </li>
               </Link>
-            
+
             ))}
           </ul>
-      
+
           <Link to="/">
             <Image src="../images/logo.png" alt="logo" />
           </Link>
