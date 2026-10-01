@@ -22,6 +22,7 @@ import ProfilePage from './pages/ProfilePage';
 import BillingPage from './pages/BillingPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 
+
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -45,6 +46,7 @@ const App = () => {
         { path: "profile", Component: ProfilePage },
          { path: "billing", Component: BillingPage },
          { path: "ordercomplete", Component: OrderSuccessPage },
+
         
         
       ],

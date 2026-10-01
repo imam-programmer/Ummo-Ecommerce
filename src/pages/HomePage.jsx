@@ -10,17 +10,17 @@ import Services from '../components/layout/home/Services'
 
 const HomePage = () => {
   return (
-   <>
-   <Banner/>
-   <Category/>
-   <TrendyProducts/>
-   <SpringCollection/>
-   <Starting/>
-   <LimitedEdition/>
-   <Sponcer/>
-   <Services/>
-   
-   </>
+    <>
+      <Banner />
+      <Category />
+      <TrendyProducts />
+      <SpringCollection />
+      <Starting />
+      <LimitedEdition />
+      <Sponcer />
+      <Services />
+
+    </>
   )
 }
 

@@ -18,11 +18,13 @@ const Category = () => {
                     item.id == 4 && <p className='text-[14px] lg:text-sm md:text-[12px] leading-6 lg:leading-6 md:leading-4  font-normal text-primary max-w-53.25 xl:mt-2 mb-4 xl:mb-4 md:mb-1'>Surprise someone with the gift they
                       really want.</p>
                   }
-                  <Link className='uppercase text-primary text-sm lg:text-sm md:text-[12px] leading-6 after:content-[""] after:w-0 after:duration-300 hover:after:w-12.5 after:h-0.5 after:bg-primary after:absolute after:bottom-0 relative after:left-0'>
+                  <button  className='flex items-center gap-2'>
+                  <Link   className='uppercase text-primary text-sm lg:text-sm md:text-[12px] leading-6 after:content-[""] after:w-0 after:duration-300 hover:after:w-12.5 after:h-0.5 after:bg-primary after:absolute after:bottom-0 relative after:left-0'>
                     {
                       item.id == 4 ? "DISCOVER MORE" : " SHOP NOW"
                     }
                   </Link>
+                  </button>
                 </div>
               </div>
             )

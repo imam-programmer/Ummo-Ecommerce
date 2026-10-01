@@ -1,9 +1,14 @@
 import React from 'react'
-import startingimage2 from "../../../assets/images/startingimage2.png"
-import startingimage from "../../../assets/images/startingimage.png"
 import Image from '../common/Image'
 import { Link } from 'react-router'
+import { useSelector } from 'react-redux'
 const Starting = () => {
+    const Alldata=useSelector((state)=>state.AllProduct.Products)
+    const categore=Alldata.map((item)=>item.category)
+    const uniqueCategory = [...new Set(categore)];
+    const h=uniqueCategory.find((cat) => cat === "womens-dresses")
+    const g=uniqueCategory.find((cat) => cat === "mens-shoes")
+    console.log(g)
     return (
         <section className='md:mt-25 mt-3.75'>
             <div className="container">
