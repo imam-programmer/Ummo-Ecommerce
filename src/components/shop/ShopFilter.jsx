@@ -64,7 +64,7 @@ export default function ShopFilter({ setCurrentPage = () => { } }) {
     updateOptions({ maxPrice: value })
   };
 
-  const filteredBrands = BRANDS.filter((brand) => brand.toLowerCase().includes(brandSearch.toLowerCase()));
+  const filteredBrands = BRANDS.filter((brand) => brand.toLowerCase().includes(brandSearch.toLowerCase().trim()));
 
   return (
     <div className="font-jost w-45 lg:w-60  xl:w-90  xl:px-1 text-primary -mt-3 xl:-mt-2  px-2 pt-2 xl:pt-0">

@@ -12,8 +12,14 @@ export const wishListSlice = createSlice({
   reducers: {
 
     addWishList: (state, action) => {
-        state.wishProduct.push(action.payload)
+      const existingProduct = state.wishProduct.find(item => item.id === action.payload.id);
+      if (existingProduct) {
+        // Product already exists in the wishlist, do not add it again
+        return;
+      } else {
+        state.wishProduct.push(action.payload);
         localStorage.setItem("wishList",JSON.stringify(state.wishProduct)) 
+      }
     },
     deleteWishEndevisual:(state,action)=>{
       const filterEndevisual=state.wishProduct.filter(item=>item.id!==action.payload.id);

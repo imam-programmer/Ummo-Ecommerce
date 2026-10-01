@@ -178,7 +178,7 @@ const Header = () => {
           </div>
         </div>
 {searchOpen&&
-<SearchOpan/>
+<SearchOpan searchOpen={searchOpen} setSearchOpen={setsearchOpen} />
 
 }
 

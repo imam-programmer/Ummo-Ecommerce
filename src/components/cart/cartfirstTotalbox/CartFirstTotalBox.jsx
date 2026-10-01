@@ -11,12 +11,11 @@ const SHIPPING_OPTIONS = [
 export default function CartFirstTotalBox() {
   const [shipping, setShipping] = useState("free");
   const cartProduct = useSelector(state => state.cart.products)
-  const sum = cartProduct.reduce((pre, curr) => pre + curr.price, 0)
+  const sum = cartProduct.reduce((pre, curr) => pre + curr.price * curr.quantity, 0)
   const navigate = useNavigate()
   const subtotal = sum;
   const vat = 19;
-  const shippingCost =
-    SHIPPING_OPTIONS.find((o) => o.id === shipping)?.price || 0;
+  const shippingCost = SHIPPING_OPTIONS.find((o) => o.id === shipping)?.price || 0;
   const total = subtotal + vat + shippingCost;
 
 
@@ -73,7 +72,7 @@ export default function CartFirstTotalBox() {
 
               <p className="text-primary font-normal leading-6 text-sm">Shipping to AL.</p>
 
-       
+
             </div>
           </div>
 

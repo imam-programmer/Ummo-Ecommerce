@@ -6,8 +6,8 @@ import RelatedProduct from '../components/shopsingle/RelatedProduct'
 const ShopSingle = () => {
   return (
     <div>
-      <ProductDetails/>
-      <RelatedProduct/>
+      <ProductDetails />
+      <RelatedProduct />
     </div>
   )
 }

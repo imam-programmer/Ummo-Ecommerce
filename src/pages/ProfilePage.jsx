@@ -19,7 +19,6 @@ export default function ProfilePage() {
       } else {
         setUser(null);
       }
-
       setLoading(false);
     });
     return () => unsubscribe();

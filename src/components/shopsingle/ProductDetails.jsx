@@ -1,18 +1,32 @@
 import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { LuShare2 } from "react-icons/lu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Reviews from "./Reviews";
 import AdditionalInformation from "./AdditionalInformation";
 import Image from "../layout/common/Image";
+import { addToCart } from "../../slices/cartSlice";
+import { addWishList } from "../../slices/wishListSlice";
 
 
 export default function ProductDetails() {
   const detailsProduct = useSelector((state) => state.clickProductDetails.Details)
+ console.log(detailsProduct, "detailsProduct")
+const dispatch = useDispatch()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("description");
-
+function handleAddToCart() {
+  dispatch(addToCart({
+    id: detailsProduct.id,
+    title: detailsProduct.title,
+    price: detailsProduct.price,
+    image: detailsProduct.thumbnail,
+  }));
+}
+function handleWishList() {
+ dispatch(addWishList(detailsProduct));
+}
   return (
     <div className="min-h-screen bg-white font-jost text-primary px-3">
       <div className="mx-auto container px-4 py-8 sm:px-4 md:px-0 lg:py-12">
@@ -21,10 +35,10 @@ export default function ProductDetails() {
         {/* Main content: gallery + info */}
         <div className="grid grid-cols-1 gap-8  lg:grid-cols-2 lg:gap-25">
           <div className="flex flex-col-reverse gap-4 sm:flex-row">
-        
-              
-              <Image className="aspect-square w-full  overflow-hidden bg-[#EDECE9]" src={detailsProduct.thumbnail}/>
-         
+
+
+            <Image className="aspect-square w-full  overflow-hidden bg-[#EDECE9]" src={detailsProduct.thumbnail} />
+
           </div>
           {/* Product info */}
           <div>
@@ -35,7 +49,7 @@ export default function ProductDetails() {
                 </span>
                 <span className="ml-1">/</span> THE SHOP
               </div>
-             
+
             </div>
 
 
@@ -52,12 +66,12 @@ export default function ProductDetails() {
                 {detailsProduct.description}
               </p>
 
-              <button className="mt-7 w-fit cursor-pointer bg-primary px-8 py-3 text-sm font-normal  text-white transition-opacity hover:opacity-90">
-                BUY ON AMAZON.COM
+              <button onClick={handleAddToCart} className="mt-7 w-fit cursor-pointer bg-primary px-8 py-3 text-lg font-normal  text-white transition-opacity hover:opacity-90">
+                Add to Cart
               </button>
 
               <div className="mt-6 flex items-center gap-6  font-medium leading-6 text-[13px] text-primary">
-                <button className="flex items-center gap-2 transition-colors hover:text-gray cursor-pointer">
+                <button onClick={handleWishList} className="flex items-center gap-2 transition-colors hover:text-gray cursor-pointer">
                   <FaRegHeart size={15} strokeWidth={1.5} />
                   ADD TO WISHLIST
                 </button>
@@ -81,7 +95,7 @@ export default function ProductDetails() {
 
                 <ul className="flex gap-2 ">
                   TAGS:{" "}
-                  {detailsProduct.tags?.map((item,id) => (
+                  {detailsProduct.tags?.map((item, id) => (
 
                     <li key={id} className="text-primary">{item},</li>
                   ))}
@@ -185,13 +199,13 @@ export default function ProductDetails() {
 
         {activeTab === "additional" && (
           <div className="mx-auto mt-10 max-w-3xl  text-gray sm:mt-14">
-         <AdditionalInformation/>
+            <AdditionalInformation />
           </div>
         )}
 
         {activeTab === "reviews" && (
           <div className="mx-auto mt-10 max-w-3xl text-sm text-gray sm:mt-14">
-            <Reviews/>
+            <Reviews />
           </div>
         )}
       </div>
