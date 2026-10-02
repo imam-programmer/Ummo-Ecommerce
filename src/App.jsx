@@ -21,6 +21,7 @@ import ForgotPassword from './pages/ForgorPage';
 import ProfilePage from './pages/ProfilePage';
 import BillingPage from './pages/BillingPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
+import ClickProductPage from './pages/ClickProductPage';
 
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
         { path: "profile", Component: ProfilePage },
          { path: "billing", Component: BillingPage },
          { path: "ordercomplete", Component: OrderSuccessPage },
+         {path: "clickproduct", Component: ClickProductPage}
 
         
         

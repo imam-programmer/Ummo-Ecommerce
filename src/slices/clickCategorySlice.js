@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 const initialState = {
-  value: []
+  categoryProduct: []
 }
 
 export const clickCategorySlice = createSlice({
@@ -11,7 +11,7 @@ export const clickCategorySlice = createSlice({
   reducers: {
     Click: (state ,action)=> {
 
-      state.value += action.payload
+      state.categoryProduct = action.payload
     }
 
   }
