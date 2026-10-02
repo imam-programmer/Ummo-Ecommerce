@@ -5,10 +5,12 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
 import navData from "../../api/navbardata.json";
 import { IoCloseSharp } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase.config";
 import SearchOpan from "./common/SearchOpan";
+import { productDetail } from "../../slices/ProductDetailsSlice";
+
 
 
 
@@ -19,6 +21,24 @@ const Header = () => {
   const WishProduct = useSelector((state) => state.wishList.wishProduct)
   const [User, setuser] = useState(null)
   const [searchOpen, setsearchOpen] = useState(false)
+  const [Input, setInput] = useState('')
+
+
+  const Alldata = useSelector((state) => state.AllProduct.Products)
+  const title = Alldata.map((item) => item.title)
+  const dispatch = useDispatch()
+  const filteredTitles = title.filter((item) => item.toLowerCase().includes(Input.toLowerCase().trim()))
+  console.log(filteredTitles)
+
+  function handlesearchlist(item) {
+    setInput(item)
+    dispatch(productDetail(Alldata.find((product) => product.title === item)))
+    navigate("/shopsingle")
+    setInput("")
+    setsearchOpen(false)
+    setmenuActive(false)
+  }
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -177,10 +197,13 @@ const Header = () => {
             </div>
           </div>
         </div>
-{searchOpen&&
-<SearchOpan searchOpen={searchOpen} setSearchOpen={setsearchOpen} />
+        <div className="hidden md:block">
 
-}
+          {searchOpen &&
+            <SearchOpan searchOpen={searchOpen} setSearchOpen={setsearchOpen} />
+
+          }
+        </div>
 
 
         {/* =========mobile ===responsive header========== */}
@@ -201,16 +224,35 @@ const Header = () => {
 
 
           <ul className={`z-50 border-t-2 border-[#bebebe] absolute duration-350 w-full px-2 ${menuActive ? "left-0" : "-left-full"}  pt-5 h-screen bg-white top-15 `}>
+            <div>
 
-            <div className="flex justify-between items-center w-full relative">
-              <input type="text"
+              <div className="flex justify-between items-center w-full relative" onClick={() => setsearchOpen(true)}>
+                <input value={Input} onChange={(e) => setInput(e.target.value)} type="text"
 
-                placeholder="Search Products..." className="w-full border-2 border-[#E4E4E4] h-10 px-3.5 mb-5" />
-              <button>
-                < IoSearchOutline size={25} className="absolute right-3 top-2.5" />
-              </button>
+                  placeholder="Search Products..." className="w-full border-2 border-[#E4E4E4] h-10 px-3.5 mb-5" />
+                <button>
+                  < IoSearchOutline size={25} className="absolute right-3 top-2.5" />
+                </button>
 
+              </div>
+
+
+              {searchOpen &&
+                <div className=" md:hidden h-screen">
+                  {Input === "" ?
+                    (
+                      <p className='mb-3 cursor-pointer '>No results found</p>
+                    ) :
+                    filteredTitles.map((item) => (
+                      <p className='mb-3 cursor-pointer ' onClick={() => handlesearchlist(item)}>
+                        {item}
+                      </p>
+                    ))}
+                </div>
+              }
             </div>
+
+
 
             {navData?.map((item) => (
               <Link key={item.id} to={item.path} onClick={() => setmenuActive(false)}>

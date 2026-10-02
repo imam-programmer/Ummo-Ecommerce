@@ -23,7 +23,7 @@ const SearchOpan = ({ searchOpen, setSearchOpen }) => {
 
 
   return (
-    <div className='bg-white w-full overflow-y-auto  absolute top-21 py-5 border-t border-[#bebebe] z-30 h-2/4  left-0 z-99flex items-center justify-center'>
+    <div className='bg-white w-full px-2.5 xl:px-0 overflow-y-auto  absolute top-21 py-5 border-t border-[#bebebe] z-30 h-2/4  left-0 z-99flex items-center justify-center'>
       <div className='container'>
 
         <h3 className='text-gray mb-5'>WHAT ARE YOU LOOKING FOR?</h3>
