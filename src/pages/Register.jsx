@@ -65,7 +65,7 @@ export default function Register() {
                                 password: password,
                                 profile_picture: "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
                             });
-                        }).then(() => navigate("/login"))
+                        }).then(() =>setTimeout(()=> navigate("/"),2000))
 
                 }).catch((error) => {
                     toast.error(error)

@@ -28,8 +28,6 @@ const Header = () => {
   const title = Alldata.map((item) => item.title)
   const dispatch = useDispatch()
   const filteredTitles = title.filter((item) => item.toLowerCase().includes(Input.toLowerCase().trim()))
-  console.log(filteredTitles)
-
   function handlesearchlist(item) {
     setInput(item)
     dispatch(productDetail(Alldata.find((product) => product.title === item)))

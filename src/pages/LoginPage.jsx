@@ -1,12 +1,238 @@
+// import { useState } from "react";
+// import { signInWithEmailAndPassword } from "firebase/auth";
+// import { auth, db } from "../../firebase.config";
+// import toast, { Toaster } from 'react-hot-toast';
+// import { Link, useNavigate } from "react-router";
+// import Google from "../assets/images/Google.png"
+// import Image from "../components/layout/common/Image";
+// import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+// import { ref, set } from "firebase/database";
+
+// function EyeIcon() {
+//     return (
+//         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+//             <path
+//                 d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"
+//                 stroke="currentColor"
+//                 strokeWidth="1.6"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//             />
+//             <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.6" />
+//         </svg>
+//     );
+// }
+
+// function EyeOffIcon() {
+//     return (
+//         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+//             <path
+//                 d="M3 3l18 18M10.6 10.7a3 3 0 0 0 4.2 4.2M6.5 6.6C3.9 8.2 2 12 2 12s4 7 10 7c1.9 0 3.6-.6 5-1.6M17.4 17.4C19.6 15.8 22 12 22 12s-4-7-10-7c-.7 0-1.4.1-2.1.2"
+//                 stroke="currentColor"
+//                 strokeWidth="1.6"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//             />
+//         </svg>
+//     );
+// }
+// export default function LoginPage() {
+//     const [loading, setloading] = useState(false)
+//     const [showPassword, setShowPassword] = useState(false);
+//     const [rememberMe, setRememberMe] = useState(false);
+//     const [email, setEmail] = useState("")
+//     const [password, setPassword] = useState("")
+//     const navigate = useNavigate()
+//     const provider = new GoogleAuthProvider();
+
+//     const handleLogin = (e) => {
+//         e.preventDefault()
+//         setloading(true)
+//         signInWithEmailAndPassword(auth, email, password)
+//             .then((userCredential) => {
+//                 const user = userCredential.user;
+//                 console.log(user)
+//                 setRememberMe(false)
+//                 setEmail("")
+//                 setPassword("")
+//                 setloading(false)
+//                 toast.success("Login Successfully")
+//                 setTimeout(() => {
+//                     navigate('/')
+//                 }, 2000)
+
+//             })
+//             .catch((error) => {
+//                 setloading(false)
+//                 const errorCode = error.code;
+//                 toast.error(`${errorCode} (No match)`)
+//             });
+
+//     }
+
+//     function handleGooleLogin() {
+//         signInWithPopup(auth, provider)
+//             .then((result) => {
+//                 const user = result.user;
+//                 set(ref(db, "user/" + user.uid), {
+//                     email: user.email,
+//                     image: user.photoURL,
+//                     name: user.displayName
+
+//                 }).then(() => {
+//                     toast.success("Login Successfully")
+//                     navigate("/")
+//                     console.log(user)
+//                 })
+
+//             }).catch((error) => {
+
+//                 const errorCode = error.code;
+//                 console.log(errorCode)
+//             });
+//     }
+
+//     return (
+//         <div className="min-h-screen w-full flex  justify-center bg-white px-4 py-12 font-jost">
+//             <Toaster
+//                 position="top-center"
+//                 reverseOrder={false}
+//             />
+//             <div className="w-full max-w-md">
+//                 {/* Tabs */}
+//                 <div className="flex items-center justify-center gap-8 sm:gap-10 mb-8 sm:mb-10">
+//                     <button
+//                         type="button"
+
+//                         className={`relative font-medium text-primary text-sm sm:text-base  `}
+//                     >
+//                         LOGIN
+//                         <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary" />
+//                     </button>
+
+//                 </div>
+
+
+//                 <button onClick={handleGooleLogin} className="w-full flex bg-[#bebebe38] cursor-pointer justify-center h-13.75 inset-shadow-2xs shadow-md border-primary  mb-5   transition-colors">
+
+//                     <Image className="h-full" src={Google} alt="Google Logo" />
+//                 </button>
+
+//                 <form
+//                     onSubmit={handleLogin}
+//                     className="flex flex-col gap-6"
+//                 >
+//                     {/* email */}
+//                     <div className="border-2 border-[#e4e4e4]">
+//                         <input value={email} onChange={(e) => setEmail(e.target.value)}
+//                             type="email"
+//                             placeholder="Enter your email address *"
+//                             required
+//                             className="w-full border-none  px-4.25 h-13.75 text-sm text-primary placeholder:text-gray focus:outline-none focus:border-primary transition-colors"
+//                         />
+//                     </div>
+
+//                     {/* Password with notched label */}
+//                     <div className="relative pt-2.5">
+//                         <span className="absolute top-0 left-3 bg-white z-10 px-1.5 text-xs text-primary">
+//                             Password *
+//                         </span>
+//                         <div className="relative border-2 border-primary">
+//                             <input value={password} onChange={(e) => setPassword(e.target.value)}
+//                                 type={showPassword ? "text" : "password"}
+//                                 required
+//                                 className={`w-full px-4.25  h-13.75 ${!showPassword ? "text-[20px]" : "text-sm"} pr-12   text-primary focus:outline-none border-2`}
+//                             />
+//                             <button
+//                                 type="button"
+//                                 onClick={() => setShowPassword((v) => !v)}
+//                                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray hover:text-primary transition-colors"
+//                                 aria-label={showPassword ? "Hide password" : "Show password"}
+//                             >
+//                                 {showPassword ? (
+//                                     <EyeIcon />
+//                                 ) : (
+//                                     <EyeOffIcon />
+//                                 )}
+//                             </button>
+//                         </div>
+//                     </div>
+
+//                     {/* Remember me / Lost password */}
+//                     <div className="flex items-center justify-between flex-wrap gap-3">
+//                         <label className="flex items-center gap-2 cursor-pointer select-none">
+//                             <input
+//                                 type="checkbox"
+//                                 checked={rememberMe}
+//                                 onChange={(e) => setRememberMe(e.target.checked)}
+//                                 className="w-4 h-4 border border-gray/50 accent-primary cursor-pointer"
+//                             />
+//                             <span className="text-sm text-primary">Remember me</span>
+//                         </label>
+//                         <Link
+//                             to="/forgot"
+//                             className="text-sm text-primary underline underline-offset-2 hover:text-gray transition-colors"
+//                         >
+//                             Lost password?
+//                         </Link>
+//                     </div>
+
+//                     {/* Submit */}
+//                     {loading ?
+//                         <button type="button" className="bg-indigo-500 justify-center flex py-4 ..." disabled>
+//                             <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24">
+
+//                             </svg>
+//                             Processing…
+//                         </button> :
+//                         <button
+//                             type="submit"
+//                             className="w-full cursor-pointer uppercase bg-primary text-white text-sm tracking-wide py-4 hover:opacity-90 transition-opacity"
+//                         >
+//                             Log In
+//                         </button>
+//                     }
+
+//                     {/* Footer link */}
+//                     <p className="text-center text-sm text-gray">
+//                         No account yet?{" "}
+//                         <Link to="/register"
+
+//                             className="text-primary underline underline-offset-2 hover:text-gray transition-colors"
+//                         >
+//                             Create Account
+//                         </Link>
+//                     </p>
+//                 </form>
+
+
+
+//             </div>
+//         </div>
+//     );
+// }
+
+
+
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    setPersistence,
+    browserLocalPersistence,
+    browserSessionPersistence,
+} from "firebase/auth";
+import { ref, update } from "firebase/database";
 import { auth, db } from "../../firebase.config";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
-import Google from "../assets/images/Google.png"
+import Google from "../assets/images/Google.png";
 import Image from "../components/layout/common/Image";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { ref, set } from "firebase/database";
+
+// provider component er baire, tai protibar render e notun toiri hobe na
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
 
 function EyeIcon() {
     return (
@@ -36,99 +262,146 @@ function EyeOffIcon() {
         </svg>
     );
 }
+
+function Spinner() {
+    return (
+        <svg className="mr-3 size-5 animate-spin" viewBox="0 0 24 24" fill="none">
+            <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+            />
+            <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            />
+        </svg>
+    );
+}
+
 export default function LoginPage() {
-    const [loading, setloading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [googleLoading, setGoogleLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const navigate = useNavigate()
-    const provider = new GoogleAuthProvider();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const handleLogin = (e) => {
-        e.preventDefault()
-        setloading(true)
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user)
-                setRememberMe(false)
-                setEmail("")
-                setPassword("")
-                setloading(false)
-                toast.success("Login Successfully")
-                setTimeout(() => {
-                    navigate('/')
-                }, 2000)
+    // ---------- Email / Password login ----------
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            // Remember me: checked hole browser bondho korleo login thakbe
+            await setPersistence(
+                auth,
+                rememberMe ? browserLocalPersistence : browserSessionPersistence
+            );
 
-            })
-            .catch((error) => {
-                setloading(false)
-                const errorCode = error.code;
-                toast.error(`${errorCode} (No match)`)
-            });
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log(userCredential.user);
 
-    }
+            setEmail("");
+            setPassword("");
+            setRememberMe(false);
+            toast.success("Login Successfully");
+            setTimeout(() => navigate("/"), 2000);
+        } catch (error) {
+            console.log(error.code, error.message);
+            toast.error(`${error.code} (No match)`);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    function handleGooleLogin() {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const user = result.user;
-                set(ref(db, "user/" + user.uid), {
+    // ---------- Google login ----------
+    const handleGoogleLogin = async () => {
+        if (googleLoading) return;
+        setGoogleLoading(true);
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            // update() use korsi, jate purono extra field (role, phone etc.) overwrite na hoy
+            try {
+                await update(ref(db, "user/" + user.uid), {
                     email: user.email,
                     image: user.photoURL,
-                    name: user.displayName
+                    name: user.displayName,
+                });
+            } catch (dbError) {
+                // Login hoyeche, kintu database write fail korse (rules / databaseURL check korun)
+                console.log("DB error:", dbError.code, dbError.message);
+                toast.error("Login hoyeche, kintu data save hoy ni: " + dbError.message);
+            }
 
-                }).then(() => {
-                    toast.success("Login Successfully")
-                    navigate("/")
-                    console.log(user)
-                })
+            toast.success("Login Successfully");
+            setTimeout(()=>
+                navigate("/"),2000
+            )
+        } catch (error) {
+            console.log(error.code, error.message);
 
-            }).catch((error) => {
-
-                const errorCode = error.code;
-                console.log(errorCode)
-            });
-    }
+            // user nijei popup bondho korle error dekhanor dorkar nai
+            if (
+                error.code !== "auth/popup-closed-by-user" &&
+                error.code !== "auth/cancelled-popup-request"
+            ) {
+                toast.error(error.code || "Google login failed");
+            }
+        } finally {
+            setGoogleLoading(false);
+        }
+    };
 
     return (
-        <div className="min-h-screen w-full flex  justify-center bg-white px-4 py-12 font-jost">
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-            />
+        <div className="min-h-screen w-full flex justify-center bg-white px-4 py-12 font-jost">
+            <Toaster position="top-center" reverseOrder={false} />
             <div className="w-full max-w-md">
                 {/* Tabs */}
                 <div className="flex items-center justify-center gap-8 sm:gap-10 mb-8 sm:mb-10">
                     <button
                         type="button"
-
-                        className={`relative font-medium text-primary text-sm sm:text-base  `}
+                        className="relative font-medium text-primary text-sm sm:text-base"
                     >
                         LOGIN
                         <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary" />
                     </button>
-
                 </div>
 
-
-                <button onClick={handleGooleLogin} className="w-full flex bg-[#bebebe38] cursor-pointer justify-center h-13.75 inset-shadow-2xs shadow-md border-primary  mb-5   transition-colors">
-
-                    <Image className="h-full" src={Google} alt="Google Logo" />
+                {/* Google button */}
+                <button
+                    type="button"
+                    onClick={handleGoogleLogin}
+                    disabled={googleLoading}
+                    className="w-full flex bg-[#bebebe38] cursor-pointer justify-center items-center h-13.75 inset-shadow-2xs shadow-md border-primary mb-5 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                    {googleLoading ? (
+                        <span className="flex items-center text-sm text-primary">
+                            <Spinner />
+                            Connecting…
+                        </span>
+                    ) : (
+                        <Image className="h-full" src={Google} alt="Google Logo" />
+                    )}
                 </button>
 
-                <form
-                    onSubmit={handleLogin}
-                    className="flex flex-col gap-6"
-                >
+                <form onSubmit={handleLogin} className="flex flex-col gap-6">
                     {/* email */}
                     <div className="border-2 border-[#e4e4e4]">
-                        <input value={email} onChange={(e) => setEmail(e.target.value)}
+                        <input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             type="email"
                             placeholder="Enter your email address *"
                             required
-                            className="w-full border-none  px-4.25 h-13.75 text-sm text-primary placeholder:text-gray focus:outline-none focus:border-primary transition-colors"
+                            className="w-full border-none px-4.25 h-13.75 text-sm text-primary placeholder:text-gray focus:outline-none focus:border-primary transition-colors"
                         />
                     </div>
 
@@ -138,10 +411,14 @@ export default function LoginPage() {
                             Password *
                         </span>
                         <div className="relative border-2 border-primary">
-                            <input value={password} onChange={(e) => setPassword(e.target.value)}
+                            <input
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 type={showPassword ? "text" : "password"}
                                 required
-                                className={`w-full px-4.25  h-13.75 ${!showPassword ? "text-[20px]" : "text-sm"} pr-12   text-primary focus:outline-none border-2`}
+                                className={`w-full px-4.25 h-13.75 ${
+                                    !showPassword ? "text-[20px]" : "text-sm"
+                                } pr-12 text-primary focus:outline-none border-2`}
                             />
                             <button
                                 type="button"
@@ -149,11 +426,7 @@ export default function LoginPage() {
                                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray hover:text-primary transition-colors"
                                 aria-label={showPassword ? "Hide password" : "Show password"}
                             >
-                                {showPassword ? (
-                                    <EyeIcon />
-                                ) : (
-                                    <EyeOffIcon />
-                                )}
+                                {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                             </button>
                         </div>
                     </div>
@@ -178,37 +451,36 @@ export default function LoginPage() {
                     </div>
 
                     {/* Submit */}
-                    {loading ?
-                        <button type="button" className="bg-indigo-500 justify-center flex py-4 ..." disabled>
-                            <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24">
-
-                            </svg>
+                    {loading ? (
+                        <button
+                            type="button"
+                            disabled
+                            className="w-full bg-primary/70 text-white text-sm justify-center items-center flex py-4 cursor-not-allowed"
+                        >
+                            <Spinner />
                             Processing…
-                        </button> :
+                        </button>
+                    ) : (
                         <button
                             type="submit"
                             className="w-full cursor-pointer uppercase bg-primary text-white text-sm tracking-wide py-4 hover:opacity-90 transition-opacity"
                         >
                             Log In
                         </button>
-                    }
+                    )}
 
                     {/* Footer link */}
                     <p className="text-center text-sm text-gray">
                         No account yet?{" "}
-                        <Link to="/register"
-
+                        <Link
+                            to="/register"
                             className="text-primary underline underline-offset-2 hover:text-gray transition-colors"
                         >
                             Create Account
                         </Link>
                     </p>
                 </form>
-
-
-
             </div>
         </div>
     );
 }
-
