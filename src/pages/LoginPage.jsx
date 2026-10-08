@@ -323,7 +323,7 @@ export default function LoginPage() {
     const handleGoogleLogin = async () => {
         if (googleLoading) return;
         setGoogleLoading(true);
-
+ 
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
